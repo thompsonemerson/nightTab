@@ -18,15 +18,16 @@ var control = (function() {
     type: "button",
     func: function() {
       menu.open();
+      theme.render.custom.tabIndex();
     },
   }, {
-    element: ".control-link-add",
+    element: ".control-add-link",
     type: "button",
     func: function() {
       link.add.item.open();
     }
   }, {
-    element: ".control-group-add",
+    element: ".control-add-group",
     type: "button",
     func: function() {
       link.add.group.open();
@@ -183,60 +184,77 @@ var control = (function() {
           type: "button",
           func: function() {
             menu.nav("layout");
+            theme.render.custom.tabIndex();
           }
         }, {
           element: ".control-menu-header",
           type: "button",
           func: function() {
             menu.nav("header");
+            theme.render.custom.tabIndex();
           }
         }, {
           element: ".control-menu-groups",
           type: "button",
           func: function() {
             menu.nav("groups");
+            theme.render.custom.tabIndex();
           }
         }, {
           element: ".control-menu-bookmarks",
           type: "button",
           func: function() {
             menu.nav("bookmarks");
+            theme.render.custom.tabIndex();
           }
         }, {
           element: ".control-menu-theme",
           type: "button",
           func: function() {
             menu.nav("theme");
+            theme.render.custom.tabIndex();
           }
         }, {
           element: ".control-menu-background",
           type: "button",
           func: function() {
             menu.nav("background");
+            theme.render.custom.tabIndex();
           }
         }, {
           element: ".control-menu-data",
           type: "button",
           func: function() {
             menu.nav("data");
+            theme.render.custom.tabIndex();
+          }
+        }, {
+          element: ".control-menu-firefox",
+          type: "button",
+          func: function() {
+            menu.nav("firefox");
+            theme.render.custom.tabIndex();
           }
         }, {
           element: ".control-menu-coffee",
           type: "button",
           func: function() {
             menu.nav("coffee");
+            theme.render.custom.tabIndex();
           }
         }, {
           element: ".control-menu-nighttab",
           type: "button",
           func: function() {
             menu.nav("nighttab");
+            theme.render.custom.tabIndex();
           }
         }, {
           element: ".control-menu-close",
           type: "button",
           func: function() {
             menu.close();
+            theme.render.custom.tabIndex();
           }
         }]
       },
@@ -333,7 +351,6 @@ var control = (function() {
           func: function() {
             mod.default("layout.size");
             layout.render.size();
-            render.update.control.header();
             render.update.control.menu();
           }
         }],
@@ -425,7 +442,6 @@ var control = (function() {
           func: function() {
             mod.default("layout.width");
             layout.render.width();
-            render.update.control.header();
             render.update.control.menu();
           }
         }],
@@ -613,7 +629,6 @@ var control = (function() {
           func: function() {
             mod.default("layout.padding");
             layout.render.padding();
-            render.update.control.header();
             render.update.control.menu();
           }
         }],
@@ -703,7 +718,6 @@ var control = (function() {
           func: function() {
             mod.default("layout.gutter");
             layout.render.gutter();
-            render.update.control.header();
             render.update.control.menu();
           }
         }],
@@ -713,6 +727,14 @@ var control = (function() {
           type: "text",
           func: function() {
             layout.render.title();
+          }
+        }, {
+          element: ".control-layout-title-default",
+          type: "button",
+          func: function() {
+            mod.default("layout.title");
+            layout.render.title();
+            render.update.control.menu();
           }
         }, {
           element: ".control-layout-scrollpastend",
@@ -832,7 +854,6 @@ var control = (function() {
           func: function() {
             mod.default("header.area.width");
             header.render.area.width();
-            render.update.control.header();
             render.update.control.menu();
           }
         }, {
@@ -855,7 +876,6 @@ var control = (function() {
           func: function() {
             mod.match("header.area.width", "link.area.width");
             header.render.area.width();
-            render.update.control.header();
             render.update.control.menu();
           }
         }],
@@ -1090,7 +1110,6 @@ var control = (function() {
           func: function() {
             mod.default("header.greeting.size");
             header.render.greeting.size();
-            render.update.control.header();
             render.update.control.menu();
           }
         }, {
@@ -1232,7 +1251,6 @@ var control = (function() {
           func: function() {
             mod.default("header.transitional.size");
             header.render.transitional.size();
-            render.update.control.header();
             render.update.control.menu();
           }
         }, {
@@ -1496,7 +1514,6 @@ var control = (function() {
           func: function() {
             mod.default("header.clock.size");
             header.render.clock.size();
-            render.update.control.header();
             render.update.control.menu();
           }
         }, {
@@ -1949,7 +1966,6 @@ var control = (function() {
           func: function() {
             mod.default("header.date.size");
             header.render.date.size();
-            render.update.control.header();
             render.update.control.menu();
           }
         }, {
@@ -2089,7 +2105,6 @@ var control = (function() {
           func: function() {
             mod.default("header.search.width.size");
             header.render.search.width.size();
-            render.update.control.header();
             render.update.control.menu();
           }
         }, {
@@ -2114,7 +2129,7 @@ var control = (function() {
         }, {
           element: ".control-header-search-opacity-number",
           path: "header.search.opacity",
-          type: "range",
+          type: "number",
           valueConvert: ["float"],
           valueModify: {
             min: 0,
@@ -2204,6 +2219,31 @@ var control = (function() {
           type: "text",
           func: function() {
             search.render.engine();
+          }
+        }, {
+          element: ".control-header-search-engine-custom-queryname",
+          path: "header.search.engine.custom.queryName",
+          type: "text",
+          func: function() {
+            header.render.item.clear();
+            header.render.item.all();
+            header.render.search.width.size();
+            greeting.render.clear();
+            greeting.render.all();
+            clock.render.clear();
+            clock.render.all();
+            transitional.render.clear();
+            transitional.render.all();
+            date.render.clear();
+            date.render.all();
+            render.class();
+            render.dependents();
+            render.update.control.header();
+            bind.control.header();
+            search.render.engine();
+            search.bind.input();
+            search.bind.clear();
+            dropdown.bind.editAdd();
           }
         }, {
           element: ".control-header-search-text-justify-left",
@@ -2318,7 +2358,6 @@ var control = (function() {
           func: function() {
             mod.default("header.search.size");
             header.render.search.size();
-            render.update.control.header();
             render.update.control.menu();
           }
         }, {
@@ -2470,7 +2509,6 @@ var control = (function() {
           func: function() {
             mod.default("header.editAdd.size");
             header.render.editadd.size();
-            render.update.control.header();
             render.update.control.menu();
           }
         }, {
@@ -2495,7 +2533,7 @@ var control = (function() {
         }, {
           element: ".control-header-editadd-opacity-number",
           path: "header.editAdd.opacity",
-          type: "range",
+          type: "number",
           valueConvert: ["float"],
           valueModify: {
             min: 0,
@@ -2666,7 +2704,6 @@ var control = (function() {
           func: function() {
             mod.default("header.colorAccent.size");
             header.render.coloraccent.size();
-            render.update.control.header();
             render.update.control.menu();
           }
         }, {
@@ -2691,7 +2728,7 @@ var control = (function() {
         }, {
           element: ".control-header-coloraccent-opacity-number",
           path: "header.colorAccent.opacity",
-          type: "range",
+          type: "number",
           valueConvert: ["float"],
           valueModify: {
             min: 0,
@@ -2816,7 +2853,6 @@ var control = (function() {
           func: function() {
             mod.default("header.menu.size");
             header.render.menu.size();
-            render.update.control.header();
             render.update.control.menu();
           }
         }, {
@@ -2841,7 +2877,7 @@ var control = (function() {
         }, {
           element: ".control-header-menu-opacity-number",
           path: "header.menu.opacity",
-          type: "range",
+          type: "number",
           valueConvert: ["float"],
           valueModify: {
             min: 0,
@@ -2915,7 +2951,6 @@ var control = (function() {
             mod.default("header.border.top");
             header.render.border();
             render.class();
-            render.update.control.header();
             render.update.control.menu();
           }
         }, {
@@ -2959,7 +2994,6 @@ var control = (function() {
             mod.default("header.border.bottom");
             header.render.border();
             render.class();
-            render.update.control.header();
             render.update.control.menu();
           }
         }],
@@ -3020,7 +3054,7 @@ var control = (function() {
             render.dependents();
           }
         }, {
-          element: ".control-header-color-rgb-range",
+          element: ".control-header-color-rgb-color",
           path: "header.color.rgb",
           type: "color",
           mirrorElement: [{
@@ -3028,8 +3062,57 @@ var control = (function() {
             path: "header.color.rgb",
             type: "text",
             valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-header-color-hsl-h-range",
+            path: "header.color.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-header-color-hsl-h-number",
+            path: "header.color.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-header-color-hsl-s-range",
+            path: "header.color.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-header-color-hsl-s-number",
+            path: "header.color.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-header-color-hsl-l-range",
+            path: "header.color.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-header-color-hsl-l-number",
+            path: "header.color.hsl.l",
+            type: "number"
+          }, {
+            element: ".control-header-color-rgb-r-range",
+            path: "header.color.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-header-color-rgb-r-number",
+            path: "header.color.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-header-color-rgb-g-range",
+            path: "header.color.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-header-color-rgb-g-number",
+            path: "header.color.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-header-color-rgb-b-range",
+            path: "header.color.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-header-color-rgb-b-number",
+            path: "header.color.rgb.b",
+            type: "number"
           }],
           func: function() {
+            header.mod.color.hsl();
             header.render.color.custom();
           }
         }, {
@@ -3038,11 +3121,660 @@ var control = (function() {
           type: "text",
           valueConvert: ["hexTextString"],
           mirrorElement: [{
-            element: ".control-header-color-rgb-range",
+            element: ".control-header-color-rgb-color",
             path: "header.color.rgb",
             type: "color"
+          }, {
+            element: ".control-header-color-hsl-h-range",
+            path: "header.color.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-header-color-hsl-h-number",
+            path: "header.color.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-header-color-hsl-s-range",
+            path: "header.color.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-header-color-hsl-s-number",
+            path: "header.color.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-header-color-hsl-l-range",
+            path: "header.color.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-header-color-hsl-l-number",
+            path: "header.color.hsl.l",
+            type: "number"
+          }, {
+            element: ".control-header-color-rgb-r-range",
+            path: "header.color.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-header-color-rgb-r-number",
+            path: "header.color.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-header-color-rgb-g-range",
+            path: "header.color.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-header-color-rgb-g-number",
+            path: "header.color.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-header-color-rgb-b-range",
+            path: "header.color.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-header-color-rgb-b-number",
+            path: "header.color.rgb.b",
+            type: "number"
           }],
           func: function() {
+            header.mod.color.hsl();
+            header.render.color.custom();
+          }
+        }, {
+          element: ".control-header-color-hsl-h-range",
+          path: "header.color.hsl.h",
+          type: "range",
+          valueModify: {
+            min: 0,
+            max: 359
+          },
+          mirrorElement: [{
+            element: ".control-header-color-rgb-color",
+            path: "header.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-header-color-rgb-text",
+            path: "header.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-header-color-hsl-h-number",
+            path: "header.color.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-header-color-rgb-r-range",
+            path: "header.color.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-header-color-rgb-r-number",
+            path: "header.color.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-header-color-rgb-g-range",
+            path: "header.color.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-header-color-rgb-g-number",
+            path: "header.color.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-header-color-rgb-b-range",
+            path: "header.color.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-header-color-rgb-b-number",
+            path: "header.color.rgb.b",
+            type: "number"
+          }],
+          func: function() {
+            header.mod.color.rgb();
+            header.render.color.custom();
+          }
+        }, {
+          element: ".control-header-color-hsl-h-number",
+          path: "header.color.hsl.h",
+          type: "number",
+          valueModify: {
+            min: 0,
+            max: 359
+          },
+          mirrorElement: [{
+            element: ".control-header-color-rgb-color",
+            path: "header.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-header-color-rgb-text",
+            path: "header.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-header-color-hsl-h-range",
+            path: "header.color.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-header-color-rgb-r-range",
+            path: "header.color.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-header-color-rgb-r-number",
+            path: "header.color.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-header-color-rgb-g-range",
+            path: "header.color.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-header-color-rgb-g-number",
+            path: "header.color.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-header-color-rgb-b-range",
+            path: "header.color.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-header-color-rgb-b-number",
+            path: "header.color.rgb.b",
+            type: "number"
+          }],
+          func: function() {
+            header.mod.color.rgb();
+            header.render.color.custom();
+          }
+        }, {
+          element: ".control-header-color-hsl-s-range",
+          path: "header.color.hsl.s",
+          type: "range",
+          valueModify: {
+            min: 0,
+            max: 100
+          },
+          mirrorElement: [{
+            element: ".control-header-color-rgb-color",
+            path: "header.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-header-color-rgb-text",
+            path: "header.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-header-color-hsl-s-number",
+            path: "header.color.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-header-color-rgb-r-range",
+            path: "header.color.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-header-color-rgb-r-number",
+            path: "header.color.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-header-color-rgb-g-range",
+            path: "header.color.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-header-color-rgb-g-number",
+            path: "header.color.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-header-color-rgb-b-range",
+            path: "header.color.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-header-color-rgb-b-number",
+            path: "header.color.rgb.b",
+            type: "number"
+          }],
+          func: function() {
+            header.mod.color.rgb();
+            header.render.color.custom();
+          }
+        }, {
+          element: ".control-header-color-hsl-s-number",
+          path: "header.color.hsl.s",
+          type: "number",
+          valueModify: {
+            min: 0,
+            max: 100
+          },
+          mirrorElement: [{
+            element: ".control-header-color-rgb-color",
+            path: "header.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-header-color-rgb-text",
+            path: "header.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-header-color-hsl-s-range",
+            path: "header.color.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-header-color-rgb-r-range",
+            path: "header.color.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-header-color-rgb-r-number",
+            path: "header.color.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-header-color-rgb-g-range",
+            path: "header.color.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-header-color-rgb-g-number",
+            path: "header.color.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-header-color-rgb-b-range",
+            path: "header.color.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-header-color-rgb-b-number",
+            path: "header.color.rgb.b",
+            type: "number"
+          }],
+          func: function() {
+            header.mod.color.rgb();
+            header.render.color.custom();
+          }
+        }, {
+          element: ".control-header-color-hsl-l-range",
+          path: "header.color.hsl.l",
+          type: "range",
+          valueModify: {
+            min: 0,
+            max: 100
+          },
+          mirrorElement: [{
+            element: ".control-header-color-rgb-color",
+            path: "header.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-header-color-rgb-text",
+            path: "header.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-header-color-hsl-l-number",
+            path: "header.color.hsl.l",
+            type: "number"
+          }, {
+            element: ".control-header-color-rgb-r-range",
+            path: "header.color.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-header-color-rgb-r-number",
+            path: "header.color.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-header-color-rgb-g-range",
+            path: "header.color.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-header-color-rgb-g-number",
+            path: "header.color.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-header-color-rgb-b-range",
+            path: "header.color.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-header-color-rgb-b-number",
+            path: "header.color.rgb.b",
+            type: "number"
+          }],
+          func: function() {
+            header.mod.color.rgb();
+            header.render.color.custom();
+          }
+        }, {
+          element: ".control-header-color-hsl-l-number",
+          path: "header.color.hsl.l",
+          type: "number",
+          valueModify: {
+            min: 0,
+            max: 100
+          },
+          mirrorElement: [{
+            element: ".control-header-color-rgb-color",
+            path: "header.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-header-color-rgb-text",
+            path: "header.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-header-color-hsl-l-range",
+            path: "header.color.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-header-color-rgb-r-range",
+            path: "header.color.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-header-color-rgb-r-number",
+            path: "header.color.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-header-color-rgb-g-range",
+            path: "header.color.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-header-color-rgb-g-number",
+            path: "header.color.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-header-color-rgb-b-range",
+            path: "header.color.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-header-color-rgb-b-number",
+            path: "header.color.rgb.b",
+            type: "number"
+          }],
+          func: function() {
+            header.mod.color.rgb();
+            header.render.color.custom();
+          }
+        }, {
+          element: ".control-header-color-rgb-r-range",
+          path: "header.color.rgb.r",
+          type: "range",
+          valueModify: {
+            min: 0,
+            max: 255
+          },
+          mirrorElement: [{
+            element: ".control-header-color-rgb-color",
+            path: "header.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-header-color-rgb-text",
+            path: "header.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-header-color-rgb-r-number",
+            path: "header.color.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-header-color-hsl-h-range",
+            path: "header.color.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-header-color-hsl-h-number",
+            path: "header.color.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-header-color-hsl-s-range",
+            path: "header.color.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-header-color-hsl-s-number",
+            path: "header.color.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-header-color-hsl-l-range",
+            path: "header.color.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-header-color-hsl-l-number",
+            path: "header.color.hsl.l",
+            type: "number"
+          }],
+          func: function() {
+            header.mod.color.hsl();
+            header.render.color.custom();
+          }
+        }, {
+          element: ".control-header-color-rgb-r-number",
+          path: "header.color.rgb.r",
+          type: "number",
+          valueModify: {
+            min: 0,
+            max: 255
+          },
+          mirrorElement: [{
+            element: ".control-header-color-rgb-color",
+            path: "header.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-header-color-rgb-text",
+            path: "header.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-header-color-rgb-r-range",
+            path: "header.color.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-header-color-hsl-h-range",
+            path: "header.color.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-header-color-hsl-h-number",
+            path: "header.color.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-header-color-hsl-s-range",
+            path: "header.color.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-header-color-hsl-s-number",
+            path: "header.color.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-header-color-hsl-l-range",
+            path: "header.color.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-header-color-hsl-l-number",
+            path: "header.color.hsl.l",
+            type: "number"
+          }],
+          func: function() {
+            header.mod.color.hsl();
+            header.render.color.custom();
+          }
+        }, {
+          element: ".control-header-color-rgb-g-range",
+          path: "header.color.rgb.g",
+          type: "range",
+          valueModify: {
+            min: 0,
+            max: 255
+          },
+          mirrorElement: [{
+            element: ".control-header-color-rgb-color",
+            path: "header.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-header-color-rgb-text",
+            path: "header.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-header-color-rgb-g-number",
+            path: "header.color.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-header-color-hsl-h-range",
+            path: "header.color.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-header-color-hsl-h-number",
+            path: "header.color.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-header-color-hsl-s-range",
+            path: "header.color.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-header-color-hsl-s-number",
+            path: "header.color.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-header-color-hsl-l-range",
+            path: "header.color.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-header-color-hsl-l-number",
+            path: "header.color.hsl.l",
+            type: "number"
+          }],
+          func: function() {
+            header.mod.color.hsl();
+            header.render.color.custom();
+          }
+        }, {
+          element: ".control-header-color-rgb-g-number",
+          path: "header.color.rgb.g",
+          type: "number",
+          valueModify: {
+            min: 0,
+            max: 255
+          },
+          mirrorElement: [{
+            element: ".control-header-color-rgb-color",
+            path: "header.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-header-color-rgb-text",
+            path: "header.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-header-color-rgb-g-range",
+            path: "header.color.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-header-color-hsl-h-range",
+            path: "header.color.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-header-color-hsl-h-number",
+            path: "header.color.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-header-color-hsl-s-range",
+            path: "header.color.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-header-color-hsl-s-number",
+            path: "header.color.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-header-color-hsl-l-range",
+            path: "header.color.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-header-color-hsl-l-number",
+            path: "header.color.hsl.l",
+            type: "number"
+          }],
+          func: function() {
+            header.mod.color.hsl();
+            header.render.color.custom();
+          }
+        }, {
+          element: ".control-header-color-rgb-b-range",
+          path: "header.color.rgb.b",
+          type: "range",
+          valueModify: {
+            min: 0,
+            max: 255
+          },
+          mirrorElement: [{
+            element: ".control-header-color-rgb-color",
+            path: "header.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-header-color-rgb-text",
+            path: "header.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-header-color-rgb-b-number",
+            path: "header.color.rgb.b",
+            type: "number"
+          }, {
+            element: ".control-header-color-hsl-h-range",
+            path: "header.color.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-header-color-hsl-h-number",
+            path: "header.color.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-header-color-hsl-s-range",
+            path: "header.color.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-header-color-hsl-s-number",
+            path: "header.color.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-header-color-hsl-l-range",
+            path: "header.color.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-header-color-hsl-l-number",
+            path: "header.color.hsl.l",
+            type: "number"
+          }],
+          func: function() {
+            header.mod.color.hsl();
+            header.render.color.custom();
+          }
+        }, {
+          element: ".control-header-color-rgb-b-number",
+          path: "header.color.rgb.b",
+          type: "number",
+          valueModify: {
+            min: 0,
+            max: 255
+          },
+          mirrorElement: [{
+            element: ".control-header-color-rgb-color",
+            path: "header.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-header-color-rgb-text",
+            path: "header.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-header-color-rgb-b-range",
+            path: "header.color.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-header-color-hsl-h-range",
+            path: "header.color.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-header-color-hsl-h-number",
+            path: "header.color.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-header-color-hsl-s-range",
+            path: "header.color.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-header-color-hsl-s-number",
+            path: "header.color.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-header-color-hsl-l-range",
+            path: "header.color.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-header-color-hsl-l-number",
+            path: "header.color.hsl.l",
+            type: "number"
+          }],
+          func: function() {
+            header.mod.color.hsl();
             header.render.color.custom();
           }
         }, {
@@ -3066,7 +3798,7 @@ var control = (function() {
         }, {
           element: ".control-header-color-opacity-number",
           path: "header.color.opacity",
-          type: "range",
+          type: "number",
           valueConvert: ["float"],
           valueModify: {
             min: 0,
@@ -3087,7 +3819,6 @@ var control = (function() {
           func: function() {
             mod.default("header.color.opacity");
             header.render.opacity();
-            render.update.control.header();
             render.update.control.menu();
           }
         }, {
@@ -3186,7 +3917,6 @@ var control = (function() {
           func: function() {
             mod.default("link.area.width");
             link.render.area.width();
-            render.update.control.header();
             render.update.control.menu();
           }
         }, {
@@ -3209,7 +3939,6 @@ var control = (function() {
           func: function() {
             mod.match("link.area.width", "header.area.width");
             link.render.area.width();
-            render.update.control.header();
             render.update.control.menu();
           }
         }],
@@ -3377,7 +4106,6 @@ var control = (function() {
           func: function() {
             mod.default("link.item.size");
             link.render.item.size();
-            render.update.control.header();
             render.update.control.menu();
           }
         }, {
@@ -3418,67 +4146,47 @@ var control = (function() {
           }
         }],
         content: [{
+          element: ".control-link-item-display-alignment-topleft",
+          path: "link.item.display.alignment",
+          type: "radio"
+        }, {
           element: ".control-link-item-display-alignment-topcenter",
           path: "link.item.display.alignment",
-          type: "radio",
-          func: function() {
-            render.class();
-          }
+          type: "radio"
         }, {
           element: ".control-link-item-display-alignment-topright",
           path: "link.item.display.alignment",
-          type: "radio",
-          func: function() {
-            render.class();
-          }
+          type: "radio"
         }, {
           element: ".control-link-item-display-alignment-centerleft",
           path: "link.item.display.alignment",
-          type: "radio",
-          func: function() {
-            render.class();
-          }
+          type: "radio"
         }, {
           element: ".control-link-item-display-alignment-centercenter",
           path: "link.item.display.alignment",
-          type: "radio",
-          func: function() {
-            render.class();
-          }
+          type: "radio"
         }, {
           element: ".control-link-item-display-alignment-centerright",
           path: "link.item.display.alignment",
-          type: "radio",
-          func: function() {
-            render.class();
-          }
+          type: "radio"
         }, {
           element: ".control-link-item-display-alignment-bottomleft",
           path: "link.item.display.alignment",
-          type: "radio",
-          func: function() {
-            render.class();
-          }
+          type: "radio"
         }, {
           element: ".control-link-item-display-alignment-bottomcenter",
           path: "link.item.display.alignment",
-          type: "radio",
-          func: function() {
-            render.class();
-          }
+          type: "radio"
         }, {
           element: ".control-link-item-display-alignment-bottomright",
           path: "link.item.display.alignment",
-          type: "radio",
-          func: function() {
-            render.class();
-          }
+          type: "radio"
         }, {
-          element: ".control-link-item-display-alignment-topleft",
-          path: "link.item.display.alignment",
-          type: "radio",
+          element: ".control-link-item-display-alignment-apply",
+          type: "button",
           func: function() {
-            render.class();
+            link.mod.item.display.alignment();
+            link.groupAndItems();
           }
         }, {
           element: ".control-link-item-display-rotate-range",
@@ -3492,10 +4200,7 @@ var control = (function() {
             element: ".control-link-item-display-rotate-number",
             path: "link.item.display.rotate",
             type: "number"
-          }],
-          func: function() {
-            link.render.item.rotate();
-          }
+          }]
         }, {
           element: ".control-link-item-display-rotate-number",
           path: "link.item.display.rotate",
@@ -3508,18 +4213,20 @@ var control = (function() {
             element: ".control-link-item-display-rotate-range",
             path: "link.item.display.rotate",
             type: "range"
-          }],
-          func: function() {
-            link.render.item.rotate();
-          }
+          }]
         }, {
           element: ".control-link-item-display-rotate-default",
           type: "button",
           func: function() {
             mod.default("link.item.display.rotate");
-            link.render.item.rotate();
-            render.update.control.header();
             render.update.control.menu();
+          }
+        }, {
+          element: ".control-link-item-display-rotate-apply",
+          type: "button",
+          func: function() {
+            link.mod.item.display.rotate();
+            link.groupAndItems();
           }
         }, {
           element: ".control-link-item-display-translate-x-range",
@@ -3536,10 +4243,7 @@ var control = (function() {
             path: "link.item.display.translate.x",
             type: "number",
             valueConvert: ["float"]
-          }],
-          func: function() {
-            link.render.item.translate.x();
-          }
+          }]
         }, {
           element: ".control-link-item-display-translate-x-number",
           path: "link.item.display.translate.x",
@@ -3555,18 +4259,20 @@ var control = (function() {
             path: "link.item.display.translate.x",
             type: "range",
             valueConvert: ["float"]
-          }],
-          func: function() {
-            link.render.item.translate.x();
-          }
+          }]
         }, {
           element: ".control-link-item-display-translate-x-default",
           type: "button",
           func: function() {
             mod.default("link.item.display.translate.x");
-            link.render.item.translate.x();
-            render.update.control.header();
             render.update.control.menu();
+          }
+        }, {
+          element: ".control-link-item-display-translate-x-apply",
+          type: "button",
+          func: function() {
+            link.mod.item.display.translate.x();
+            link.groupAndItems();
           }
         }, {
           element: ".control-link-item-display-translate-y-range",
@@ -3583,10 +4289,7 @@ var control = (function() {
             path: "link.item.display.translate.y",
             type: "number",
             valueConvert: ["float"]
-          }],
-          func: function() {
-            link.render.item.translate.y();
-          }
+          }]
         }, {
           element: ".control-link-item-display-translate-y-number",
           path: "link.item.display.translate.y",
@@ -3602,18 +4305,20 @@ var control = (function() {
             path: "link.item.display.translate.y",
             type: "range",
             valueConvert: ["float"]
-          }],
-          func: function() {
-            link.render.item.translate.y();
-          }
+          }]
         }, {
           element: ".control-link-item-display-translate-y-default",
           type: "button",
           func: function() {
             mod.default("link.item.display.translate.y");
-            link.render.item.translate.y();
-            render.update.control.header();
             render.update.control.menu();
+          }
+        }, {
+          element: ".control-link-item-display-translate-y-apply",
+          type: "button",
+          func: function() {
+            link.mod.item.display.translate.y();
+            link.groupAndItems();
           }
         }, {
           element: ".control-link-item-display-gutter-range",
@@ -3627,10 +4332,7 @@ var control = (function() {
             element: ".control-link-item-display-gutter-number",
             path: "link.item.display.gutter",
             type: "number"
-          }],
-          func: function() {
-            link.render.item.gutter();
-          }
+          }]
         }, {
           element: ".control-link-item-display-gutter-number",
           path: "link.item.display.gutter",
@@ -3643,59 +4345,69 @@ var control = (function() {
             element: ".control-link-item-display-gutter-range",
             path: "link.item.display.gutter",
             type: "range"
-          }],
-          func: function() {
-            link.render.item.gutter();
-          }
+          }]
         }, {
           element: ".control-link-item-display-gutter-default",
           type: "button",
           func: function() {
             mod.default("link.item.display.gutter");
-            link.render.item.gutter();
-            render.update.control.header();
             render.update.control.menu();
+          }
+        }, {
+          element: ".control-link-item-display-gutter-apply",
+          type: "button",
+          func: function() {
+            link.mod.item.display.gutter();
+            link.groupAndItems();
           }
         }, {
           element: ".control-link-item-display-direction-horizontal",
           path: "link.item.display.direction",
-          type: "radio",
-          func: function() {
-            render.class();
-          }
+          type: "radio"
         }, {
           element: ".control-link-item-display-direction-vertical",
           path: "link.item.display.direction",
-          type: "radio",
+          type: "radio"
+        }, {
+          element: ".control-link-item-display-direction-apply",
+          type: "button",
           func: function() {
-            render.class();
+            link.mod.item.display.direction();
+            link.groupAndItems();
           }
         }, {
-          element: ".control-link-item-display-order-letconname",
+          element: ".control-link-item-display-order-visualname",
           path: "link.item.display.order",
-          type: "radio",
-          func: function() {
-            render.class();
-          }
+          type: "radio"
         }, {
-          element: ".control-link-item-display-order-nameletcon",
+          element: ".control-link-item-display-order-namevisual",
           path: "link.item.display.order",
-          type: "radio",
+          type: "radio"
+        }, {
+          element: ".control-link-item-display-order-apply",
+          type: "button",
           func: function() {
-            render.class();
+            link.mod.item.display.order();
+            link.groupAndItems();
           }
         }],
-        letcon: [{
-          element: ".control-link-item-display-letcon-show",
-          path: "link.item.display.letcon.show",
-          type: "checkbox",
+        visual: [{
+          element: ".control-link-item-display-visual-show",
+          type: "button",
           func: function() {
-            render.class();
-            render.dependents();
+            link.mod.item.display.visual.show();
+            link.groupAndItems();
           }
         }, {
-          element: ".control-link-item-display-letcon-letter-size-range",
-          path: "link.item.display.letcon.letter.size",
+          element: ".control-link-item-display-visual-hide",
+          type: "button",
+          func: function() {
+            link.mod.item.display.visual.hide();
+            link.groupAndItems();
+          }
+        }, {
+          element: ".control-link-item-display-visual-letter-size-range",
+          path: "link.item.display.visual.letter.size",
           type: "range",
           valueConvert: ["float"],
           valueModify: {
@@ -3704,17 +4416,14 @@ var control = (function() {
             step: 10
           },
           mirrorElement: [{
-            element: ".control-link-item-display-letcon-letter-size-number",
-            path: "link.item.display.letcon.letter.size",
+            element: ".control-link-item-display-visual-letter-size-number",
+            path: "link.item.display.visual.letter.size",
             type: "number",
             valueConvert: ["float"]
-          }],
-          func: function() {
-            link.render.item.display.letter();
-          }
+          }]
         }, {
-          element: ".control-link-item-display-letcon-letter-size-number",
-          path: "link.item.display.letcon.letter.size",
+          element: ".control-link-item-display-visual-letter-size-number",
+          path: "link.item.display.visual.letter.size",
           type: "number",
           valueConvert: ["float"],
           valueModify: {
@@ -3723,26 +4432,28 @@ var control = (function() {
             step: 10
           },
           mirrorElement: [{
-            element: ".control-link-item-display-letcon-letter-size-range",
-            path: "link.item.display.letcon.letter.size",
+            element: ".control-link-item-display-visual-letter-size-range",
+            path: "link.item.display.visual.letter.size",
             type: "range",
             valueConvert: ["float"]
-          }],
-          func: function() {
-            link.render.item.display.letter();
-          }
+          }]
         }, {
-          element: ".control-link-item-display-letcon-letter-size-default",
+          element: ".control-link-item-display-visual-letter-size-default",
           type: "button",
           func: function() {
-            mod.default("link.item.display.letcon.letter.size");
-            link.render.item.display.letter();
-            render.update.control.header();
+            mod.default("link.item.display.visual.letter.size");
             render.update.control.menu();
           }
         }, {
-          element: ".control-link-item-display-letcon-icon-size-range",
-          path: "link.item.display.letcon.icon.size",
+          element: ".control-link-item-display-visual-letter-size-apply",
+          type: "button",
+          func: function() {
+            link.mod.item.display.visual.letter.size();
+            link.groupAndItems();
+          }
+        }, {
+          element: ".control-link-item-display-visual-icon-size-range",
+          path: "link.item.display.visual.icon.size",
           type: "range",
           valueConvert: ["float"],
           valueModify: {
@@ -3751,17 +4462,14 @@ var control = (function() {
             step: 10
           },
           mirrorElement: [{
-            element: ".control-link-item-display-letcon-icon-size-number",
-            path: "link.item.display.letcon.icon.size",
+            element: ".control-link-item-display-visual-icon-size-number",
+            path: "link.item.display.visual.icon.size",
             type: "number",
             valueConvert: ["float"]
           }],
-          func: function() {
-            link.render.item.display.icon();
-          }
         }, {
-          element: ".control-link-item-display-letcon-icon-size-number",
-          path: "link.item.display.letcon.icon.size",
+          element: ".control-link-item-display-visual-icon-size-number",
+          path: "link.item.display.visual.icon.size",
           type: "number",
           valueConvert: ["float"],
           valueModify: {
@@ -3770,31 +4478,125 @@ var control = (function() {
             step: 10
           },
           mirrorElement: [{
-            element: ".control-link-item-display-letcon-icon-size-range",
-            path: "link.item.display.letcon.icon.size",
+            element: ".control-link-item-display-visual-icon-size-range",
+            path: "link.item.display.visual.icon.size",
             type: "range",
             valueConvert: ["float"]
           }],
-          func: function() {
-            link.render.item.display.icon();
-          }
         }, {
-          element: ".control-link-item-display-letcon-icon-size-default",
+          element: ".control-link-item-display-visual-icon-size-default",
           type: "button",
           func: function() {
-            mod.default("link.item.display.letcon.icon.size");
-            link.render.item.display.icon();
-            render.update.control.header();
+            mod.default("link.item.display.visual.icon.size");
             render.update.control.menu();
+          }
+        }, {
+          element: ".control-link-item-display-visual-icon-size-apply",
+          type: "button",
+          func: function() {
+            link.mod.item.display.visual.icon.size();
+            link.groupAndItems();
+          }
+        }, {
+          element: ".control-link-item-display-visual-image-size-range",
+          path: "link.item.display.visual.image.size",
+          type: "range",
+          valueConvert: ["float"],
+          valueModify: {
+            min: 10,
+            max: 3000,
+            step: 10
+          },
+          mirrorElement: [{
+            element: ".control-link-item-display-visual-image-size-number",
+            path: "link.item.display.visual.image.size",
+            type: "number",
+            valueConvert: ["float"]
+          }],
+        }, {
+          element: ".control-link-item-display-visual-image-size-number",
+          path: "link.item.display.visual.image.size",
+          type: "number",
+          valueConvert: ["float"],
+          valueModify: {
+            min: 10,
+            max: 3000,
+            step: 10
+          },
+          mirrorElement: [{
+            element: ".control-link-item-display-visual-image-size-range",
+            path: "link.item.display.visual.image.size",
+            type: "range",
+            valueConvert: ["float"]
+          }],
+        }, {
+          element: ".control-link-item-display-visual-image-size-default",
+          type: "button",
+          func: function() {
+            mod.default("link.item.display.visual.image.size");
+            render.update.control.menu();
+          }
+        }, {
+          element: ".control-link-item-display-visual-image-size-apply",
+          type: "button",
+          func: function() {
+            link.mod.item.display.visual.image.size();
+            link.groupAndItems();
+          }
+        }, {
+          element: ".control-link-item-display-visual-shadow-size-range",
+          path: "link.item.display.visual.shadow.size",
+          type: "range",
+          valueModify: {
+            min: 0,
+            max: 100
+          },
+          mirrorElement: [{
+            element: ".control-link-item-display-visual-shadow-size-number",
+            path: "link.item.display.visual.shadow.size",
+            type: "number"
+          }],
+        }, {
+          element: ".control-link-item-display-visual-shadow-size-number",
+          path: "link.item.display.visual.shadow.size",
+          type: "number",
+          valueModify: {
+            min: 0,
+            max: 100
+          },
+          mirrorElement: [{
+            element: ".control-link-item-display-visual-shadow-size-range",
+            path: "link.item.display.visual.shadow.size",
+            type: "range"
+          }],
+        }, {
+          element: ".control-link-item-display-visual-shadow-size-default",
+          type: "button",
+          func: function() {
+            mod.default("link.item.display.visual.shadow.size");
+            render.update.control.menu();
+          }
+        }, {
+          element: ".control-link-item-display-visual-shadow-size-apply",
+          type: "button",
+          func: function() {
+            link.mod.item.display.visual.shadow.size();
+            link.groupAndItems();
           }
         }],
         name: [{
           element: ".control-link-item-display-name-show",
-          path: "link.item.display.name.show",
-          type: "checkbox",
+          type: "button",
           func: function() {
-            render.class();
-            render.dependents();
+            link.mod.item.display.name.show();
+            link.groupAndItems();
+          }
+        }, {
+          element: ".control-link-item-display-name-hide",
+          type: "button",
+          func: function() {
+            link.mod.item.display.name.hide();
+            link.groupAndItems();
           }
         }, {
           element: ".control-link-item-display-name-size-range",
@@ -3803,7 +4605,7 @@ var control = (function() {
           valueConvert: ["float"],
           valueModify: {
             min: 10,
-            max: 3000,
+            max: 1500,
             step: 10
           },
           mirrorElement: [{
@@ -3811,10 +4613,7 @@ var control = (function() {
             path: "link.item.display.name.size",
             type: "number",
             valueConvert: ["float"]
-          }],
-          func: function() {
-            link.render.item.name();
-          }
+          }]
         }, {
           element: ".control-link-item-display-name-size-number",
           path: "link.item.display.name.size",
@@ -3822,7 +4621,7 @@ var control = (function() {
           valueConvert: ["float"],
           valueModify: {
             min: 10,
-            max: 3000,
+            max: 1500,
             step: 10
           },
           mirrorElement: [{
@@ -3830,18 +4629,20 @@ var control = (function() {
             path: "link.item.display.name.size",
             type: "range",
             valueConvert: ["float"]
-          }],
-          func: function() {
-            link.render.item.name();
-          }
+          }]
         }, {
           element: ".control-link-item-display-name-size-default",
           type: "button",
           func: function() {
             mod.default("link.item.display.name.size");
-            link.render.item.name();
-            render.update.control.header();
             render.update.control.menu();
+          }
+        }, {
+          element: ".control-link-item-display-name-size-apply",
+          type: "button",
+          func: function() {
+            link.mod.item.display.name.size();
+            link.groupAndItems();
           }
         }],
         style: [{
@@ -3865,7 +4666,6 @@ var control = (function() {
           type: "radio",
           func: function() {
             render.dependents();
-            render.class();
           }
         }, {
           element: ".control-link-item-color-by-custom",
@@ -3873,10 +4673,9 @@ var control = (function() {
           type: "radio",
           func: function() {
             render.dependents();
-            render.class();
           }
         }, {
-          element: ".control-link-item-color-rgb-range",
+          element: ".control-link-item-color-rgb-color",
           path: "link.item.color.rgb",
           type: "color",
           mirrorElement: [{
@@ -3884,9 +4683,57 @@ var control = (function() {
             path: "link.item.color.rgb",
             type: "text",
             valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-link-item-color-hsl-h-range",
+            path: "link.item.color.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-hsl-h-number",
+            path: "link.item.color.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-hsl-s-range",
+            path: "link.item.color.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-hsl-s-number",
+            path: "link.item.color.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-hsl-l-range",
+            path: "link.item.color.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-hsl-l-number",
+            path: "link.item.color.hsl.l",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-rgb-r-range",
+            path: "link.item.color.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-rgb-r-number",
+            path: "link.item.color.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-rgb-g-range",
+            path: "link.item.color.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-rgb-g-number",
+            path: "link.item.color.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-rgb-b-range",
+            path: "link.item.color.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-rgb-b-number",
+            path: "link.item.color.rgb.b",
+            type: "number"
           }],
           func: function() {
-            link.render.item.color.custom();
+            link.mod.item.color.hsl();
           }
         }, {
           element: ".control-link-item-color-rgb-text",
@@ -3894,60 +4741,1504 @@ var control = (function() {
           type: "text",
           valueConvert: ["hexTextString"],
           mirrorElement: [{
-            element: ".control-link-item-color-rgb-range",
+            element: ".control-link-item-color-rgb-color",
             path: "link.item.color.rgb",
             type: "color"
+          }, {
+            element: ".control-link-item-color-hsl-h-range",
+            path: "link.item.color.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-hsl-h-number",
+            path: "link.item.color.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-hsl-s-range",
+            path: "link.item.color.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-hsl-s-number",
+            path: "link.item.color.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-hsl-l-range",
+            path: "link.item.color.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-hsl-l-number",
+            path: "link.item.color.hsl.l",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-rgb-r-range",
+            path: "link.item.color.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-rgb-r-number",
+            path: "link.item.color.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-rgb-g-range",
+            path: "link.item.color.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-rgb-g-number",
+            path: "link.item.color.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-rgb-b-range",
+            path: "link.item.color.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-rgb-b-number",
+            path: "link.item.color.rgb.b",
+            type: "number"
           }],
           func: function() {
-            link.render.item.color.custom();
+            link.mod.item.color.hsl();
           }
         }, {
-          element: ".control-link-item-opacity-range",
-          path: "link.item.opacity",
+          element: ".control-link-item-color-hsl-h-range",
+          path: "link.item.color.hsl.h",
           type: "range",
-          valueConvert: ["float"],
+          valueModify: {
+            min: 0,
+            max: 359
+          },
+          mirrorElement: [{
+            element: ".control-link-item-color-rgb-color",
+            path: "link.item.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-link-item-color-rgb-text",
+            path: "link.item.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-link-item-color-hsl-h-number",
+            path: "link.item.color.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-rgb-r-range",
+            path: "link.item.color.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-rgb-r-number",
+            path: "link.item.color.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-rgb-g-range",
+            path: "link.item.color.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-rgb-g-number",
+            path: "link.item.color.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-rgb-b-range",
+            path: "link.item.color.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-rgb-b-number",
+            path: "link.item.color.rgb.b",
+            type: "number"
+          }],
+          func: function() {
+            link.mod.item.color.rgb();
+          }
+        }, {
+          element: ".control-link-item-color-hsl-h-number",
+          path: "link.item.color.hsl.h",
+          type: "number",
+          valueModify: {
+            min: 0,
+            max: 359
+          },
+          mirrorElement: [{
+            element: ".control-link-item-color-rgb-color",
+            path: "link.item.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-link-item-color-rgb-text",
+            path: "link.item.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-link-item-color-hsl-h-range",
+            path: "link.item.color.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-rgb-r-range",
+            path: "link.item.color.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-rgb-r-number",
+            path: "link.item.color.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-rgb-g-range",
+            path: "link.item.color.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-rgb-g-number",
+            path: "link.item.color.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-rgb-b-range",
+            path: "link.item.color.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-rgb-b-number",
+            path: "link.item.color.rgb.b",
+            type: "number"
+          }],
+          func: function() {
+            link.mod.item.color.rgb();
+          }
+        }, {
+          element: ".control-link-item-color-hsl-s-range",
+          path: "link.item.color.hsl.s",
+          type: "range",
           valueModify: {
             min: 0,
             max: 100
           },
           mirrorElement: [{
-            element: ".control-link-item-opacity-number",
-            path: "link.item.opacity",
-            type: "number",
-            valueConvert: ["float"]
+            element: ".control-link-item-color-rgb-color",
+            path: "link.item.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-link-item-color-rgb-text",
+            path: "link.item.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-link-item-color-hsl-s-number",
+            path: "link.item.color.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-rgb-r-range",
+            path: "link.item.color.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-rgb-r-number",
+            path: "link.item.color.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-rgb-g-range",
+            path: "link.item.color.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-rgb-g-number",
+            path: "link.item.color.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-rgb-b-range",
+            path: "link.item.color.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-rgb-b-number",
+            path: "link.item.color.rgb.b",
+            type: "number"
           }],
           func: function() {
-            link.render.item.opacity();
-            render.class();
+            link.mod.item.color.rgb();
           }
         }, {
-          element: ".control-link-item-opacity-number",
-          path: "link.item.opacity",
-          type: "range",
-          valueConvert: ["float"],
+          element: ".control-link-item-color-hsl-s-number",
+          path: "link.item.color.hsl.s",
+          type: "number",
           valueModify: {
             min: 0,
             max: 100
           },
           mirrorElement: [{
-            element: ".control-link-item-opacity-range",
-            path: "link.item.opacity",
-            type: "number",
-            valueConvert: ["float"]
+            element: ".control-link-item-color-rgb-color",
+            path: "link.item.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-link-item-color-rgb-text",
+            path: "link.item.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-link-item-color-hsl-s-range",
+            path: "link.item.color.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-rgb-r-range",
+            path: "link.item.color.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-rgb-r-number",
+            path: "link.item.color.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-rgb-g-range",
+            path: "link.item.color.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-rgb-g-number",
+            path: "link.item.color.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-rgb-b-range",
+            path: "link.item.color.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-rgb-b-number",
+            path: "link.item.color.rgb.b",
+            type: "number"
           }],
           func: function() {
-            link.render.item.opacity();
-            render.class();
+            link.mod.item.color.rgb();
           }
         }, {
-          element: ".control-link-item-opacity-default",
+          element: ".control-link-item-color-hsl-l-range",
+          path: "link.item.color.hsl.l",
+          type: "range",
+          valueModify: {
+            min: 0,
+            max: 100
+          },
+          mirrorElement: [{
+            element: ".control-link-item-color-rgb-color",
+            path: "link.item.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-link-item-color-rgb-text",
+            path: "link.item.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-link-item-color-hsl-l-number",
+            path: "link.item.color.hsl.l",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-rgb-r-range",
+            path: "link.item.color.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-rgb-r-number",
+            path: "link.item.color.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-rgb-g-range",
+            path: "link.item.color.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-rgb-g-number",
+            path: "link.item.color.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-rgb-b-range",
+            path: "link.item.color.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-rgb-b-number",
+            path: "link.item.color.rgb.b",
+            type: "number"
+          }],
+          func: function() {
+            link.mod.item.color.rgb();
+          }
+        }, {
+          element: ".control-link-item-color-hsl-l-number",
+          path: "link.item.color.hsl.l",
+          type: "number",
+          valueModify: {
+            min: 0,
+            max: 100
+          },
+          mirrorElement: [{
+            element: ".control-link-item-color-rgb-color",
+            path: "link.item.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-link-item-color-rgb-text",
+            path: "link.item.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-link-item-color-hsl-l-range",
+            path: "link.item.color.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-rgb-r-range",
+            path: "link.item.color.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-rgb-r-number",
+            path: "link.item.color.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-rgb-g-range",
+            path: "link.item.color.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-rgb-g-number",
+            path: "link.item.color.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-rgb-b-range",
+            path: "link.item.color.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-rgb-b-number",
+            path: "link.item.color.rgb.b",
+            type: "number"
+          }],
+          func: function() {
+            link.mod.item.color.rgb();
+          }
+        }, {
+          element: ".control-link-item-color-rgb-r-range",
+          path: "link.item.color.rgb.r",
+          type: "range",
+          valueModify: {
+            min: 0,
+            max: 255
+          },
+          mirrorElement: [{
+            element: ".control-link-item-color-rgb-color",
+            path: "link.item.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-link-item-color-rgb-text",
+            path: "link.item.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-link-item-color-rgb-r-number",
+            path: "link.item.color.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-hsl-h-range",
+            path: "link.item.color.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-hsl-h-number",
+            path: "link.item.color.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-hsl-s-range",
+            path: "link.item.color.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-hsl-s-number",
+            path: "link.item.color.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-hsl-l-range",
+            path: "link.item.color.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-hsl-l-number",
+            path: "link.item.color.hsl.l",
+            type: "number"
+          }],
+          func: function() {
+            link.mod.item.color.hsl();
+          }
+        }, {
+          element: ".control-link-item-color-rgb-r-number",
+          path: "link.item.color.rgb.r",
+          type: "number",
+          valueModify: {
+            min: 0,
+            max: 255
+          },
+          mirrorElement: [{
+            element: ".control-link-item-color-rgb-color",
+            path: "link.item.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-link-item-color-rgb-text",
+            path: "link.item.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-link-item-color-rgb-r-range",
+            path: "link.item.color.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-hsl-h-range",
+            path: "link.item.color.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-hsl-h-number",
+            path: "link.item.color.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-hsl-s-range",
+            path: "link.item.color.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-hsl-s-number",
+            path: "link.item.color.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-hsl-l-range",
+            path: "link.item.color.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-hsl-l-number",
+            path: "link.item.color.hsl.l",
+            type: "number"
+          }],
+          func: function() {
+            link.mod.item.color.hsl();
+          }
+        }, {
+          element: ".control-link-item-color-rgb-g-range",
+          path: "link.item.color.rgb.g",
+          type: "range",
+          valueModify: {
+            min: 0,
+            max: 255
+          },
+          mirrorElement: [{
+            element: ".control-link-item-color-rgb-color",
+            path: "link.item.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-link-item-color-rgb-text",
+            path: "link.item.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-link-item-color-rgb-g-number",
+            path: "link.item.color.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-hsl-h-range",
+            path: "link.item.color.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-hsl-h-number",
+            path: "link.item.color.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-hsl-s-range",
+            path: "link.item.color.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-hsl-s-number",
+            path: "link.item.color.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-hsl-l-range",
+            path: "link.item.color.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-hsl-l-number",
+            path: "link.item.color.hsl.l",
+            type: "number"
+          }],
+          func: function() {
+            link.mod.item.color.hsl();
+          }
+        }, {
+          element: ".control-link-item-color-rgb-g-number",
+          path: "link.item.color.rgb.g",
+          type: "number",
+          valueModify: {
+            min: 0,
+            max: 255
+          },
+          mirrorElement: [{
+            element: ".control-link-item-color-rgb-color",
+            path: "link.item.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-link-item-color-rgb-text",
+            path: "link.item.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-link-item-color-rgb-g-range",
+            path: "link.item.color.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-hsl-h-range",
+            path: "link.item.color.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-hsl-h-number",
+            path: "link.item.color.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-hsl-s-range",
+            path: "link.item.color.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-hsl-s-number",
+            path: "link.item.color.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-hsl-l-range",
+            path: "link.item.color.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-hsl-l-number",
+            path: "link.item.color.hsl.l",
+            type: "number"
+          }],
+          func: function() {
+            link.mod.item.color.hsl();
+          }
+        }, {
+          element: ".control-link-item-color-rgb-b-range",
+          path: "link.item.color.rgb.b",
+          type: "range",
+          valueModify: {
+            min: 0,
+            max: 255
+          },
+          mirrorElement: [{
+            element: ".control-link-item-color-rgb-color",
+            path: "link.item.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-link-item-color-rgb-text",
+            path: "link.item.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-link-item-color-rgb-b-number",
+            path: "link.item.color.rgb.b",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-hsl-h-range",
+            path: "link.item.color.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-hsl-h-number",
+            path: "link.item.color.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-hsl-s-range",
+            path: "link.item.color.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-hsl-s-number",
+            path: "link.item.color.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-hsl-l-range",
+            path: "link.item.color.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-hsl-l-number",
+            path: "link.item.color.hsl.l",
+            type: "number"
+          }],
+          func: function() {
+            link.mod.item.color.hsl();
+          }
+        }, {
+          element: ".control-link-item-color-rgb-b-number",
+          path: "link.item.color.rgb.b",
+          type: "number",
+          valueModify: {
+            min: 0,
+            max: 255
+          },
+          mirrorElement: [{
+            element: ".control-link-item-color-rgb-color",
+            path: "link.item.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-link-item-color-rgb-text",
+            path: "link.item.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-link-item-color-rgb-b-range",
+            path: "link.item.color.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-hsl-h-range",
+            path: "link.item.color.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-hsl-h-number",
+            path: "link.item.color.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-hsl-s-range",
+            path: "link.item.color.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-hsl-s-number",
+            path: "link.item.color.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-link-item-color-hsl-l-range",
+            path: "link.item.color.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-link-item-color-hsl-l-number",
+            path: "link.item.color.hsl.l",
+            type: "number"
+          }],
+          func: function() {
+            link.mod.item.color.hsl();
+          }
+        }, {
+          element: ".control-link-item-color-apply",
           type: "button",
           func: function() {
-            mod.default("link.item.opacity");
-            link.render.item.opacity();
-            render.update.control.header();
+            link.mod.item.color.set();
+            link.groupAndItems();
+          }
+        }, {
+          element: ".control-link-item-color-rainbow",
+          type: "button",
+          func: function() {
+            link.mod.item.color.rainbow();
+            link.groupAndItems();
+          }
+        }, {
+          element: ".control-link-item-color-opacity-range",
+          path: "link.item.color.opacity",
+          type: "range",
+          valueConvert: ["float"],
+          valueModify: {
+            min: 0,
+            max: 100
+          },
+          mirrorElement: [{
+            element: ".control-link-item-color-opacity-number",
+            path: "link.item.color.opacity",
+            type: "number",
+            valueConvert: ["float"]
+          }]
+        }, {
+          element: ".control-link-item-color-opacity-number",
+          path: "link.item.color.opacity",
+          type: "number",
+          valueConvert: ["float"],
+          valueModify: {
+            min: 0,
+            max: 100
+          },
+          mirrorElement: [{
+            element: ".control-link-item-color-opacity-range",
+            path: "link.item.color.opacity",
+            type: "number",
+            valueConvert: ["float"]
+          }]
+        }, {
+          element: ".control-link-item-color-opacity-default",
+          type: "button",
+          func: function() {
+            mod.default("link.item.color.opacity");
             render.update.control.menu();
-            render.class();
+          }
+        }, {
+          element: ".control-link-item-color-opacity-apply",
+          type: "button",
+          func: function() {
+            link.mod.item.color.opacity();
+            link.groupAndItems();
+          }
+        }],
+        accent: [{
+          element: ".control-link-item-accent-by-theme",
+          path: "link.item.accent.by",
+          type: "radio",
+          func: function() {
+            render.dependents();
+          }
+        }, {
+          element: ".control-link-item-accent-by-custom",
+          path: "link.item.accent.by",
+          type: "radio",
+          func: function() {
+            render.dependents();
+          }
+        }, {
+          element: ".control-link-item-accent-rgb-color",
+          path: "link.item.accent.rgb",
+          type: "color",
+          mirrorElement: [{
+            element: ".control-link-item-accent-rgb-text",
+            path: "link.item.accent.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-link-item-accent-hsl-h-range",
+            path: "link.item.accent.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-hsl-h-number",
+            path: "link.item.accent.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-hsl-s-range",
+            path: "link.item.accent.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-hsl-s-number",
+            path: "link.item.accent.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-hsl-l-range",
+            path: "link.item.accent.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-hsl-l-number",
+            path: "link.item.accent.hsl.l",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-rgb-r-range",
+            path: "link.item.accent.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-rgb-r-number",
+            path: "link.item.accent.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-rgb-g-range",
+            path: "link.item.accent.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-rgb-g-number",
+            path: "link.item.accent.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-rgb-b-range",
+            path: "link.item.accent.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-rgb-b-number",
+            path: "link.item.accent.rgb.b",
+            type: "number"
+          }],
+          func: function() {
+            link.mod.item.accent.hsl();
+          }
+        }, {
+          element: ".control-link-item-accent-rgb-text",
+          path: "link.item.accent.rgb",
+          type: "text",
+          valueConvert: ["hexTextString"],
+          mirrorElement: [{
+            element: ".control-link-item-accent-rgb-color",
+            path: "link.item.accent.rgb",
+            type: "color"
+          }, {
+            element: ".control-link-item-accent-hsl-h-range",
+            path: "link.item.accent.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-hsl-h-number",
+            path: "link.item.accent.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-hsl-s-range",
+            path: "link.item.accent.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-hsl-s-number",
+            path: "link.item.accent.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-hsl-l-range",
+            path: "link.item.accent.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-hsl-l-number",
+            path: "link.item.accent.hsl.l",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-rgb-r-range",
+            path: "link.item.accent.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-rgb-r-number",
+            path: "link.item.accent.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-rgb-g-range",
+            path: "link.item.accent.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-rgb-g-number",
+            path: "link.item.accent.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-rgb-b-range",
+            path: "link.item.accent.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-rgb-b-number",
+            path: "link.item.accent.rgb.b",
+            type: "number"
+          }],
+          func: function() {
+            link.mod.item.accent.hsl();
+          }
+        }, {
+          element: ".control-link-item-accent-hsl-h-range",
+          path: "link.item.accent.hsl.h",
+          type: "range",
+          valueModify: {
+            min: 0,
+            max: 359
+          },
+          mirrorElement: [{
+            element: ".control-link-item-accent-rgb-color",
+            path: "link.item.accent.rgb",
+            type: "color"
+          }, {
+            element: ".control-link-item-accent-rgb-text",
+            path: "link.item.accent.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-link-item-accent-hsl-h-number",
+            path: "link.item.accent.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-rgb-r-range",
+            path: "link.item.accent.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-rgb-r-number",
+            path: "link.item.accent.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-rgb-g-range",
+            path: "link.item.accent.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-rgb-g-number",
+            path: "link.item.accent.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-rgb-b-range",
+            path: "link.item.accent.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-rgb-b-number",
+            path: "link.item.accent.rgb.b",
+            type: "number"
+          }],
+          func: function() {
+            link.mod.item.accent.rgb();
+          }
+        }, {
+          element: ".control-link-item-accent-hsl-h-number",
+          path: "link.item.accent.hsl.h",
+          type: "number",
+          valueModify: {
+            min: 0,
+            max: 359
+          },
+          mirrorElement: [{
+            element: ".control-link-item-accent-rgb-color",
+            path: "link.item.accent.rgb",
+            type: "color"
+          }, {
+            element: ".control-link-item-accent-rgb-text",
+            path: "link.item.accent.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-link-item-accent-hsl-h-range",
+            path: "link.item.accent.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-rgb-r-range",
+            path: "link.item.accent.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-rgb-r-number",
+            path: "link.item.accent.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-rgb-g-range",
+            path: "link.item.accent.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-rgb-g-number",
+            path: "link.item.accent.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-rgb-b-range",
+            path: "link.item.accent.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-rgb-b-number",
+            path: "link.item.accent.rgb.b",
+            type: "number"
+          }],
+          func: function() {
+            link.mod.item.accent.rgb();
+          }
+        }, {
+          element: ".control-link-item-accent-hsl-s-range",
+          path: "link.item.accent.hsl.s",
+          type: "range",
+          valueModify: {
+            min: 0,
+            max: 100
+          },
+          mirrorElement: [{
+            element: ".control-link-item-accent-rgb-color",
+            path: "link.item.accent.rgb",
+            type: "color"
+          }, {
+            element: ".control-link-item-accent-rgb-text",
+            path: "link.item.accent.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-link-item-accent-hsl-s-number",
+            path: "link.item.accent.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-rgb-r-range",
+            path: "link.item.accent.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-rgb-r-number",
+            path: "link.item.accent.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-rgb-g-range",
+            path: "link.item.accent.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-rgb-g-number",
+            path: "link.item.accent.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-rgb-b-range",
+            path: "link.item.accent.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-rgb-b-number",
+            path: "link.item.accent.rgb.b",
+            type: "number"
+          }],
+          func: function() {
+            link.mod.item.accent.rgb();
+          }
+        }, {
+          element: ".control-link-item-accent-hsl-s-number",
+          path: "link.item.accent.hsl.s",
+          type: "number",
+          valueModify: {
+            min: 0,
+            max: 100
+          },
+          mirrorElement: [{
+            element: ".control-link-item-accent-rgb-color",
+            path: "link.item.accent.rgb",
+            type: "color"
+          }, {
+            element: ".control-link-item-accent-rgb-text",
+            path: "link.item.accent.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-link-item-accent-hsl-s-range",
+            path: "link.item.accent.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-rgb-r-range",
+            path: "link.item.accent.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-rgb-r-number",
+            path: "link.item.accent.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-rgb-g-range",
+            path: "link.item.accent.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-rgb-g-number",
+            path: "link.item.accent.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-rgb-b-range",
+            path: "link.item.accent.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-rgb-b-number",
+            path: "link.item.accent.rgb.b",
+            type: "number"
+          }],
+          func: function() {
+            link.mod.item.accent.rgb();
+          }
+        }, {
+          element: ".control-link-item-accent-hsl-l-range",
+          path: "link.item.accent.hsl.l",
+          type: "range",
+          valueModify: {
+            min: 0,
+            max: 100
+          },
+          mirrorElement: [{
+            element: ".control-link-item-accent-rgb-color",
+            path: "link.item.accent.rgb",
+            type: "color"
+          }, {
+            element: ".control-link-item-accent-rgb-text",
+            path: "link.item.accent.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-link-item-accent-hsl-l-number",
+            path: "link.item.accent.hsl.l",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-rgb-r-range",
+            path: "link.item.accent.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-rgb-r-number",
+            path: "link.item.accent.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-rgb-g-range",
+            path: "link.item.accent.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-rgb-g-number",
+            path: "link.item.accent.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-rgb-b-range",
+            path: "link.item.accent.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-rgb-b-number",
+            path: "link.item.accent.rgb.b",
+            type: "number"
+          }],
+          func: function() {
+            link.mod.item.accent.rgb();
+          }
+        }, {
+          element: ".control-link-item-accent-hsl-l-number",
+          path: "link.item.accent.hsl.l",
+          type: "number",
+          valueModify: {
+            min: 0,
+            max: 100
+          },
+          mirrorElement: [{
+            element: ".control-link-item-accent-rgb-color",
+            path: "link.item.accent.rgb",
+            type: "color"
+          }, {
+            element: ".control-link-item-accent-rgb-text",
+            path: "link.item.accent.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-link-item-accent-hsl-l-range",
+            path: "link.item.accent.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-rgb-r-range",
+            path: "link.item.accent.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-rgb-r-number",
+            path: "link.item.accent.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-rgb-g-range",
+            path: "link.item.accent.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-rgb-g-number",
+            path: "link.item.accent.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-rgb-b-range",
+            path: "link.item.accent.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-rgb-b-number",
+            path: "link.item.accent.rgb.b",
+            type: "number"
+          }],
+          func: function() {
+            link.mod.item.accent.rgb();
+          }
+        }, {
+          element: ".control-link-item-accent-rgb-r-range",
+          path: "link.item.accent.rgb.r",
+          type: "range",
+          valueModify: {
+            min: 0,
+            max: 255
+          },
+          mirrorElement: [{
+            element: ".control-link-item-accent-rgb-color",
+            path: "link.item.accent.rgb",
+            type: "color"
+          }, {
+            element: ".control-link-item-accent-rgb-text",
+            path: "link.item.accent.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-link-item-accent-rgb-r-number",
+            path: "link.item.accent.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-hsl-h-range",
+            path: "link.item.accent.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-hsl-h-number",
+            path: "link.item.accent.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-hsl-s-range",
+            path: "link.item.accent.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-hsl-s-number",
+            path: "link.item.accent.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-hsl-l-range",
+            path: "link.item.accent.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-hsl-l-number",
+            path: "link.item.accent.hsl.l",
+            type: "number"
+          }],
+          func: function() {
+            link.mod.item.accent.hsl();
+          }
+        }, {
+          element: ".control-link-item-accent-rgb-r-number",
+          path: "link.item.accent.rgb.r",
+          type: "number",
+          valueModify: {
+            min: 0,
+            max: 255
+          },
+          mirrorElement: [{
+            element: ".control-link-item-accent-rgb-color",
+            path: "link.item.accent.rgb",
+            type: "color"
+          }, {
+            element: ".control-link-item-accent-rgb-text",
+            path: "link.item.accent.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-link-item-accent-rgb-r-range",
+            path: "link.item.accent.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-hsl-h-range",
+            path: "link.item.accent.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-hsl-h-number",
+            path: "link.item.accent.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-hsl-s-range",
+            path: "link.item.accent.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-hsl-s-number",
+            path: "link.item.accent.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-hsl-l-range",
+            path: "link.item.accent.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-hsl-l-number",
+            path: "link.item.accent.hsl.l",
+            type: "number"
+          }],
+          func: function() {
+            link.mod.item.accent.hsl();
+          }
+        }, {
+          element: ".control-link-item-accent-rgb-g-range",
+          path: "link.item.accent.rgb.g",
+          type: "range",
+          valueModify: {
+            min: 0,
+            max: 255
+          },
+          mirrorElement: [{
+            element: ".control-link-item-accent-rgb-color",
+            path: "link.item.accent.rgb",
+            type: "color"
+          }, {
+            element: ".control-link-item-accent-rgb-text",
+            path: "link.item.accent.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-link-item-accent-rgb-g-number",
+            path: "link.item.accent.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-hsl-h-range",
+            path: "link.item.accent.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-hsl-h-number",
+            path: "link.item.accent.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-hsl-s-range",
+            path: "link.item.accent.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-hsl-s-number",
+            path: "link.item.accent.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-hsl-l-range",
+            path: "link.item.accent.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-hsl-l-number",
+            path: "link.item.accent.hsl.l",
+            type: "number"
+          }],
+          func: function() {
+            link.mod.item.accent.hsl();
+          }
+        }, {
+          element: ".control-link-item-accent-rgb-g-number",
+          path: "link.item.accent.rgb.g",
+          type: "number",
+          valueModify: {
+            min: 0,
+            max: 255
+          },
+          mirrorElement: [{
+            element: ".control-link-item-accent-rgb-color",
+            path: "link.item.accent.rgb",
+            type: "color"
+          }, {
+            element: ".control-link-item-accent-rgb-text",
+            path: "link.item.accent.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-link-item-accent-rgb-g-range",
+            path: "link.item.accent.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-hsl-h-range",
+            path: "link.item.accent.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-hsl-h-number",
+            path: "link.item.accent.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-hsl-s-range",
+            path: "link.item.accent.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-hsl-s-number",
+            path: "link.item.accent.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-hsl-l-range",
+            path: "link.item.accent.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-hsl-l-number",
+            path: "link.item.accent.hsl.l",
+            type: "number"
+          }],
+          func: function() {
+            link.mod.item.accent.hsl();
+          }
+        }, {
+          element: ".control-link-item-accent-rgb-b-range",
+          path: "link.item.accent.rgb.b",
+          type: "range",
+          valueModify: {
+            min: 0,
+            max: 255
+          },
+          mirrorElement: [{
+            element: ".control-link-item-accent-rgb-color",
+            path: "link.item.accent.rgb",
+            type: "color"
+          }, {
+            element: ".control-link-item-accent-rgb-text",
+            path: "link.item.accent.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-link-item-accent-rgb-b-number",
+            path: "link.item.accent.rgb.b",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-hsl-h-range",
+            path: "link.item.accent.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-hsl-h-number",
+            path: "link.item.accent.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-hsl-s-range",
+            path: "link.item.accent.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-hsl-s-number",
+            path: "link.item.accent.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-hsl-l-range",
+            path: "link.item.accent.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-hsl-l-number",
+            path: "link.item.accent.hsl.l",
+            type: "number"
+          }],
+          func: function() {
+            link.mod.item.accent.hsl();
+          }
+        }, {
+          element: ".control-link-item-accent-rgb-b-number",
+          path: "link.item.accent.rgb.b",
+          type: "number",
+          valueModify: {
+            min: 0,
+            max: 255
+          },
+          mirrorElement: [{
+            element: ".control-link-item-accent-rgb-color",
+            path: "link.item.accent.rgb",
+            type: "color"
+          }, {
+            element: ".control-link-item-accent-rgb-text",
+            path: "link.item.accent.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-link-item-accent-rgb-b-range",
+            path: "link.item.accent.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-hsl-h-range",
+            path: "link.item.accent.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-hsl-h-number",
+            path: "link.item.accent.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-hsl-s-range",
+            path: "link.item.accent.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-hsl-s-number",
+            path: "link.item.accent.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-link-item-accent-hsl-l-range",
+            path: "link.item.accent.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-link-item-accent-hsl-l-number",
+            path: "link.item.accent.hsl.l",
+            type: "number"
+          }],
+          func: function() {
+            link.mod.item.accent.hsl();
+          }
+        }, {
+          element: ".control-link-item-accent-apply",
+          type: "button",
+          func: function() {
+            link.mod.item.accent.set();
+            link.groupAndItems();
+          }
+        }, {
+          element: ".control-link-item-accent-rainbow",
+          type: "button",
+          func: function() {
+            link.mod.item.accent.rainbow();
+            link.groupAndItems();
+          }
+        }],
+        background: [{
+          element: ".control-link-item-background-show",
+          type: "button",
+          func: function() {
+            link.mod.item.background.show();
+            link.groupAndItems();
+          }
+        }, {
+          element: ".control-link-item-background-hide",
+          type: "button",
+          func: function() {
+            link.mod.item.background.hide();
+            link.groupAndItems();
+          }
+        }, {
+          element: ".control-link-item-background-opacity-range",
+          path: "link.item.background.opacity",
+          type: "range",
+          valueConvert: ["float"],
+          valueModify: {
+            min: 0,
+            max: 100
+          },
+          mirrorElement: [{
+            element: ".control-link-item-background-opacity-number",
+            path: "link.item.background.opacity",
+            type: "number",
+            valueConvert: ["float"]
+          }]
+        }, {
+          element: ".control-link-item-background-opacity-number",
+          path: "link.item.background.opacity",
+          type: "number",
+          valueConvert: ["float"],
+          valueModify: {
+            min: 0,
+            max: 100
+          },
+          mirrorElement: [{
+            element: ".control-link-item-background-opacity-range",
+            path: "link.item.background.opacity",
+            type: "number",
+            valueConvert: ["float"]
+          }]
+        }, {
+          element: ".control-link-item-background-opacity-default",
+          type: "button",
+          func: function() {
+            mod.default("link.item.background.opacity");
+            render.update.control.menu();
+          }
+        }, {
+          element: ".control-link-item-background-opacity-apply",
+          type: "button",
+          func: function() {
+            link.mod.item.background.opacity();
+            link.groupAndItems();
           }
         }],
         border: [{
@@ -3991,7 +6282,6 @@ var control = (function() {
             mod.default("link.item.border");
             render.class();
             link.render.item.border();
-            render.update.control.header();
             render.update.control.menu();
           }
         }],
@@ -4029,21 +6319,6 @@ var control = (function() {
           type: "button",
           func: function() {
             bookmarks.sort("name");
-            link.groupAndItems();
-          }
-        }],
-        accent: [{
-          element: ".control-link-accent-clear",
-          type: "button",
-          func: function() {
-            link.mod.accent.clear();
-            link.groupAndItems();
-          }
-        }, {
-          element: ".control-link-accent-set",
-          type: "button",
-          func: function() {
-            link.mod.accent.rainbow();
             link.groupAndItems();
           }
         }]
@@ -4090,14 +6365,14 @@ var control = (function() {
           element: ".control-group-name-show",
           type: "button",
           func: function() {
-            link.mod.name.show();
+            link.mod.group.name.show();
             link.groupAndItems();
           }
         }, {
           element: ".control-group-name-hide",
           type: "button",
           func: function() {
-            link.mod.name.hide();
+            link.mod.group.name.hide();
             link.groupAndItems();
           }
         }, {
@@ -4192,7 +6467,6 @@ var control = (function() {
           func: function() {
             mod.default("group.name.size");
             link.render.group.name.size();
-            render.update.control.header();
             render.update.control.menu();
           }
         }],
@@ -4200,14 +6474,14 @@ var control = (function() {
           element: ".control-group-openall-show",
           type: "button",
           func: function() {
-            link.mod.openall.show();
+            link.mod.group.openall.show();
             link.groupAndItems();
           }
         }, {
           element: ".control-group-openall-hide",
           type: "button",
           func: function() {
-            link.mod.openall.hide();
+            link.mod.group.openall.hide();
             link.groupAndItems();
           }
         }, {
@@ -4302,7 +6576,6 @@ var control = (function() {
           func: function() {
             mod.default("group.openAll.size");
             link.render.group.openall.size();
-            render.update.control.header();
             render.update.control.menu();
           }
         }, {
@@ -4327,7 +6600,7 @@ var control = (function() {
         }, {
           element: ".control-group-openall-opacity-number",
           path: "group.openAll.opacity",
-          type: "range",
+          type: "number",
           valueConvert: ["float"],
           valueModify: {
             min: 0,
@@ -4394,7 +6667,6 @@ var control = (function() {
             mod.default("group.border");
             link.render.group.border();
             render.class();
-            render.update.control.header();
             render.update.control.menu();
           }
         }]
@@ -4416,21 +6688,6 @@ var control = (function() {
             render.class();
           }
         }],
-        style: [{
-          element: ".control-theme-style-dark",
-          path: "theme.style",
-          type: "radio",
-          func: function() {
-            theme.style.dark();
-          }
-        }, {
-          element: ".control-theme-style-light",
-          path: "theme.style",
-          type: "radio",
-          func: function() {
-            theme.style.light();
-          }
-        }],
         fonts: [{
           element: ".control-theme-font-display-name",
           path: "theme.font.display.name",
@@ -4444,7 +6701,6 @@ var control = (function() {
           func: function() {
             mod.default("theme.font.display.name");
             theme.render.font.display.name();
-            render.update.control.header();
             render.update.control.menu();
           }
         }, {
@@ -4470,7 +6726,6 @@ var control = (function() {
           func: function() {
             mod.default("theme.font.display.weight");
             theme.render.font.display.weight();
-            render.update.control.header();
             render.update.control.menu();
           }
         }, {
@@ -4496,7 +6751,6 @@ var control = (function() {
           func: function() {
             theme.mod.font.display.light();
             theme.render.font.display.weight();
-            render.update.control.header();
             render.update.control.menu();
           }
         }, {
@@ -4505,7 +6759,6 @@ var control = (function() {
           func: function() {
             theme.mod.font.display.regular();
             theme.render.font.display.weight();
-            render.update.control.header();
             render.update.control.menu();
           }
         }, {
@@ -4514,7 +6767,6 @@ var control = (function() {
           func: function() {
             theme.mod.font.display.bold();
             theme.render.font.display.weight();
-            render.update.control.header();
             render.update.control.menu();
           }
         }, {
@@ -4537,7 +6789,6 @@ var control = (function() {
           func: function() {
             mod.default("theme.font.display.style");
             theme.render.font.display.style();
-            render.update.control.header();
             render.update.control.menu();
           }
         }, {
@@ -4553,7 +6804,6 @@ var control = (function() {
           func: function() {
             mod.default("theme.font.ui.name");
             theme.render.font.ui.name();
-            render.update.control.header();
             render.update.control.menu();
           }
         }, {
@@ -4579,7 +6829,6 @@ var control = (function() {
           func: function() {
             mod.default("theme.font.ui.weight");
             theme.render.font.ui.weight();
-            render.update.control.header();
             render.update.control.menu();
           }
         }, {
@@ -4605,7 +6854,6 @@ var control = (function() {
           func: function() {
             theme.mod.font.ui.light();
             theme.render.font.ui.weight();
-            render.update.control.header();
             render.update.control.menu();
           }
         }, {
@@ -4614,7 +6862,6 @@ var control = (function() {
           func: function() {
             theme.mod.font.ui.regular();
             theme.render.font.ui.weight();
-            render.update.control.header();
             render.update.control.menu();
           }
         }, {
@@ -4623,7 +6870,6 @@ var control = (function() {
           func: function() {
             theme.mod.font.ui.bold();
             theme.render.font.ui.weight();
-            render.update.control.header();
             render.update.control.menu();
           }
         }, {
@@ -4646,8 +6892,29 @@ var control = (function() {
           func: function() {
             mod.default("theme.font.ui.style");
             theme.render.font.ui.style();
-            render.update.control.header();
             render.update.control.menu();
+          }
+        }],
+        style: [{
+          element: ".control-theme-style-dark",
+          path: "theme.style",
+          type: "radio",
+          func: function() {
+            theme.style.dark();
+          }
+        }, {
+          element: ".control-theme-style-light",
+          path: "theme.style",
+          type: "radio",
+          func: function() {
+            theme.style.light();
+          }
+        }, {
+          element: ".control-theme-style-system",
+          path: "theme.style",
+          type: "radio",
+          func: function() {
+            theme.style.system();
           }
         }],
         color: [{
@@ -5520,7 +7787,6 @@ var control = (function() {
             theme.mod.color.generated();
             theme.render.color.shade();
             theme.render.themeMetaTag();
-            render.update.control.header();
             render.update.control.menu();
           }
         }, {
@@ -5573,7 +7839,6 @@ var control = (function() {
             theme.mod.color.generated();
             theme.render.color.shade();
             theme.render.themeMetaTag();
-            render.update.control.header();
             render.update.control.menu();
           }
         }],
@@ -6470,7 +8735,6 @@ var control = (function() {
             mod.default("theme.accent.cycle.speed");
             theme.bind.accent.cycle.remove();
             theme.bind.accent.cycle.add();
-            render.update.control.header();
             render.update.control.menu();
           }
         }, {
@@ -6514,7 +8778,6 @@ var control = (function() {
             mod.default("theme.accent.cycle.step");
             theme.bind.accent.cycle.remove();
             theme.bind.accent.cycle.add();
-            render.update.control.header();
             render.update.control.menu();
           }
         }],
@@ -6564,7 +8827,6 @@ var control = (function() {
           func: function() {
             mod.default("theme.radius");
             theme.render.radius();
-            render.update.control.header();
             render.update.control.menu();
           }
         }],
@@ -6612,7 +8874,6 @@ var control = (function() {
           func: function() {
             mod.default("theme.shadow");
             theme.render.shadow();
-            render.update.control.header();
             render.update.control.menu();
           }
         }],
@@ -6660,479 +8921,6 @@ var control = (function() {
           func: function() {
             mod.default("theme.shade.opacity");
             theme.render.shade.opacity();
-            render.update.control.header();
-            render.update.control.menu();
-          }
-        }]
-      },
-      background: {
-        color: [{
-          element: ".control-background-color-by-theme",
-          path: "background.color.by",
-          type: "radio",
-          func: function() {
-            render.dependents();
-            render.class();
-          }
-        }, {
-          element: ".control-background-color-by-custom",
-          path: "background.color.by",
-          type: "radio",
-          func: function() {
-            render.dependents();
-            render.class();
-          }
-        }, {
-          element: ".control-background-color-rgb-range",
-          path: "background.color.rgb",
-          type: "color",
-          mirrorElement: [{
-            element: ".control-background-color-rgb-text",
-            path: "background.color.rgb",
-            type: "text",
-            valueConvert: ["hexTextString"]
-          }],
-          func: function() {
-            background.render.color.custom();
-          }
-        }, {
-          element: ".control-background-color-rgb-text",
-          path: "background.color.rgb",
-          type: "text",
-          valueConvert: ["hexTextString"],
-          mirrorElement: [{
-            element: ".control-background-color-rgb-range",
-            path: "background.color.rgb",
-            type: "color"
-          }],
-          func: function() {
-            background.render.color.custom();
-          }
-        }],
-        image: [{
-          element: ".control-background-image-show",
-          path: "background.image.show",
-          type: "checkbox",
-          func: function() {
-            render.class();
-            render.dependents();
-            background.render.image();
-          }
-        }, {
-          element: ".control-background-image-from-file",
-          path: "background.image.from",
-          type: "radio",
-          func: function() {
-            render.dependents();
-            background.render.image();
-          }
-        }, {
-          element: ".control-background-image-file",
-          type: "file",
-          func: function() {
-            background.mod.import();
-          }
-        }, {
-          element: ".control-background-image-file-clear",
-          type: "button",
-          func: function() {
-            background.mod.clear.file();
-            background.render.input.clear();
-            background.render.image();
-            background.render.feedback.clear({
-              animate: true
-            });
-            background.render.feedback.empty();
-          }
-        }, {
-          element: ".control-background-image-from-url",
-          path: "background.image.from",
-          type: "radio",
-          func: function() {
-            render.dependents();
-            background.render.image();
-          }
-        }, {
-          element: ".control-background-image-url",
-          path: "background.image.url",
-          type: "textarea",
-          func: function() {
-            background.render.image();
-          }
-        }, {
-          element: ".control-background-image-opacity-range",
-          path: "background.image.opacity",
-          type: "range",
-          valueConvert: ["float"],
-          valueModify: {
-            min: 0,
-            max: 100
-          },
-          mirrorElement: [{
-            element: ".control-background-image-opacity-number",
-            path: "background.image.opacity",
-            type: "number",
-            valueConvert: ["float"]
-          }],
-          func: function() {
-            background.render.opacity();
-          }
-        }, {
-          element: ".control-background-image-opacity-number",
-          path: "background.image.opacity",
-          type: "number",
-          valueConvert: ["float"],
-          valueModify: {
-            min: 0,
-            max: 100
-          },
-          mirrorElement: [{
-            element: ".control-background-image-opacity-range",
-            path: "background.image.opacity",
-            type: "range",
-            valueConvert: ["float"]
-          }],
-          func: function() {
-            background.render.opacity();
-          }
-        }, {
-          element: ".control-background-image-opacity-default",
-          type: "button",
-          func: function() {
-            mod.default("background.image.opacity");
-            background.render.opacity();
-            render.update.control.menu();
-          }
-        }, {
-          element: ".control-background-image-grayscale-range",
-          path: "background.image.grayscale",
-          type: "range",
-          valueConvert: ["float"],
-          valueModify: {
-            min: 0,
-            max: 100
-          },
-          mirrorElement: [{
-            element: ".control-background-image-grayscale-number",
-            path: "background.image.grayscale",
-            type: "number",
-            valueConvert: ["float"]
-          }],
-          func: function() {
-            background.render.grayscale();
-          }
-        }, {
-          element: ".control-background-image-grayscale-number",
-          path: "background.image.grayscale",
-          type: "number",
-          valueConvert: ["float"],
-          valueModify: {
-            min: 0,
-            max: 100
-          },
-          mirrorElement: [{
-            element: ".control-background-image-grayscale-range",
-            path: "background.image.grayscale",
-            type: "range",
-            valueConvert: ["float"]
-          }],
-          func: function() {
-            background.render.grayscale();
-          }
-        }, {
-          element: ".control-background-image-grayscale-default",
-          type: "button",
-          func: function() {
-            mod.default("background.image.grayscale");
-            background.render.grayscale();
-            render.update.control.menu();
-          }
-        }, {
-          element: ".control-background-image-blur-range",
-          path: "background.image.blur",
-          type: "range",
-          valueModify: {
-            min: 0,
-            max: 100
-          },
-          mirrorElement: [{
-            element: ".control-background-image-blur-number",
-            path: "background.image.blur",
-            type: "number"
-          }],
-          func: function() {
-            background.render.blur();
-          }
-        }, {
-          element: ".control-background-image-blur-number",
-          path: "background.image.blur",
-          type: "number",
-          valueModify: {
-            min: 0,
-            max: 100
-          },
-          mirrorElement: [{
-            element: ".control-background-image-blur-range",
-            path: "background.image.blur",
-            type: "range"
-          }],
-          func: function() {
-            background.render.blur();
-          }
-        }, {
-          element: ".control-background-image-blur-default",
-          type: "button",
-          func: function() {
-            mod.default("background.image.blur");
-            background.render.blur();
-            render.update.control.menu();
-          }
-        }, {
-          element: ".control-background-image-accent-range",
-          path: "background.image.accent",
-          type: "range",
-          valueConvert: ["float"],
-          valueModify: {
-            min: 0,
-            max: 100
-          },
-          mirrorElement: [{
-            element: ".control-background-image-accent-number",
-            path: "background.image.accent",
-            type: "number",
-            valueConvert: ["float"]
-          }],
-          func: function() {
-            background.render.accent();
-          }
-        }, {
-          element: ".control-background-image-accent-number",
-          path: "background.image.accent",
-          type: "number",
-          valueConvert: ["float"],
-          valueModify: {
-            min: 0,
-            max: 100
-          },
-          mirrorElement: [{
-            element: ".control-background-image-accent-range",
-            path: "background.image.accent",
-            type: "range",
-            valueConvert: ["float"]
-          }],
-          func: function() {
-            background.render.accent();
-          }
-        }, {
-          element: ".control-background-image-accent-default",
-          type: "button",
-          func: function() {
-            mod.default("background.image.accent");
-            background.render.accent();
-            render.update.control.menu();
-          }
-        }, {
-          element: ".control-background-image-scale-range",
-          path: "background.image.scale",
-          type: "range",
-          valueConvert: ["float"],
-          valueModify: {
-            min: 100,
-            max: 1000
-          },
-          mirrorElement: [{
-            element: ".control-background-image-scale-number",
-            path: "background.image.scale",
-            type: "number",
-            valueConvert: ["float"]
-          }],
-          func: function() {
-            background.render.scale();
-          }
-        }, {
-          element: ".control-background-image-scale-number",
-          path: "background.image.scale",
-          type: "number",
-          valueConvert: ["float"],
-          valueModify: {
-            min: 100,
-            max: 1000
-          },
-          mirrorElement: [{
-            element: ".control-background-image-scale-range",
-            path: "background.image.scale",
-            type: "range",
-            valueConvert: ["float"]
-          }],
-          func: function() {
-            background.render.scale();
-          }
-        }, {
-          element: ".control-background-image-scale-default",
-          type: "button",
-          func: function() {
-            mod.default("background.image.scale");
-            background.render.scale();
-            render.update.control.menu();
-          }
-        }, {
-          element: ".control-background-image-vignette-opacity-range",
-          path: "background.image.vignette.opacity",
-          type: "range",
-          valueModify: {
-            min: 0,
-            max: 100
-          },
-          mirrorElement: [{
-            element: ".control-background-image-vignette-opacity-number",
-            path: "background.image.vignette.opacity",
-            type: "number"
-          }],
-          func: function() {
-            background.render.vignette.opacity();
-            background.render.vignette.start();
-            background.render.vignette.end();
-          }
-        }, {
-          element: ".control-background-image-vignette-opacity-number",
-          path: "background.image.vignette.opacity",
-          type: "number",
-          valueModify: {
-            min: 0,
-            max: 100
-          },
-          mirrorElement: [{
-            element: ".control-background-image-vignette-opacity-range",
-            path: "background.image.vignette.opacity",
-            type: "range"
-          }],
-          func: function() {
-            background.render.vignette.opacity();
-            background.render.vignette.start();
-            background.render.vignette.end();
-          }
-        }, {
-          element: ".control-background-image-vignette-opacity-default",
-          type: "button",
-          func: function() {
-            mod.default("background.image.vignette.opacity");
-            background.render.vignette.opacity();
-            background.render.vignette.start();
-            background.render.vignette.end();
-            render.update.control.menu();
-          }
-        }, {
-          element: ".control-background-image-vignette-start-range",
-          path: "background.image.vignette.start",
-          type: "range",
-          valueModify: {
-            min: 0,
-            max: 100
-          },
-          mirrorElement: [{
-            element: ".control-background-image-vignette-start-number",
-            path: "background.image.vignette.start",
-            type: "number"
-          }],
-          limitElement: [{
-            element: ".control-background-image-vignette-end-range",
-            path: "background.image.vignette.end",
-            type: "range",
-            limit: "max"
-          }, {
-            element: ".control-background-image-vignette-end-number",
-            path: "background.image.vignette.end",
-            type: "number",
-            limit: "max"
-          }],
-          func: function() {
-            background.render.vignette.opacity();
-            background.render.vignette.start();
-            background.render.vignette.end();
-          }
-        }, {
-          element: ".control-background-image-vignette-start-number",
-          path: "background.image.vignette.start",
-          type: "number",
-          valueModify: {
-            min: 0,
-            max: 100
-          },
-          mirrorElement: [{
-            element: ".control-background-image-vignette-start-range",
-            path: "background.image.vignette.start",
-            type: "range"
-          }],
-          func: function() {
-            background.render.vignette.opacity();
-            background.render.vignette.start();
-            background.render.vignette.end();
-          }
-        }, {
-          element: ".control-background-image-vignette-start-default",
-          type: "button",
-          func: function() {
-            mod.default("background.image.vignette.start");
-            background.render.vignette.opacity();
-            background.render.vignette.start();
-            background.render.vignette.end();
-            render.update.control.menu();
-          }
-        }, {
-          element: ".control-background-image-vignette-end-range",
-          path: "background.image.vignette.end",
-          type: "range",
-          valueModify: {
-            min: 0,
-            max: 100
-          },
-          mirrorElement: [{
-            element: ".control-background-image-vignette-end-number",
-            path: "background.image.vignette.end",
-            type: "number"
-          }],
-          limitElement: [{
-            element: ".control-background-image-vignette-start-range",
-            path: "background.image.vignette.start",
-            type: "range",
-            limit: "min"
-          }, {
-            element: ".control-background-image-vignette-start-number",
-            path: "background.image.vignette.start",
-            type: "number",
-            limit: "min"
-          }],
-          func: function() {
-            background.render.vignette.opacity();
-            background.render.vignette.start();
-            background.render.vignette.end();
-          }
-        }, {
-          element: ".control-background-image-vignette-end-number",
-          path: "background.image.vignette.end",
-          type: "number",
-          valueModify: {
-            min: 0,
-            max: 100
-          },
-          mirrorElement: [{
-            element: ".control-background-image-vignette-end-range",
-            path: "background.image.vignette.end",
-            type: "range"
-          }],
-          func: function() {
-            background.render.vignette.opacity();
-            background.render.vignette.start();
-            background.render.vignette.end();
-          }
-        }, {
-          element: ".control-background-image-vignette-end-default",
-          type: "button",
-          func: function() {
-            mod.default("background.image.vignette.end");
-            background.render.vignette.opacity();
-            background.render.vignette.start();
-            background.render.vignette.end();
             render.update.control.menu();
           }
         }]
@@ -7158,6 +8946,1204 @@ var control = (function() {
           func: function() {
             menu.close();
             data.render.clear();
+          }
+        }]
+      },
+      background: {
+        color: [{
+          element: ".control-background-color-by-theme",
+          path: "background.color.by",
+          type: "radio",
+          func: function() {
+            render.dependents();
+            render.class();
+          }
+        }, {
+          element: ".control-background-color-by-custom",
+          path: "background.color.by",
+          type: "radio",
+          func: function() {
+            render.dependents();
+            render.class();
+          }
+        }, {
+          element: ".control-background-color-rgb-color",
+          path: "background.color.rgb",
+          type: "color",
+          mirrorElement: [{
+            element: ".control-background-color-rgb-text",
+            path: "background.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-background-color-hsl-h-range",
+            path: "background.color.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-background-color-hsl-h-number",
+            path: "background.color.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-background-color-hsl-s-range",
+            path: "background.color.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-background-color-hsl-s-number",
+            path: "background.color.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-background-color-hsl-l-range",
+            path: "background.color.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-background-color-hsl-l-number",
+            path: "background.color.hsl.l",
+            type: "number"
+          }, {
+            element: ".control-background-color-rgb-r-range",
+            path: "background.color.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-background-color-rgb-r-number",
+            path: "background.color.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-background-color-rgb-g-range",
+            path: "background.color.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-background-color-rgb-g-number",
+            path: "background.color.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-background-color-rgb-b-range",
+            path: "background.color.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-background-color-rgb-b-number",
+            path: "background.color.rgb.b",
+            type: "number"
+          }],
+          func: function() {
+            background.mod.color.hsl();
+            background.render.color.custom();
+          }
+        }, {
+          element: ".control-background-color-rgb-text",
+          path: "background.color.rgb",
+          type: "text",
+          valueConvert: ["hexTextString"],
+          mirrorElement: [{
+            element: ".control-background-color-rgb-color",
+            path: "background.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-background-color-hsl-h-range",
+            path: "background.color.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-background-color-hsl-h-number",
+            path: "background.color.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-background-color-hsl-s-range",
+            path: "background.color.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-background-color-hsl-s-number",
+            path: "background.color.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-background-color-hsl-l-range",
+            path: "background.color.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-background-color-hsl-l-number",
+            path: "background.color.hsl.l",
+            type: "number"
+          }, {
+            element: ".control-background-color-rgb-r-range",
+            path: "background.color.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-background-color-rgb-r-number",
+            path: "background.color.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-background-color-rgb-g-range",
+            path: "background.color.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-background-color-rgb-g-number",
+            path: "background.color.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-background-color-rgb-b-range",
+            path: "background.color.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-background-color-rgb-b-number",
+            path: "background.color.rgb.b",
+            type: "number"
+          }],
+          func: function() {
+            background.mod.color.hsl();
+            background.render.color.custom();
+          }
+        }, {
+          element: ".control-background-color-hsl-h-range",
+          path: "background.color.hsl.h",
+          type: "range",
+          valueModify: {
+            min: 0,
+            max: 359
+          },
+          mirrorElement: [{
+            element: ".control-background-color-rgb-color",
+            path: "background.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-background-color-rgb-text",
+            path: "background.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-background-color-hsl-h-number",
+            path: "background.color.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-background-color-rgb-r-range",
+            path: "background.color.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-background-color-rgb-r-number",
+            path: "background.color.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-background-color-rgb-g-range",
+            path: "background.color.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-background-color-rgb-g-number",
+            path: "background.color.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-background-color-rgb-b-range",
+            path: "background.color.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-background-color-rgb-b-number",
+            path: "background.color.rgb.b",
+            type: "number"
+          }],
+          func: function() {
+            background.mod.color.rgb();
+            background.render.color.custom();
+          }
+        }, {
+          element: ".control-background-color-hsl-h-number",
+          path: "background.color.hsl.h",
+          type: "number",
+          valueModify: {
+            min: 0,
+            max: 359
+          },
+          mirrorElement: [{
+            element: ".control-background-color-rgb-color",
+            path: "background.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-background-color-rgb-text",
+            path: "background.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-background-color-hsl-h-range",
+            path: "background.color.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-background-color-rgb-r-range",
+            path: "background.color.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-background-color-rgb-r-number",
+            path: "background.color.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-background-color-rgb-g-range",
+            path: "background.color.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-background-color-rgb-g-number",
+            path: "background.color.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-background-color-rgb-b-range",
+            path: "background.color.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-background-color-rgb-b-number",
+            path: "background.color.rgb.b",
+            type: "number"
+          }],
+          func: function() {
+            background.mod.color.rgb();
+            background.render.color.custom();
+          }
+        }, {
+          element: ".control-background-color-hsl-s-range",
+          path: "background.color.hsl.s",
+          type: "range",
+          valueModify: {
+            min: 0,
+            max: 100
+          },
+          mirrorElement: [{
+            element: ".control-background-color-rgb-color",
+            path: "background.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-background-color-rgb-text",
+            path: "background.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-background-color-hsl-s-number",
+            path: "background.color.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-background-color-rgb-r-range",
+            path: "background.color.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-background-color-rgb-r-number",
+            path: "background.color.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-background-color-rgb-g-range",
+            path: "background.color.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-background-color-rgb-g-number",
+            path: "background.color.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-background-color-rgb-b-range",
+            path: "background.color.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-background-color-rgb-b-number",
+            path: "background.color.rgb.b",
+            type: "number"
+          }],
+          func: function() {
+            background.mod.color.rgb();
+            background.render.color.custom();
+          }
+        }, {
+          element: ".control-background-color-hsl-s-number",
+          path: "background.color.hsl.s",
+          type: "number",
+          valueModify: {
+            min: 0,
+            max: 100
+          },
+          mirrorElement: [{
+            element: ".control-background-color-rgb-color",
+            path: "background.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-background-color-rgb-text",
+            path: "background.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-background-color-hsl-s-range",
+            path: "background.color.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-background-color-rgb-r-range",
+            path: "background.color.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-background-color-rgb-r-number",
+            path: "background.color.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-background-color-rgb-g-range",
+            path: "background.color.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-background-color-rgb-g-number",
+            path: "background.color.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-background-color-rgb-b-range",
+            path: "background.color.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-background-color-rgb-b-number",
+            path: "background.color.rgb.b",
+            type: "number"
+          }],
+          func: function() {
+            background.mod.color.rgb();
+            background.render.color.custom();
+          }
+        }, {
+          element: ".control-background-color-hsl-l-range",
+          path: "background.color.hsl.l",
+          type: "range",
+          valueModify: {
+            min: 0,
+            max: 100
+          },
+          mirrorElement: [{
+            element: ".control-background-color-rgb-color",
+            path: "background.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-background-color-rgb-text",
+            path: "background.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-background-color-hsl-l-number",
+            path: "background.color.hsl.l",
+            type: "number"
+          }, {
+            element: ".control-background-color-rgb-r-range",
+            path: "background.color.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-background-color-rgb-r-number",
+            path: "background.color.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-background-color-rgb-g-range",
+            path: "background.color.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-background-color-rgb-g-number",
+            path: "background.color.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-background-color-rgb-b-range",
+            path: "background.color.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-background-color-rgb-b-number",
+            path: "background.color.rgb.b",
+            type: "number"
+          }],
+          func: function() {
+            background.mod.color.rgb();
+            background.render.color.custom();
+          }
+        }, {
+          element: ".control-background-color-hsl-l-number",
+          path: "background.color.hsl.l",
+          type: "number",
+          valueModify: {
+            min: 0,
+            max: 100
+          },
+          mirrorElement: [{
+            element: ".control-background-color-rgb-color",
+            path: "background.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-background-color-rgb-text",
+            path: "background.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-background-color-hsl-l-range",
+            path: "background.color.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-background-color-rgb-r-range",
+            path: "background.color.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-background-color-rgb-r-number",
+            path: "background.color.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-background-color-rgb-g-range",
+            path: "background.color.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-background-color-rgb-g-number",
+            path: "background.color.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-background-color-rgb-b-range",
+            path: "background.color.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-background-color-rgb-b-number",
+            path: "background.color.rgb.b",
+            type: "number"
+          }],
+          func: function() {
+            background.mod.color.rgb();
+            background.render.color.custom();
+          }
+        }, {
+          element: ".control-background-color-rgb-r-range",
+          path: "background.color.rgb.r",
+          type: "range",
+          valueModify: {
+            min: 0,
+            max: 255
+          },
+          mirrorElement: [{
+            element: ".control-background-color-rgb-color",
+            path: "background.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-background-color-rgb-text",
+            path: "background.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-background-color-rgb-r-number",
+            path: "background.color.rgb.r",
+            type: "number"
+          }, {
+            element: ".control-background-color-hsl-h-range",
+            path: "background.color.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-background-color-hsl-h-number",
+            path: "background.color.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-background-color-hsl-s-range",
+            path: "background.color.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-background-color-hsl-s-number",
+            path: "background.color.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-background-color-hsl-l-range",
+            path: "background.color.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-background-color-hsl-l-number",
+            path: "background.color.hsl.l",
+            type: "number"
+          }],
+          func: function() {
+            background.mod.color.hsl();
+            background.render.color.custom();
+          }
+        }, {
+          element: ".control-background-color-rgb-r-number",
+          path: "background.color.rgb.r",
+          type: "number",
+          valueModify: {
+            min: 0,
+            max: 255
+          },
+          mirrorElement: [{
+            element: ".control-background-color-rgb-color",
+            path: "background.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-background-color-rgb-text",
+            path: "background.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-background-color-rgb-r-range",
+            path: "background.color.rgb.r",
+            type: "range"
+          }, {
+            element: ".control-background-color-hsl-h-range",
+            path: "background.color.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-background-color-hsl-h-number",
+            path: "background.color.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-background-color-hsl-s-range",
+            path: "background.color.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-background-color-hsl-s-number",
+            path: "background.color.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-background-color-hsl-l-range",
+            path: "background.color.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-background-color-hsl-l-number",
+            path: "background.color.hsl.l",
+            type: "number"
+          }],
+          func: function() {
+            background.mod.color.hsl();
+            background.render.color.custom();
+          }
+        }, {
+          element: ".control-background-color-rgb-g-range",
+          path: "background.color.rgb.g",
+          type: "range",
+          valueModify: {
+            min: 0,
+            max: 255
+          },
+          mirrorElement: [{
+            element: ".control-background-color-rgb-color",
+            path: "background.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-background-color-rgb-text",
+            path: "background.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-background-color-rgb-g-number",
+            path: "background.color.rgb.g",
+            type: "number"
+          }, {
+            element: ".control-background-color-hsl-h-range",
+            path: "background.color.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-background-color-hsl-h-number",
+            path: "background.color.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-background-color-hsl-s-range",
+            path: "background.color.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-background-color-hsl-s-number",
+            path: "background.color.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-background-color-hsl-l-range",
+            path: "background.color.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-background-color-hsl-l-number",
+            path: "background.color.hsl.l",
+            type: "number"
+          }],
+          func: function() {
+            background.mod.color.hsl();
+            background.render.color.custom();
+          }
+        }, {
+          element: ".control-background-color-rgb-g-number",
+          path: "background.color.rgb.g",
+          type: "number",
+          valueModify: {
+            min: 0,
+            max: 255
+          },
+          mirrorElement: [{
+            element: ".control-background-color-rgb-color",
+            path: "background.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-background-color-rgb-text",
+            path: "background.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-background-color-rgb-g-range",
+            path: "background.color.rgb.g",
+            type: "range"
+          }, {
+            element: ".control-background-color-hsl-h-range",
+            path: "background.color.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-background-color-hsl-h-number",
+            path: "background.color.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-background-color-hsl-s-range",
+            path: "background.color.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-background-color-hsl-s-number",
+            path: "background.color.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-background-color-hsl-l-range",
+            path: "background.color.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-background-color-hsl-l-number",
+            path: "background.color.hsl.l",
+            type: "number"
+          }],
+          func: function() {
+            background.mod.color.hsl();
+            background.render.color.custom();
+          }
+        }, {
+          element: ".control-background-color-rgb-b-range",
+          path: "background.color.rgb.b",
+          type: "range",
+          valueModify: {
+            min: 0,
+            max: 255
+          },
+          mirrorElement: [{
+            element: ".control-background-color-rgb-color",
+            path: "background.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-background-color-rgb-text",
+            path: "background.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-background-color-rgb-b-number",
+            path: "background.color.rgb.b",
+            type: "number"
+          }, {
+            element: ".control-background-color-hsl-h-range",
+            path: "background.color.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-background-color-hsl-h-number",
+            path: "background.color.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-background-color-hsl-s-range",
+            path: "background.color.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-background-color-hsl-s-number",
+            path: "background.color.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-background-color-hsl-l-range",
+            path: "background.color.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-background-color-hsl-l-number",
+            path: "background.color.hsl.l",
+            type: "number"
+          }],
+          func: function() {
+            background.mod.color.hsl();
+            background.render.color.custom();
+          }
+        }, {
+          element: ".control-background-color-rgb-b-number",
+          path: "background.color.rgb.b",
+          type: "number",
+          valueModify: {
+            min: 0,
+            max: 255
+          },
+          mirrorElement: [{
+            element: ".control-background-color-rgb-color",
+            path: "background.color.rgb",
+            type: "color"
+          }, {
+            element: ".control-background-color-rgb-text",
+            path: "background.color.rgb",
+            type: "text",
+            valueConvert: ["hexTextString"]
+          }, {
+            element: ".control-background-color-rgb-b-range",
+            path: "background.color.rgb.b",
+            type: "range"
+          }, {
+            element: ".control-background-color-hsl-h-range",
+            path: "background.color.hsl.h",
+            type: "range"
+          }, {
+            element: ".control-background-color-hsl-h-number",
+            path: "background.color.hsl.h",
+            type: "number"
+          }, {
+            element: ".control-background-color-hsl-s-range",
+            path: "background.color.hsl.s",
+            type: "range"
+          }, {
+            element: ".control-background-color-hsl-s-number",
+            path: "background.color.hsl.s",
+            type: "number"
+          }, {
+            element: ".control-background-color-hsl-l-range",
+            path: "background.color.hsl.l",
+            type: "range"
+          }, {
+            element: ".control-background-color-hsl-l-number",
+            path: "background.color.hsl.l",
+            type: "number"
+          }],
+          func: function() {
+            background.mod.color.hsl();
+            background.render.color.custom();
+          }
+        }],
+        visual: [{
+          element: ".control-background-visual-show",
+          path: "background.visual.show",
+          type: "checkbox",
+          func: function() {
+            render.class();
+            render.dependents();
+            background.render.visual.video.set();
+            background.render.visual.image.set();
+          }
+        }, {
+          element: ".control-background-visual-type-video",
+          path: "background.visual.type",
+          type: "radio",
+          func: function() {
+            render.dependents();
+            background.render.visual.video.set();
+            background.render.visual.image.clear();
+          }
+        }, {
+          element: ".control-background-visual-type-image",
+          path: "background.visual.type",
+          type: "radio",
+          func: function() {
+            render.dependents();
+            background.render.visual.video.clear();
+            background.render.visual.image.set();
+          }
+        }, {
+          element: ".control-background-visual-image-type-file",
+          path: "background.visual.image.type",
+          type: "radio",
+          func: function() {
+            render.dependents();
+            background.render.visual.image.set();
+          }
+        }, {
+          element: ".control-background-visual-image-type-url",
+          path: "background.visual.image.type",
+          type: "radio",
+          func: function() {
+            render.dependents();
+            background.render.visual.image.set();
+          }
+        }, {
+          element: ".control-background-visual-image-file",
+          type: "file",
+          func: function() {
+            background.mod.import();
+            background.render.visual.image.set();
+          }
+        }, {
+          element: ".control-background-visual-image-clear",
+          type: "button",
+          func: function() {
+            background.mod.visual.image.clear();
+            background.render.visual.image.clear();
+            background.render.feedback.clear({
+              animate: true
+            });
+            background.render.feedback.empty();
+          }
+        }, {
+          element: ".control-background-visual-image-url",
+          path: "background.visual.image.url",
+          type: "textarea",
+          func: function() {
+            background.render.visual.image.clear();
+            background.render.visual.image.set();
+          }
+        }, {
+          element: ".control-background-visual-video-url",
+          path: "background.visual.video.url",
+          type: "textarea",
+          func: function() {
+            background.render.visual.video.clear();
+            background.render.visual.video.set();
+          }
+        }, {
+          element: ".control-background-visual-opacity-range",
+          path: "background.visual.opacity",
+          type: "range",
+          valueConvert: ["float"],
+          valueModify: {
+            min: 0,
+            max: 100
+          },
+          mirrorElement: [{
+            element: ".control-background-visual-opacity-number",
+            path: "background.visual.opacity",
+            type: "number",
+            valueConvert: ["float"]
+          }],
+          func: function() {
+            background.render.visual.opacity();
+          }
+        }, {
+          element: ".control-background-visual-opacity-number",
+          path: "background.visual.opacity",
+          type: "number",
+          valueConvert: ["float"],
+          valueModify: {
+            min: 0,
+            max: 100
+          },
+          mirrorElement: [{
+            element: ".control-background-visual-opacity-range",
+            path: "background.visual.opacity",
+            type: "range",
+            valueConvert: ["float"]
+          }],
+          func: function() {
+            background.render.visual.opacity();
+          }
+        }, {
+          element: ".control-background-visual-opacity-default",
+          type: "button",
+          func: function() {
+            mod.default("background.visual.opacity");
+            background.render.visual.opacity();
+            render.update.control.menu();
+          }
+        }, {
+          element: ".control-background-visual-grayscale-range",
+          path: "background.visual.grayscale",
+          type: "range",
+          valueConvert: ["float"],
+          valueModify: {
+            min: 0,
+            max: 100
+          },
+          mirrorElement: [{
+            element: ".control-background-visual-grayscale-number",
+            path: "background.visual.grayscale",
+            type: "number",
+            valueConvert: ["float"]
+          }],
+          func: function() {
+            background.render.visual.grayscale();
+          }
+        }, {
+          element: ".control-background-visual-grayscale-number",
+          path: "background.visual.grayscale",
+          type: "number",
+          valueConvert: ["float"],
+          valueModify: {
+            min: 0,
+            max: 100
+          },
+          mirrorElement: [{
+            element: ".control-background-visual-grayscale-range",
+            path: "background.visual.grayscale",
+            type: "range",
+            valueConvert: ["float"]
+          }],
+          func: function() {
+            background.render.visual.grayscale();
+          }
+        }, {
+          element: ".control-background-visual-grayscale-default",
+          type: "button",
+          func: function() {
+            mod.default("background.visual.grayscale");
+            background.render.visual.grayscale();
+            render.update.control.menu();
+          }
+        }, {
+          element: ".control-background-visual-blur-range",
+          path: "background.visual.blur",
+          type: "range",
+          valueModify: {
+            min: 0,
+            max: 100
+          },
+          mirrorElement: [{
+            element: ".control-background-visual-blur-number",
+            path: "background.visual.blur",
+            type: "number"
+          }],
+          func: function() {
+            background.render.visual.blur();
+          }
+        }, {
+          element: ".control-background-visual-blur-number",
+          path: "background.visual.blur",
+          type: "number",
+          valueModify: {
+            min: 0,
+            max: 100
+          },
+          mirrorElement: [{
+            element: ".control-background-visual-blur-range",
+            path: "background.visual.blur",
+            type: "range"
+          }],
+          func: function() {
+            background.render.visual.blur();
+          }
+        }, {
+          element: ".control-background-visual-blur-default",
+          type: "button",
+          func: function() {
+            mod.default("background.visual.blur");
+            background.render.visual.blur();
+            render.update.control.menu();
+          }
+        }, {
+          element: ".control-background-visual-accent-range",
+          path: "background.visual.accent",
+          type: "range",
+          valueConvert: ["float"],
+          valueModify: {
+            min: 0,
+            max: 100
+          },
+          mirrorElement: [{
+            element: ".control-background-visual-accent-number",
+            path: "background.visual.accent",
+            type: "number",
+            valueConvert: ["float"]
+          }],
+          func: function() {
+            background.render.visual.accent();
+          }
+        }, {
+          element: ".control-background-visual-accent-number",
+          path: "background.visual.accent",
+          type: "number",
+          valueConvert: ["float"],
+          valueModify: {
+            min: 0,
+            max: 100
+          },
+          mirrorElement: [{
+            element: ".control-background-visual-accent-range",
+            path: "background.visual.accent",
+            type: "range",
+            valueConvert: ["float"]
+          }],
+          func: function() {
+            background.render.visual.accent();
+          }
+        }, {
+          element: ".control-background-visual-accent-default",
+          type: "button",
+          func: function() {
+            mod.default("background.visual.accent");
+            background.render.visual.accent();
+            render.update.control.menu();
+          }
+        }, {
+          element: ".control-background-visual-scale-range",
+          path: "background.visual.scale",
+          type: "range",
+          valueConvert: ["float"],
+          valueModify: {
+            min: 100,
+            max: 1000
+          },
+          mirrorElement: [{
+            element: ".control-background-visual-scale-number",
+            path: "background.visual.scale",
+            type: "number",
+            valueConvert: ["float"]
+          }],
+          func: function() {
+            background.render.visual.scale();
+          }
+        }, {
+          element: ".control-background-visual-scale-number",
+          path: "background.visual.scale",
+          type: "number",
+          valueConvert: ["float"],
+          valueModify: {
+            min: 100,
+            max: 1000
+          },
+          mirrorElement: [{
+            element: ".control-background-visual-scale-range",
+            path: "background.visual.scale",
+            type: "range",
+            valueConvert: ["float"]
+          }],
+          func: function() {
+            background.render.visual.scale();
+          }
+        }, {
+          element: ".control-background-visual-scale-default",
+          type: "button",
+          func: function() {
+            mod.default("background.visual.scale");
+            background.render.visual.scale();
+            render.update.control.menu();
+          }
+        }, {
+          element: ".control-background-vignette-opacity-range",
+          path: "background.visual.vignette.opacity",
+          type: "range",
+          valueModify: {
+            min: 0,
+            max: 100
+          },
+          mirrorElement: [{
+            element: ".control-background-vignette-opacity-number",
+            path: "background.visual.vignette.opacity",
+            type: "number"
+          }],
+          func: function() {
+            background.render.visual.vignette.opacity();
+            background.render.visual.vignette.start();
+            background.render.visual.vignette.end();
+          }
+        }, {
+          element: ".control-background-vignette-opacity-number",
+          path: "background.visual.vignette.opacity",
+          type: "number",
+          valueModify: {
+            min: 0,
+            max: 100
+          },
+          mirrorElement: [{
+            element: ".control-background-vignette-opacity-range",
+            path: "background.visual.vignette.opacity",
+            type: "range"
+          }],
+          func: function() {
+            background.render.visual.vignette.opacity();
+            background.render.visual.vignette.start();
+            background.render.visual.vignette.end();
+          }
+        }, {
+          element: ".control-background-vignette-opacity-default",
+          type: "button",
+          func: function() {
+            mod.default("background.visual.vignette.opacity");
+            background.render.visual.vignette.opacity();
+            background.render.visual.vignette.start();
+            background.render.visual.vignette.end();
+            render.update.control.menu();
+          }
+        }, {
+          element: ".control-background-vignette-start-range",
+          path: "background.visual.vignette.start",
+          type: "range",
+          valueModify: {
+            min: 0,
+            max: 100
+          },
+          mirrorElement: [{
+            element: ".control-background-vignette-start-number",
+            path: "background.visual.vignette.start",
+            type: "number"
+          }],
+          limitElement: [{
+            element: ".control-background-vignette-end-range",
+            path: "background.visual.vignette.end",
+            type: "range",
+            limit: "max"
+          }, {
+            element: ".control-background-vignette-end-number",
+            path: "background.visual.vignette.end",
+            type: "number",
+            limit: "max"
+          }],
+          func: function() {
+            background.render.visual.vignette.opacity();
+            background.render.visual.vignette.start();
+            background.render.visual.vignette.end();
+          }
+        }, {
+          element: ".control-background-vignette-start-number",
+          path: "background.visual.vignette.start",
+          type: "number",
+          valueModify: {
+            min: 0,
+            max: 100
+          },
+          mirrorElement: [{
+            element: ".control-background-vignette-start-range",
+            path: "background.visual.vignette.start",
+            type: "range"
+          }],
+          func: function() {
+            background.render.visual.vignette.opacity();
+            background.render.visual.vignette.start();
+            background.render.visual.vignette.end();
+          }
+        }, {
+          element: ".control-background-vignette-start-default",
+          type: "button",
+          func: function() {
+            mod.default("background.visual.vignette.start");
+            background.render.visual.vignette.opacity();
+            background.render.visual.vignette.start();
+            background.render.visual.vignette.end();
+            render.update.control.menu();
+          }
+        }, {
+          element: ".control-background-vignette-end-range",
+          path: "background.visual.vignette.end",
+          type: "range",
+          valueModify: {
+            min: 0,
+            max: 100
+          },
+          mirrorElement: [{
+            element: ".control-background-vignette-end-number",
+            path: "background.visual.vignette.end",
+            type: "number"
+          }],
+          limitElement: [{
+            element: ".control-background-vignette-start-range",
+            path: "background.visual.vignette.start",
+            type: "range",
+            limit: "min"
+          }, {
+            element: ".control-background-vignette-start-number",
+            path: "background.visual.vignette.start",
+            type: "number",
+            limit: "min"
+          }],
+          func: function() {
+            background.render.visual.vignette.opacity();
+            background.render.visual.vignette.start();
+            background.render.visual.vignette.end();
+          }
+        }, {
+          element: ".control-background-vignette-end-number",
+          path: "background.visual.vignette.end",
+          type: "number",
+          valueModify: {
+            min: 0,
+            max: 100
+          },
+          mirrorElement: [{
+            element: ".control-background-vignette-end-range",
+            path: "background.visual.vignette.end",
+            type: "range"
+          }],
+          func: function() {
+            background.render.visual.vignette.opacity();
+            background.render.visual.vignette.start();
+            background.render.visual.vignette.end();
+          }
+        }, {
+          element: ".control-background-vignette-end-default",
+          type: "button",
+          func: function() {
+            mod.default("background.visual.vignette.end");
+            background.render.visual.vignette.opacity();
+            background.render.visual.vignette.start();
+            background.render.visual.vignette.end();
+            render.update.control.menu();
           }
         }]
       }
@@ -7357,7 +10343,7 @@ var control = (function() {
         });
       };
       if (object.valueModify) {
-        object.mirrorElement.forEach(function(arrayItem, index) {
+        for (var key in object.valueModify) {
           helper.e(object.element).addEventListener(bind.control.eventType[object.type], function(event) {
             var _update = function() {
               render.update.control.menu(object);
@@ -7365,7 +10351,7 @@ var control = (function() {
             clearTimeout(bind.control.timer.inputUpdate);
             bind.control.timer.inputUpdate = setTimeout(_update, 1000);
           }, false);
-        });
+        };
       };
     },
     header: function(object) {
@@ -7719,73 +10705,6 @@ var control = (function() {
         name: "is-link-area-direction-" + state.get.current().link.area.direction
       }, {
         remove: [
-          "is-link-display-alignment-topleft",
-          "is-link-display-alignment-topcenter",
-          "is-link-display-alignment-topright",
-          "is-link-display-alignment-centerleft",
-          "is-link-display-alignment-centercenter",
-          "is-link-display-alignment-centerright",
-          "is-link-display-alignment-bottomleft",
-          "is-link-display-alignment-bottomcenter",
-          "is-link-display-alignment-bottomright"
-        ],
-        condition: function() {
-          return state.get.current().link.show;
-        },
-        name: "is-link-display-alignment-" + state.get.current().link.item.display.alignment
-      }, {
-        remove: [
-          "is-link-item-color-by-theme",
-          "is-link-item-color-by-custom"
-        ],
-        condition: function() {
-          return state.get.current().link.show;
-        },
-        name: "is-link-item-color-by-" + state.get.current().link.item.color.by
-      }, {
-        remove: [
-          "is-link-item-opacity"
-        ],
-        condition: function() {
-          return (state.get.current().link.item.opacity < 1);
-        },
-        name: "is-link-item-opacity"
-      }, {
-        remove: [
-          "is-link-item-display-direction-horizontal",
-          "is-link-item-display-direction-vertical"
-        ],
-        condition: function() {
-          return state.get.current().link.show;
-        },
-        name: "is-link-item-display-direction-" + state.get.current().link.item.display.direction
-      }, {
-        remove: [
-          "is-link-item-display-order-letconname",
-          "is-link-item-display-order-nameletcon"
-        ],
-        condition: function() {
-          return state.get.current().link.show;
-        },
-        name: "is-link-item-display-order-" + state.get.current().link.item.display.order
-      }, {
-        remove: [
-          "is-link-item-display-name-show"
-        ],
-        condition: function() {
-          return (state.get.current().link.show && state.get.current().link.item.display.name.show);
-        },
-        name: "is-link-item-display-name-show"
-      }, {
-        remove: [
-          "is-link-item-display-letcon-show"
-        ],
-        condition: function() {
-          return (state.get.current().link.show && state.get.current().link.item.display.letcon.show);
-        },
-        name: "is-link-item-display-letcon-show"
-      }, {
-        remove: [
           "is-link-style-list",
           "is-link-style-block"
         ],
@@ -7876,12 +10795,12 @@ var control = (function() {
       }],
       background: [{
         remove: [
-          "is-background-image-show"
+          "is-background-visual-show"
         ],
         condition: function() {
-          return state.get.current().background.image.show;
+          return state.get.current().background.visual.show;
         },
-        name: "is-background-image-show"
+        name: "is-background-visual-show"
       }, {
         remove: [
           "is-background-color-by-theme",
@@ -8001,8 +10920,7 @@ var control = (function() {
               ".control-header-greeting-size-range",
               ".control-header-greeting-size-number",
               ".control-header-greeting-size-default",
-              ".control-header-greeting-newline",
-              ".control-header-greeting-newline-helper"
+              ".control-header-greeting-newline"
             ]
           }
         }],
@@ -8100,8 +11018,7 @@ var control = (function() {
               ".control-header-clock-size-range",
               ".control-header-clock-size-number",
               ".control-header-clock-size-default",
-              ".control-header-clock-newline",
-              ".control-header-clock-newline-helper"
+              ".control-header-clock-newline"
             ];
           }
         }],
@@ -8128,8 +11045,7 @@ var control = (function() {
               ".control-header-transitional-size-range",
               ".control-header-transitional-size-number",
               ".control-header-transitional-size-default",
-              '.control-header-transitional-newline',
-              '.control-header-transitional-newline-helper'
+              '.control-header-transitional-newline'
             ];
           }
         }],
@@ -8197,8 +11113,7 @@ var control = (function() {
             return [
               ".control-header-date-date-display-number",
               ".control-header-date-date-display-word",
-              ".control-header-date-date-ordinal",
-              ".control-header-date-date-ordinal-helper"
+              ".control-header-date-date-ordinal"
             ];
           }
         }, {
@@ -8260,8 +11175,7 @@ var control = (function() {
           },
           dependents: function() {
             return [
-              ".control-header-date-month-ordinal",
-              ".control-header-date-month-ordinal-helper"
+              ".control-header-date-month-ordinal"
             ];
           }
         }, {
@@ -8274,8 +11188,7 @@ var control = (function() {
               ".control-header-date-size-range",
               ".control-header-date-size-number",
               ".control-header-date-size-default",
-              ".control-header-date-newline",
-              ".control-header-date-newline-helper"
+              ".control-header-date-newline"
             ];
           }
         }],
@@ -8287,9 +11200,7 @@ var control = (function() {
             return [
               ".control-header-search-width-by-label",
               ".control-header-search-width-by-auto",
-              ".control-header-search-width-by-auto-helper",
               ".control-header-search-width-by-custom",
-              ".control-header-search-width-by-custom-helper",
               ".control-header-search-width-size-range",
               ".control-header-search-width-size-number",
               ".control-header-search-width-size-default",
@@ -8317,8 +11228,7 @@ var control = (function() {
               ".control-header-search-size-default",
               ".control-header-search-size-helper",
               ".control-header-search-newtab",
-              ".control-header-search-newline",
-              ".control-header-search-newline-helper"
+              ".control-header-search-newline"
             ];
           }
         }, {
@@ -8331,6 +11241,8 @@ var control = (function() {
               ".control-header-search-engine-custom-name",
               "[for=control-header-search-engine-custom-url]",
               ".control-header-search-engine-custom-url",
+              "[for=control-header-search-engine-custom-queryname]",
+              ".control-header-search-engine-custom-queryname",
               ".control-header-search-engine-custom-helper"
             ];
           }
@@ -8361,8 +11273,7 @@ var control = (function() {
               ".control-header-editadd-size-range",
               ".control-header-editadd-size-number",
               ".control-header-editadd-size-default",
-              ".control-header-editadd-newline",
-              ".control-header-editadd-newline-helper"
+              ".control-header-editadd-newline"
             ];
           }
         }],
@@ -8382,8 +11293,7 @@ var control = (function() {
               ".control-header-coloraccent-size-range",
               ".control-header-coloraccent-size-number",
               ".control-header-coloraccent-size-default",
-              ".control-header-coloraccent-newline",
-              ".control-header-coloraccent-newline-helper"
+              ".control-header-coloraccent-newline"
             ];
           }
         }],
@@ -8401,8 +11311,7 @@ var control = (function() {
               ".control-header-menu-size-range",
               ".control-header-menu-size-number",
               ".control-header-menu-size-default",
-              ".control-header-menu-newline",
-              ".control-header-menu-newline-helper"
+              ".control-header-menu-newline"
             ];
           }
         }],
@@ -8413,15 +11322,12 @@ var control = (function() {
           dependents: function() {
             return [
               ".control-header-color-style-always",
-              ".control-header-color-style-always-helper",
               ".control-header-color-style-scroll",
-              ".control-header-color-style-scroll-helper",
+              ".control-header-color-style-helper",
               ".control-header-color-by-theme",
               ".control-header-color-by-theme-helper",
               ".control-header-color-by-custom",
               ".control-header-color-by-custom-helper",
-              ".control-header-color-rgb-range",
-              ".control-header-color-rgb-text",
               "[for=control-header-color-opacity-range]",
               ".control-header-color-opacity-range",
               ".control-header-color-opacity-number",
@@ -8436,8 +11342,26 @@ var control = (function() {
           },
           dependents: function() {
             return [
-              ".control-header-color-rgb-range",
-              ".control-header-color-rgb-text"
+              ".control-header-color-rgb-color",
+              ".control-header-color-rgb-text",
+              "[for=control-header-color-hsl-h-range]",
+              ".control-header-color-hsl-h-range",
+              ".control-header-color-hsl-h-number",
+              "[for=control-header-color-hsl-s-range]",
+              ".control-header-color-hsl-s-range",
+              ".control-header-color-hsl-s-number",
+              "[for=control-header-color-hsl-l-range]",
+              ".control-header-color-hsl-l-range",
+              ".control-header-color-hsl-l-number",
+              "[for=control-header-color-rgb-r-range]",
+              ".control-header-color-rgb-r-range",
+              ".control-header-color-rgb-r-number",
+              "[for=control-header-color-rgb-g-range]",
+              ".control-header-color-rgb-g-range",
+              ".control-header-color-rgb-g-number",
+              "[for=control-header-color-rgb-b-range]",
+              ".control-header-color-rgb-b-range",
+              ".control-header-color-rgb-b-number"
             ];
           }
         }],
@@ -8448,9 +11372,7 @@ var control = (function() {
           dependents: function() {
             return [
               ".control-header-position-sticky",
-              ".control-header-position-sticky-helper",
-              ".control-header-position-inline",
-              ".control-header-position-inline-helper"
+              ".control-header-position-inline"
             ];
           }
         }]
@@ -8478,42 +11400,178 @@ var control = (function() {
             ".control-link-item-size-range",
             ".control-link-item-size-number",
             ".control-link-item-size-default",
-            ".control-link-item-display-letcon-show",
-            ".control-link-item-display-name-show",
             ".control-link-item-url-show",
             ".control-link-item-line-show",
             ".control-link-item-shadow-show",
             ".control-link-item-shadow-show-helper",
             ".control-link-item-hoverscale",
             ".control-link-newtab",
-            ".control-link-item-display-direction-helper",
-            ".control-link-item-display-order-helper",
+            ".control-link-item-display-visual-show",
+            ".control-link-item-display-visual-hide",
+            ".control-link-item-display-visual-helper",
+            "[for=control-link-item-display-visual-letter-size-range]",
+            ".control-link-item-display-visual-letter-size-range",
+            ".control-link-item-display-visual-letter-size-number",
+            ".control-link-item-display-visual-letter-size-default",
+            ".control-link-item-display-visual-letter-size-apply",
+            "[for=control-link-item-display-visual-icon-size-range]",
+            ".control-link-item-display-visual-icon-size-range",
+            ".control-link-item-display-visual-icon-size-number",
+            ".control-link-item-display-visual-icon-size-default",
+            ".control-link-item-display-visual-icon-size-apply",
+            "[for=control-link-item-display-visual-image-size-range]",
+            ".control-link-item-display-visual-image-size-range",
+            ".control-link-item-display-visual-image-size-number",
+            ".control-link-item-display-visual-image-size-default",
+            ".control-link-item-display-visual-image-size-apply",
+            "[for=control-link-item-display-visual-shadow-size-range]",
+            ".control-link-item-display-visual-shadow-size-range",
+            ".control-link-item-display-visual-shadow-size-number",
+            ".control-link-item-display-visual-shadow-size-default",
+            ".control-link-item-display-visual-shadow-size-apply",
+            ".control-link-item-display-visual-shadow-size-helper",
+            ".control-link-item-display-name-show",
+            ".control-link-item-display-name-hide",
+            ".control-link-item-display-name-helper",
+            "[for=control-link-item-display-name-size-range]",
+            ".control-link-item-display-name-size-range",
+            ".control-link-item-display-name-size-number",
+            ".control-link-item-display-name-size-default",
+            ".control-link-item-display-name-size-apply",
+            ".control-link-item-display-alignment-grid",
+            ".control-link-item-display-alignment-label",
+            ".control-link-item-display-alignment-topleft",
+            ".control-link-item-display-alignment-topcenter",
+            ".control-link-item-display-alignment-topright",
+            ".control-link-item-display-alignment-centerleft",
+            ".control-link-item-display-alignment-centercenter",
+            ".control-link-item-display-alignment-centerright",
+            ".control-link-item-display-alignment-bottomleft",
+            ".control-link-item-display-alignment-bottomcenter",
+            ".control-link-item-display-alignment-bottomright",
+            ".control-link-item-display-alignment-helper",
+            ".control-link-item-display-alignment-apply",
+            "[for=control-link-item-display-rotate-range]",
+            ".control-link-item-display-rotate-range",
+            ".control-link-item-display-rotate-number",
+            ".control-link-item-display-rotate-default",
+            ".control-link-item-display-rotate-apply",
+            "[for=control-link-item-display-translate-x-range]",
+            ".control-link-item-display-translate-x-range",
+            ".control-link-item-display-translate-x-number",
+            ".control-link-item-display-translate-x-default",
+            ".control-link-item-display-translate-x-apply",
+            "[for=control-link-item-display-translate-y-range]",
+            ".control-link-item-display-translate-y-range",
+            ".control-link-item-display-translate-y-number",
+            ".control-link-item-display-translate-y-default",
+            ".control-link-item-display-translate-y-apply",
+            "[for=control-link-item-display-gutter-range]",
+            ".control-link-item-display-gutter-range",
+            ".control-link-item-display-gutter-number",
+            ".control-link-item-display-gutter-default",
+            ".control-link-item-display-gutter-apply",
+            ".control-link-item-display-direction-horizontal",
+            ".control-link-item-display-direction-vertical",
+            ".control-link-item-display-direction-apply",
+            ".control-link-item-display-order-visualname",
+            ".control-link-item-display-order-namevisual",
+            ".control-link-item-display-order-apply",
             ".control-link-item-color-by-theme",
-            ".control-link-item-color-by-theme-helper",
             ".control-link-item-color-by-custom",
-            ".control-link-item-color-by-custom-helper",
-            "[for=control-link-item-opacity-range]",
-            ".control-link-item-opacity-range",
-            ".control-link-item-opacity-number",
-            ".control-link-item-opacity-default",
+            ".control-link-item-color-apply",
+            ".control-link-item-color-rainbow",
+            "[for=control-link-item-color-opacity-range]",
+            ".control-link-item-color-opacity-range",
+            ".control-link-item-color-opacity-number",
+            ".control-link-item-color-opacity-default",
+            ".control-link-item-color-opacity-apply",
+            ".control-link-item-accent-by-theme",
+            ".control-link-item-accent-by-custom",
+            ".control-link-item-accent-apply",
+            ".control-link-item-accent-rainbow",
+            ".control-link-item-background-show",
+            ".control-link-item-background-hide",
+            ".control-link-item-background-helper",
+            "[for=control-link-item-background-opacity-range]",
+            ".control-link-item-background-opacity-range",
+            ".control-link-item-background-opacity-number",
+            ".control-link-item-background-opacity-default",
+            ".control-link-item-background-opacity-apply",
             "[for=control-link-item-border-range]",
             ".control-link-item-border-range",
             ".control-link-item-border-number",
             ".control-link-item-border-default",
             ".control-link-style-block",
-            ".control-link-style-block-helper",
             ".control-link-style-list",
-            ".control-link-style-list-helper",
+            "[for=control-link-item-image-opacity-range]",
+            ".control-link-item-image-opacity-range",
+            ".control-link-item-image-opacity-number",
+            ".control-link-item-image-opacity-default",
+            ".control-link-item-image-opacity-apply",
             ".control-link-orientation-top",
             ".control-link-orientation-bottom",
             ".control-link-orientation-helper",
             ".control-link-sort-name",
             ".control-link-sort-letter",
-            ".control-link-sort-icon",
-            ".control-link-accent-clear",
-            ".control-link-accent-set",
-            ".control-link-accent-set-helper"
+            ".control-link-sort-icon"
           ];
+        }
+      }, {
+        condition: function() {
+          return state.get.current().link.show && (state.get.current().link.item.color.by == "custom")
+        },
+        dependents: function() {
+          return [
+            ".control-link-item-color-rgb-color",
+            ".control-link-item-color-rgb-text",
+            "[for=control-link-item-color-hsl-h-range]",
+            ".control-link-item-color-hsl-h-range",
+            ".control-link-item-color-hsl-h-number",
+            "[for=control-link-item-color-hsl-s-range]",
+            ".control-link-item-color-hsl-s-range",
+            ".control-link-item-color-hsl-s-number",
+            "[for=control-link-item-color-hsl-l-range]",
+            ".control-link-item-color-hsl-l-range",
+            ".control-link-item-color-hsl-l-number",
+            "[for=control-link-item-color-rgb-r-range]",
+            ".control-link-item-color-rgb-r-range",
+            ".control-link-item-color-rgb-r-number",
+            "[for=control-link-item-color-rgb-g-range]",
+            ".control-link-item-color-rgb-g-range",
+            ".control-link-item-color-rgb-g-number",
+            "[for=control-link-item-color-rgb-b-range]",
+            ".control-link-item-color-rgb-b-range",
+            ".control-link-item-color-rgb-b-number"
+          ]
+        }
+      }, {
+        condition: function() {
+          return state.get.current().link.show && (state.get.current().link.item.accent.by == "custom")
+        },
+        dependents: function() {
+          return [
+            ".control-link-item-accent-rgb-color",
+            ".control-link-item-accent-rgb-text",
+            "[for=control-link-item-accent-hsl-h-range]",
+            ".control-link-item-accent-hsl-h-range",
+            ".control-link-item-accent-hsl-h-number",
+            "[for=control-link-item-accent-hsl-s-range]",
+            ".control-link-item-accent-hsl-s-range",
+            ".control-link-item-accent-hsl-s-number",
+            "[for=control-link-item-accent-hsl-l-range]",
+            ".control-link-item-accent-hsl-l-range",
+            ".control-link-item-accent-hsl-l-number",
+            "[for=control-link-item-accent-rgb-r-range]",
+            ".control-link-item-accent-rgb-r-range",
+            ".control-link-item-accent-rgb-r-number",
+            "[for=control-link-item-accent-rgb-g-range]",
+            ".control-link-item-accent-rgb-g-range",
+            ".control-link-item-accent-rgb-g-number",
+            "[for=control-link-item-accent-rgb-b-range]",
+            ".control-link-item-accent-rgb-b-range",
+            ".control-link-item-accent-rgb-b-number"
+          ]
         }
       }, {
         condition: function() {
@@ -8528,93 +11586,6 @@ var control = (function() {
             ".control-link-area-justify-right",
             ".control-link-area-justify-helper",
           ]
-        }
-      }, {
-        condition: function() {
-          return (state.get.current().link.show && state.get.current().link.item.display.letcon.show);
-        },
-        dependents: function() {
-          return [
-            "[for=control-link-item-display-letcon-letter-size-range]",
-            ".control-link-item-display-letcon-letter-size-range",
-            ".control-link-item-display-letcon-letter-size-number",
-            ".control-link-item-display-letcon-letter-size-default",
-            "[for=control-link-item-display-letcon-icon-size-range]",
-            ".control-link-item-display-letcon-icon-size-range",
-            ".control-link-item-display-letcon-icon-size-number",
-            ".control-link-item-display-letcon-icon-size-default"
-          ];
-        }
-      }, {
-        condition: function() {
-          return (state.get.current().link.show && state.get.current().link.item.display.name.show);
-        },
-        dependents: function() {
-          return [
-            "[for=control-link-item-display-name-size-range]",
-            ".control-link-item-display-name-size-range",
-            ".control-link-item-display-name-size-number",
-            ".control-link-item-display-name-size-default"
-          ];
-        }
-      }, {
-        condition: function() {
-          return (state.get.current().link.show && (state.get.current().link.item.display.letcon.show || state.get.current().link.item.display.name.show));
-        },
-        dependents: function() {
-          return [
-            ".control-link-item-display-alignment-grid",
-            ".control-link-item-display-alignment-label",
-            ".control-link-item-display-alignment-topleft",
-            ".control-link-item-display-alignment-topcenter",
-            ".control-link-item-display-alignment-topright",
-            ".control-link-item-display-alignment-centerleft",
-            ".control-link-item-display-alignment-centercenter",
-            ".control-link-item-display-alignment-centerright",
-            ".control-link-item-display-alignment-bottomleft",
-            ".control-link-item-display-alignment-bottomcenter",
-            ".control-link-item-display-alignment-bottomright",
-            "[for=control-link-item-display-rotate-range]",
-            ".control-link-item-display-rotate-range",
-            ".control-link-item-display-rotate-number",
-            ".control-link-item-display-rotate-default",
-            "[for=control-link-item-display-translate-x-range]",
-            ".control-link-item-display-translate-x-range",
-            ".control-link-item-display-translate-x-number",
-            ".control-link-item-display-translate-x-default",
-            "[for=control-link-item-display-translate-y-range]",
-            ".control-link-item-display-translate-y-range",
-            ".control-link-item-display-translate-y-number",
-            ".control-link-item-display-translate-y-default"
-          ];
-        }
-      }, {
-        condition: function() {
-          return (state.get.current().link.show && state.get.current().link.item.display.letcon.show && state.get.current().link.item.display.name.show);
-        },
-        dependents: function() {
-          return [
-            ".control-link-item-display-direction-horizontal",
-            ".control-link-item-display-direction-vertical",
-            ".control-link-item-display-order-letconname",
-            ".control-link-item-display-order-nameletcon",
-            ".control-link-item-display-direction-vertical-helper",
-            ".control-link-item-display-direction-horizontal-helper",
-            "[for=control-link-item-display-gutter-range]",
-            ".control-link-item-display-gutter-range",
-            ".control-link-item-display-gutter-number",
-            ".control-link-item-display-gutter-default"
-          ];
-        }
-      }, {
-        condition: function() {
-          return state.get.current().link.item.color.by == "custom";
-        },
-        dependents: function() {
-          return [
-            ".control-link-item-color-rgb-range",
-            ".control-link-item-color-rgb-text"
-          ];
         }
       }],
       theme: [{
@@ -8671,64 +11642,116 @@ var control = (function() {
       }],
       background: [{
         condition: function() {
-          return state.get.current().background.image.show;
-        },
-        dependents: function() {
-          return [
-            ".control-background-image-from-file",
-            ".control-background-image-from-url",
-            "[for=control-background-image-opacity-range]",
-            ".control-background-image-opacity-range",
-            ".control-background-image-opacity-number",
-            ".control-background-image-opacity-default",
-            "[for=control-background-image-blur-range]",
-            ".control-background-image-blur-range",
-            ".control-background-image-blur-number",
-            ".control-background-image-blur-default",
-            "[for=control-background-image-grayscale-range]",
-            ".control-background-image-grayscale-range",
-            ".control-background-image-grayscale-number",
-            ".control-background-image-grayscale-default",
-            "[for=control-background-image-accent-range]",
-            ".control-background-image-accent-range",
-            ".control-background-image-accent-number",
-            ".control-background-image-accent-default",
-            "[for=control-background-image-scale-range]",
-            ".control-background-image-scale-range",
-            ".control-background-image-scale-number",
-            ".control-background-image-scale-default"
-          ];
-        }
-      }, {
-        condition: function() {
-          return (state.get.current().background.image.show && state.get.current().background.image.from == "file");
-        },
-        dependents: function() {
-          return [
-            ".control-background-image-file-feedback",
-            ".control-background-image-file",
-            ".control-background-image-file-clear",
-            ".control-background-image-file-helper"
-          ];
-        }
-      }, {
-        condition: function() {
-          return (state.get.current().background.image.show && state.get.current().background.image.from == "url");
-        },
-        dependents: function() {
-          return [
-            ".control-background-image-url",
-            ".control-background-image-url-helper"
-          ];
-        }
-      }, {
-        condition: function() {
           return (state.get.current().background.color.by == "custom");
         },
         dependents: function() {
           return [
-            ".control-background-color-rgb-range",
-            ".control-background-color-rgb-text"
+            ".control-background-color-rgb-color",
+            ".control-background-color-rgb-text",
+            ".control-background-color-by-custom-helper",
+            "[for=control-background-color-hsl-h-range]",
+            ".control-background-color-hsl-h-range",
+            ".control-background-color-hsl-h-number",
+            "[for=control-background-color-hsl-s-range]",
+            ".control-background-color-hsl-s-range",
+            ".control-background-color-hsl-s-number",
+            "[for=control-background-color-hsl-l-range]",
+            ".control-background-color-hsl-l-range",
+            ".control-background-color-hsl-l-number",
+            "[for=control-background-color-rgb-r-range]",
+            ".control-background-color-rgb-r-range",
+            ".control-background-color-rgb-r-number",
+            "[for=control-background-color-rgb-g-range]",
+            ".control-background-color-rgb-g-range",
+            ".control-background-color-rgb-g-number",
+            "[for=control-background-color-rgb-b-range]",
+            ".control-background-color-rgb-b-range",
+            ".control-background-color-rgb-b-number"
+          ];
+        }
+      }, {
+        condition: function() {
+          return (state.get.current().background.visual.show);
+        },
+        dependents: function() {
+          return [
+            ".control-background-visual-type-video",
+            ".control-background-visual-type-image",
+            "[for=control-background-visual-opacity-range]",
+            ".control-background-visual-opacity-range",
+            ".control-background-visual-opacity-number",
+            ".control-background-visual-opacity-default",
+            "[for=control-background-visual-blur-range]",
+            ".control-background-visual-blur-range",
+            ".control-background-visual-blur-number",
+            ".control-background-visual-blur-default",
+            "[for=control-background-visual-grayscale-range]",
+            ".control-background-visual-grayscale-range",
+            ".control-background-visual-grayscale-number",
+            ".control-background-visual-grayscale-default",
+            "[for=control-background-visual-accent-range]",
+            ".control-background-visual-accent-range",
+            ".control-background-visual-accent-number",
+            ".control-background-visual-accent-default",
+            "[for=control-background-visual-scale-range]",
+            ".control-background-visual-scale-range",
+            ".control-background-visual-scale-number",
+            ".control-background-visual-scale-default",
+            "[for=control-background-vignette-opacity-range]",
+            ".control-background-vignette-opacity-range",
+            ".control-background-vignette-opacity-number",
+            ".control-background-vignette-opacity-default",
+            "[for=control-background-vignette-start-range]",
+            ".control-background-vignette-start-range",
+            ".control-background-vignette-start-number",
+            ".control-background-vignette-start-default",
+            "[for=control-background-vignette-end-range]",
+            ".control-background-vignette-end-range",
+            ".control-background-vignette-end-number",
+            ".control-background-vignette-end-default"
+          ];
+        }
+      }, {
+        condition: function() {
+          return (state.get.current().background.visual.show && state.get.current().background.visual.type == "video");
+        },
+        dependents: function() {
+          return [
+            "[for=control-background-visual-video-url]",
+            ".control-background-visual-video-url",
+            ".control-background-visual-video-url-helper"
+          ];
+        }
+      }, {
+        condition: function() {
+          return (state.get.current().background.visual.show && state.get.current().background.visual.type == "image");
+        },
+        dependents: function() {
+          return [
+            ".control-background-visual-image-type-file",
+            ".control-background-visual-image-type-url"
+          ];
+        }
+      }, {
+        condition: function() {
+          return (state.get.current().background.visual.show && state.get.current().background.visual.type == "image" && state.get.current().background.visual.image.type == "file");
+        },
+        dependents: function() {
+          return [
+            ".control-background-visual-image-file",
+            ".control-background-visual-image-clear",
+            ".control-background-visual-image-file-helper",
+            ".control-background-visual-image-file-feedback"
+          ];
+        }
+      }, {
+        condition: function() {
+          return (state.get.current().background.visual.show && state.get.current().background.visual.type == "image" && state.get.current().background.visual.image.type == "url");
+        },
+        dependents: function() {
+          return [
+            ".control-background-visual-image-url",
+            ".control-background-visual-image-url-helper"
           ];
         }
       }]

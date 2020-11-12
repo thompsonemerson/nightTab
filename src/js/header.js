@@ -10,6 +10,33 @@ var header = (function() {
     }
   };
 
+  mod.color = {
+    hsl: function() {
+      var hsl = helper.convertColor.rgb.hsl(state.get.current().header.color.rgb);
+      helper.setObject({
+        object: state.get.current(),
+        path: "header.color.hsl",
+        newValue: {
+          h: Math.round(hsl.h),
+          s: Math.round(hsl.s),
+          l: Math.round(hsl.l)
+        }
+      });
+    },
+    rgb: function() {
+      var rgb = helper.convertColor.hsl.rgb(state.get.current().header.color.hsl);
+      helper.setObject({
+        object: state.get.current(),
+        path: "header.color.rgb",
+        newValue: {
+          r: Math.round(rgb.r),
+          g: Math.round(rgb.g),
+          b: Math.round(rgb.b)
+        }
+      });
+    }
+  };
+
   var bind = {};
 
   bind.resize = function() {
@@ -167,15 +194,15 @@ var header = (function() {
         var forminline = helper.node("div|class:form-inline");
         var formGroup = helper.node("div|class:form-group header-order-control");
 
-        var buttonUp = helper.node("button|class:button form-group-item-shrink header-order-control-item header-order-control-item-up,tabindex:-1,title:Move this header item up");
+        var buttonUp = helper.node("button|class:button button-line form-group-item-shrink header-order-control-item header-order-control-item-up,tabindex:-1,title:Move this header item up");
         var buttonUpIcon = helper.node("span|class:button-icon icon-arrow-up");
         buttonUp.appendChild(buttonUpIcon);
 
-        var linkHandle = helper.node("div|class:button form-group-item-shrink header-order-control-item header-order-control-item-handle,tabindex:-1,title:Drag header item to reorder");
+        var linkHandle = helper.node("div|class:button button-line form-group-item-shrink header-order-control-item header-order-control-item-handle,tabindex:-1,title:Drag header item to reorder");
         var linkHandleIcon = helper.node("span|class:button-icon icon-reorder");
         linkHandle.appendChild(linkHandleIcon);
 
-        var buttonDown = helper.node("button|class:button form-group-item-shrink header-order-control-item header-order-control-item-down,tabindex:-1,title:Move this header item down");
+        var buttonDown = helper.node("button|class:button button-line form-group-item-shrink header-order-control-item header-order-control-item-down,tabindex:-1,title:Move this header item down");
         var buttonDownIcon = helper.node("span|class:button-icon icon-arrow-down");
         buttonDown.appendChild(buttonDownIcon);
 
@@ -345,7 +372,12 @@ var header = (function() {
     search: function() {
       var headerSearchBody = helper.node("div|class:search-wrapper");
       var form = helper.node("form|class:search,action,method:get");
-      var searchInput = helper.node("input|class:search-input,type:text,placeholder:Find or Search,name:q,autocomplete:off,autocorrect:off,autocapitalize:off,spellcheck:false,tabindex:1");
+      var searchInput;
+      if (helper.checkIfValidString(state.get.current().header.search.engine.custom.queryName)) {
+        searchInput = helper.node("input|class:search-input,type:search,placeholder:Find or Search,name:" + helper.trimString(state.get.current().header.search.engine.custom.queryName) + ",autocomplete:off,autocorrect:off,autocapitalize:off,spellcheck:false,tabindex:1");
+      } else {
+        searchInput = helper.node("input|class:search-input,type:search,placeholder:Find or Search,name:q,autocomplete:off,autocorrect:off,autocapitalize:off,spellcheck:false,tabindex:1");
+      };
       var hiddenInput = helper.node("input|type:submit,value:Search,class:is-hidden");
       var clearButton = helper.node("button|class:search-clear search-clear button button-link,tabindex:1,disabled");
       var clearButtonIcon = helper.node("span|class:icon-close");
@@ -367,7 +399,7 @@ var header = (function() {
     },
     editAdd: function() {
       var formGroup = helper.node("div|class:header-editadd form-group form-group-nested-button");
-      var formInputButton = helper.node("div|class:form-input-button form-input-hide");
+      var formInputButton = helper.node("div|class:form-input-button form-input-button-line form-input-hide");
       var controlEditInput = helper.node("input|id:control-edit,class:header-edit control-edit,type:checkbox,tabindex:1");
       var controlEditLabel = helper.node("label|for:control-edit");
       var controlEditLabelText = helper.node("span:Edit");
@@ -378,17 +410,17 @@ var header = (function() {
       formInputButton.appendChild(controlEditLabel);
 
       var formDropdown = helper.node("div|class:form-dropdown");
-      var controlAddToggle = helper.node("button|class:header-add control-add-toggle form-dropdown-toggle button,tabindex:1");
+      var controlAddToggle = helper.node("button|class:header-add control-add-toggle form-dropdown-toggle button button-line,tabindex:1");
       var controlAddToggleText = helper.node("span:Add");
       controlAddToggle.appendChild(controlAddToggleText);
       var formDropdownMenu = helper.node("ul|class:list-unstyled form-dropdown-menu");
       var controlGroupAddLi = helper.node("li");
-      var controlGroupAdd = helper.node("button|class:button button-block text-left form-dropdown-menu-item control-group-add,tabindex:1");
+      var controlGroupAdd = helper.node("button|class:button button-block text-left form-dropdown-menu-item control-add-group,tabindex:1");
       var controlGroupAddText = helper.node("span:New Group|class:button-text");
       controlGroupAdd.appendChild(controlGroupAddText);
       controlGroupAddLi.appendChild(controlGroupAdd);
       var controlLinkAddLi = helper.node("li");
-      var controlLinkAdd = helper.node("button|class:button button-block text-left form-dropdown-menu-item control-link-add,tabindex:1");
+      var controlLinkAdd = helper.node("button|class:button button-block text-left form-dropdown-menu-item control-add-link,tabindex:1");
       var controlLinkAddText = helper.node("span:New Bookmark|class:button-text");
       controlLinkAdd.appendChild(controlLinkAddText);
       controlLinkAddLi.appendChild(controlLinkAdd);
@@ -410,7 +442,7 @@ var header = (function() {
     colorAccent: function() {
       var formGroup = helper.node("div|class:header-coloraccent form-group form-group-nested-button");
 
-      var colorInputButton = helper.node("div|class:form-input-button");
+      var colorInputButton = helper.node("div|class:form-input-button form-input-button-line");
       var colorInput = helper.node("input|id:control-theme-color-rgb-color-quick,class:control-theme-color-rgb-color-quick header-color,type:color,value:#000000,tabindex:1,autocomplete:off");
       var colorInputLabel = helper.node("label|for:control-theme-color-rgb-color-quick");
       var colorInputLabelText = helper.node("span:Colour");
@@ -418,7 +450,7 @@ var header = (function() {
       colorInputButton.appendChild(colorInput);
       colorInputButton.appendChild(colorInputLabel);
 
-      var accentInputButton = helper.node("div|class:form-input-button");
+      var accentInputButton = helper.node("div|class:form-input-button form-input-button-line");
       var accentInput = helper.node("input|id:control-theme-accent-rgb-color-quick,class:control-theme-accent-rgb-color-quick header-accent,type:color,value:#000000,tabindex:1,autocomplete:off");
       var accentInputLabel = helper.node("label|for:control-theme-accent-rgb-color-quick");
       var accentInputLabelText = helper.node("span:Accent");
@@ -446,7 +478,8 @@ var header = (function() {
       return formGroup;
     },
     menu: function() {
-      var button = helper.node("button|class:control-menu-open header-menu button,tabindex:1");
+      var button = helper.node("button|class:control-menu-open header-menu button button-line,tabindex:1");
+      var buttonText = helper.node("span:Open settings menu|class:button-text sr-only");
       var baselineAlignmentCharacter = helper.node("span:-|class:baseline-alignment-icon-character,aria-hidden:true");
       var buttonIcon = helper.node("span|class:icon-settings");
       if (state.get.current().header.menu.style == "clear") {
@@ -454,6 +487,7 @@ var header = (function() {
       };
       button.appendChild(baselineAlignmentCharacter);
       button.appendChild(buttonIcon);
+      button.appendChild(buttonText);
       return button;
     }
   };

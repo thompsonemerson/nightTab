@@ -2,6 +2,8 @@ var data = (function() {
 
   var _saveName = "nightTab";
 
+  var _backupName = "nightTab-backup";
+
   var mod = {};
 
   mod.import = function() {
@@ -25,7 +27,7 @@ var data = (function() {
     timeStamp.date = _timeStampPrefix(timeStamp.date);
     timeStamp.month = _timeStampPrefix(timeStamp.month + 1);
     timeStamp.year = _timeStampPrefix(timeStamp.year);
-    timeStamp = timeStamp.hours + " " + timeStamp.minutes + " " + timeStamp.seconds + " - " + timeStamp.date + "." + timeStamp.month + "." + timeStamp.year;
+    timeStamp = timeStamp.year + "." + timeStamp.month + "." + timeStamp.date + " - " + timeStamp.hours + " " + timeStamp.minutes + " " + timeStamp.seconds;
     var fileName = _saveName + " backup - " + timeStamp + ".json";
     var data = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(load()));
     var link = document.createElement("a");
@@ -42,6 +44,7 @@ var data = (function() {
     if (data) {
       if (!("version" in data) || data.version != version.get().number) {
         console.log("data version " + data.version + " found less than current");
+        mod.backup(data);
         data = update.run(data);
         mod.set(_saveName, JSON.stringify(data));
       } else {
@@ -50,6 +53,30 @@ var data = (function() {
       };
     } else {
       console.log("no data found to load");
+    };
+  };
+
+  mod.backup = function(data) {
+    if (data) {
+      var dataBackup = JSON.parse(JSON.stringify(data));
+      if (dataBackup.state.background.image) {
+        if (dataBackup.state.background.image.file) {
+          if (helper.checkIfValidString(dataBackup.state.background.image.file.data)) {
+            dataBackup.state.background.image.file.name = "";
+            dataBackup.state.background.image.file.data = "";
+          };
+        };
+      };
+      if (dataBackup.state.background.visual) {
+        if (dataBackup.state.background.visual.image.file) {
+          if (helper.checkIfValidString(dataBackup.state.background.visual.image.file.data)) {
+            dataBackup.state.background.visual.image.file.name = "";
+            dataBackup.state.background.visual.image.file.data = "";
+          };
+        };
+      };
+      console.log("data version " + dataBackup.version + " backed up");
+      mod.set(_backupName, JSON.stringify(dataBackup));
     };
   };
 
@@ -235,7 +262,11 @@ var data = (function() {
   };
 
   var load = function() {
-    return JSON.parse(mod.get(_saveName));
+    if (mod.get(_saveName) != null && mod.get(_saveName) != undefined) {
+      return JSON.parse(mod.get(_saveName));
+    } else {
+      return false;
+    };
   };
 
   var wipe = function() {
@@ -245,7 +276,7 @@ var data = (function() {
 
   var init = function() {
     mod.nameFix();
-    mod.restore(data.load());
+    mod.restore(load());
     render.feedback.empty();
   };
 

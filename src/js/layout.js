@@ -24,7 +24,11 @@ var layout = (function() {
 
   render.title = function() {
     var title = helper.e("title");
-    title.textContent = state.get.current().layout.title;
+    if (helper.checkIfValidString(state.get.current().layout.title)) {
+      title.textContent = helper.trimString(state.get.current().layout.title);
+    } else {
+      title.textContent = "New Tab";
+    };
   };
 
   var init = function() {

@@ -34,7 +34,7 @@ var state = (function() {
         },
         separator: {
           show: true,
-          text: ":"
+          text: ""
         },
         meridiem: {
           show: true
@@ -75,7 +75,7 @@ var state = (function() {
         },
         separator: {
           show: true,
-          text: "/"
+          text: ""
         },
         format: "datemonth",
         size: 1,
@@ -113,7 +113,8 @@ var state = (function() {
           },
           custom: {
             url: "",
-            name: ""
+            name: "",
+            queryName: ""
           }
         },
         text: {
@@ -152,6 +153,11 @@ var state = (function() {
       },
       color: {
         by: "theme",
+        hsl: {
+          h: 0,
+          s: 0,
+          l: 0
+        },
         rgb: {
           r: 0,
           g: 0,
@@ -159,10 +165,10 @@ var state = (function() {
         },
         style: "scroll",
         opacity: 0.95,
-        show: true,
+        show: false,
         newLine: false
       },
-      position: "sticky",
+      position: "inline",
       radius: false
     },
     link: {
@@ -174,20 +180,47 @@ var state = (function() {
       item: {
         color: {
           by: "theme",
+          hsl: {
+            h: 0,
+            s: 0,
+            l: 0
+          },
+          rgb: {
+            r: 0,
+            g: 0,
+            b: 0
+          },
+          opacity: 1
+        },
+        accent: {
+          by: "theme",
+          hsl: {
+            h: 0,
+            s: 0,
+            l: 0
+          },
           rgb: {
             r: 0,
             g: 0,
             b: 0
           }
         },
+        background: {
+          opacity: 1
+        },
         display: {
-          letcon: {
-            show: true,
+          visual: {
             letter: {
               size: 3
             },
             icon: {
               size: 3
+            },
+            image: {
+              size: 3
+            },
+            shadow: {
+              size: 0
             }
           },
           name: {
@@ -196,7 +229,7 @@ var state = (function() {
           },
           gutter: 2,
           direction: "vertical",
-          order: "letconname",
+          order: "visualname",
           alignment: "centercenter",
           rotate: 0,
           translate: {
@@ -218,14 +251,14 @@ var state = (function() {
         },
         newTab: false,
         size: 1,
-        border: 0,
-        opacity: 1
+        border: 0
       },
       show: true,
       add: false,
       edit: false,
       style: "block",
-      orientation: "bottom"
+      orientation: "bottom",
+      breakpoint: "xs"
     },
     group: {
       area: {
@@ -255,7 +288,7 @@ var state = (function() {
       width: 80,
       scrollPastEnd: false,
       scrollbars: "auto",
-      title: "New Tab"
+      title: ""
     },
     theme: {
       accent: {
@@ -322,20 +355,31 @@ var state = (function() {
     background: {
       color: {
         by: "theme",
+        hsl: {
+          h: 0,
+          s: 0,
+          l: 0
+        },
         rgb: {
           r: 0,
           g: 0,
           b: 0
         }
       },
-      image: {
+      visual: {
         show: false,
-        from: "file",
-        file: {
-          name: "",
-          data: ""
+        type: "video",
+        image: {
+          type: "file",
+          file: {
+            name: "",
+            data: ""
+          },
+          url: "",
         },
-        url: "",
+        video: {
+          url: ""
+        },
         blur: 0,
         scale: 1,
         opacity: 1,
@@ -366,13 +410,13 @@ var state = (function() {
       },
       clock: {
         separator: {
-          text: ":"
+          text: ""
         },
         size: 1
       },
       date: {
         separator: {
-          text: "/"
+          text: ""
         },
         size: 1
       },
@@ -414,13 +458,25 @@ var state = (function() {
         width: 100
       },
       item: {
+        color: {
+          opacity: 1
+        },
+        background: {
+          opacity: 1
+        },
         display: {
-          letcon: {
+          visual: {
             letter: {
               size: 3
             },
             icon: {
               size: 3
+            },
+            image: {
+              size: 3
+            },
+            shadow: {
+              size: 0
             }
           },
           name: {
@@ -434,8 +490,7 @@ var state = (function() {
           }
         },
         size: 1,
-        border: 0,
-        opacity: 1
+        border: 0
       }
     },
     group: {
@@ -452,7 +507,8 @@ var state = (function() {
       padding: 4,
       gutter: 2,
       size: 1,
-      width: 80
+      width: 80,
+      title: ""
     },
     theme: {
       accent: {
@@ -507,7 +563,7 @@ var state = (function() {
       }
     },
     background: {
-      image: {
+      visual: {
         blur: 0,
         scale: 1,
         opacity: 1,

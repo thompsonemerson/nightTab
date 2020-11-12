@@ -1,6 +1,25 @@
+/* fieldset */
+fieldset:not(:only-child):not(:last-child),
+.fieldset:not(:only-child):not(:last-child) {
+  border-bottom: var(--horizontal-rule-small);
+  position: relative;
+  width: 100%;
+  display: block;
+  transition: border-color var(--layout-transition-extra-fast);
+}
+
+fieldset:not(:first-child),
+.fieldset:not(:first-child) {
+  padding-top: calc(var(--form-wrap-space) * 2);
+}
+
+fieldset:not(:last-child),
+.fieldset:not(:last-child) {
+  padding-bottom: calc(var(--form-wrap-space) * 2);
+}
+
 /* form variants */
-.form-wrap,
-.form-helper {
+.form-wrap {
   position: relative;
   width: 100%;
   display: block;
@@ -18,14 +37,6 @@
 .form-wrap-hide-space:not(:last-child) {
   margin-top: calc(var(--form-wrap-space) * -1);
   margin-bottom: 0;
-}
-
-.form-helper:not(:first-child) {
-  margin-top: calc(var(--form-wrap-space) / 2);
-}
-
-.form-helper:not(:last-child) {
-  margin-bottom: calc(var(--form-wrap-space) / 2);
 }
 
 .form-indent {
@@ -73,6 +84,7 @@
   position: sticky;
   top: 0;
   z-index: 4;
+  transition: background-color var(--layout-transition-extra-fast);
 }
 
 /* label */
@@ -82,11 +94,11 @@ label {
   margin-bottom: 0;
   font-size: 1em;
   display: block;
-  transition: color var(--layout-timing-extra-fast);
+  transition: color var(--layout-transition-extra-fast);
 }
 
 label:not(:only-child):not(:last-child) {
-  padding-bottom: calc(var(--form-wrap-space) / 2);
+  padding-bottom: var(--form-wrap-space);
 }
 
 label.disabled {
@@ -106,21 +118,21 @@ select {
     0.5em 0.375em,
     0.5em 0.375em;
   background-repeat: no-repeat;
-  padding: 0 3em 0 1em;
+  padding: 0 3em 0 1.25em;
   margin: 0;
   color: rgb(var(--form-label));
   font-size: 1em;
   font-family: var(--theme-font-ui-name);
   font-weight: var(--theme-font-ui-weight);
   font-style: var(--theme-font-ui-style);
-  line-height: 2;
+  line-height: 2.5;
   min-height: 2.5em;
   min-width: 0;
   width: 100%;
   border-width: 0;
   border-radius: var(--theme-radius);
   cursor: pointer;
-  transition: background-color var(--layout-timing-extra-fast), border-color var(--layout-timing-extra-fast), color var(--layout-timing-extra-fast), box-shadow var(--layout-timing-extra-fast);
+  transition: background-color var(--layout-transition-extra-fast), border-color var(--layout-transition-extra-fast), color var(--layout-transition-extra-fast), box-shadow var(--layout-transition-extra-fast);
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
@@ -164,7 +176,7 @@ select:disabled:active {
 /* textarea */
 textarea {
   background-color: rgb(var(--form-input-background));
-  padding: 0.5em 1em;
+  padding: 0.5em 1.25em;
   margin: 0;
   color: rgb(var(--form-input-text));
   font-size: 1em;
@@ -181,7 +193,7 @@ textarea {
   cursor: text;
   resize: vertical;
   display: block;
-  transition: background-color var(--layout-timing-extra-fast), border-color var(--layout-timing-extra-fast), color var(--layout-timing-extra-fast), box-shadow var(--layout-timing-extra-fast);
+  transition: background-color var(--layout-transition-extra-fast), border-color var(--layout-transition-extra-fast), color var(--layout-transition-extra-fast), box-shadow var(--layout-transition-extra-fast);
   -moz-appearance: textfield;
 }
 
@@ -215,7 +227,7 @@ textarea:disabled:focus {
 
 textarea::placeholder {
   color: rgb(var(--form-placeholder));
-  transition: color var(--layout-timing-extra-fast);
+  transition: color var(--layout-transition-extra-fast);
 }
 
 textarea:hover::placeholder {
@@ -240,22 +252,29 @@ input[type="search"],
 input[type="tel"],
 input[type="text"] {
   background-color: rgb(var(--form-input-background));
-  padding: 0 1em;
+  padding: 0 1.25em;
   margin: 0;
   color: rgb(var(--form-input-text));
   font-size: 1em;
   font-family: var(--theme-font-ui-name);
   font-weight: var(--theme-font-ui-weight);
   font-style: var(--theme-font-ui-style);
-  line-height: 1.6em;
+  line-height: 1.6;
   height: 2.5em;
   min-width: 0;
   width: 100%;
   border-width: 0;
   border-radius: var(--theme-radius);
   cursor: text;
-  transition: background-color var(--layout-timing-extra-fast), border-color var(--layout-timing-extra-fast), color var(--layout-timing-extra-fast), box-shadow var(--layout-timing-extra-fast);
+  transition: background-color var(--layout-transition-extra-fast), border-color var(--layout-transition-extra-fast), color var(--layout-transition-extra-fast), box-shadow var(--layout-transition-extra-fast);
   -moz-appearance: textfield;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  -webkit-appearance: none;
 }
 
 input[type="number"] {
@@ -333,7 +352,7 @@ input[type="search"]::placeholder,
 input[type="tel"]::placeholder,
 input[type="text"]::placeholder {
   color: rgb(var(--form-placeholder));
-  transition: color var(--layout-timing-extra-fast);
+  transition: color var(--layout-transition-extra-fast);
 }
 
 input[type="email"]:hover::placeholder,
@@ -425,7 +444,7 @@ input[type="radio"] {
   pointer-events: none;
   box-sizing: border-box;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  transition: color var(--layout-timing-extra-fast);
+  transition: color var(--layout-transition-extra-fast);
 }
 
 input[type="checkbox"]+label,
@@ -436,12 +455,13 @@ input[type="radio"]+label {
   font-family: var(--theme-font-ui-name);
   font-weight: var(--theme-font-ui-weight);
   font-style: var(--theme-font-ui-style);
+  color: rgb(var(--form-label));
   cursor: pointer;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
-  transition: transform var(--layout-timing-extra-fast), color var(--layout-timing-extra-fast);
+  transition: transform var(--layout-transition-extra-fast), color var(--layout-transition-extra-fast);
 }
 
 input[type="checkbox"]:hover+label,
@@ -484,7 +504,7 @@ input[type="radio"]+label .label-icon {
   flex-shrink: 0;
   z-index: 1;
   box-shadow: none;
-  transition: background-color var(--layout-timing-extra-fast), box-shadow var(--layout-timing-extra-fast);
+  transition: background-color var(--layout-transition-extra-fast), box-shadow var(--layout-transition-extra-fast);
 }
 
 input[type="checkbox"]+label .label-icon {
@@ -551,7 +571,7 @@ input[type="radio"]+label .label-icon:before {
   transform: scale(0.7);
   transform-origin: center;
   z-index: 2;
-  transition: background-color var(--layout-timing-extra-fast), border-radius var(--layout-timing-extra-fast), transform var(--layout-timing-extra-fast);
+  transition: background-color var(--layout-transition-extra-fast), border-radius var(--layout-transition-extra-fast), transform var(--layout-transition-extra-fast);
 }
 
 input[type="checkbox"]+label .label-icon:before {
@@ -613,7 +633,7 @@ input[type="checkbox"]+label .label-icon:after {
   transform: scale(0);
   transform-origin: center;
   z-index: 2;
-  transition: transform var(--layout-timing-extra-fast);
+  transition: transform var(--layout-transition-extra-fast);
   clip-path: polygon(7% 56%, 37% 86%, 95% 27%, 84% 16%, 37% 64%, 18% 45%);
 }
 
@@ -633,6 +653,95 @@ input[type="checkbox"]:checked:disabled:active+label .label-icon:after {
   background-color: rgb(var(--form-icon-symbol-disabled));
 }
 
+.label-block {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+input[type="checkbox"]+label .label-block-item,
+input[type="radio"]+label .label-block-item {
+  color: rgb(var(--form-label));
+  transition: color var(--layout-transition-extra-fast);
+}
+
+input[type="checkbox"]:hover+label .label-block-item,
+input[type="checkbox"]:focus+label .label-block-item,
+input[type="radio"]:hover+label .label-block-item,
+input[type="radio"]:focus+label .label-block-item {
+  color: rgb(var(--form-label-hover));
+}
+
+input[type="checkbox"]:active+label .label-block-item,
+input[type="radio"]:active+label .label-block-item {
+  color: rgb(var(--form-label-focus-active));
+}
+
+input[type="checkbox"]:checked+label .label-block-item,
+input[type="radio"]:checked+label .label-block-item {
+  color: rgb(var(--form-label-checked));
+}
+
+input[type="checkbox"]:disabled+label .label-block-item,
+input[type="checkbox"]:disabled:hover+label .label-block-item,
+input[type="checkbox"]:disabled:focus+label .label-block-item,
+input[type="radio"]:disabled+label .label-block-item,
+input[type="radio"]:disabled:hover+label .label-block-item,
+input[type="radio"]:disabled:focus+label .label-block-item {
+  color: rgb(var(--form-label-disabled));
+  cursor: default;
+}
+
+input[type="checkbox"]+label .label-block-item.muted,
+input[type="radio"]+label .label-block-item.muted {
+  color: rgb(var(--utilities-muted));
+  transition: color var(--layout-transition-extra-fast);
+}
+
+input[type="checkbox"]:hover+label .label-block-item.muted,
+input[type="checkbox"]:focus+label .label-block-item.muted,
+input[type="radio"]:hover+label .label-block-item.muted,
+input[type="radio"]:focus+label .label-block-item.muted {
+  color: rgb(var(--utilities-muted-hover));
+}
+
+input[type="checkbox"]:active+label .label-block-item.muted,
+input[type="radio"]:active+label .label-block-item.muted {
+  color: rgb(var(--utilities-muted-focus-active));
+}
+
+input[type="checkbox"]:checked+label .label-block-item.muted,
+input[type="radio"]:checked+label .label-block-item.muted {
+  color: rgb(var(--utilities-muted-checked));
+}
+
+input[type="checkbox"]:disabled+label .label-block-item.muted,
+input[type="checkbox"]:disabled:hover+label .label-block-item.muted,
+input[type="checkbox"]:disabled:focus+label .label-block-item.muted,
+input[type="radio"]:disabled+label .label-block-item.muted,
+input[type="radio"]:disabled:hover+label .label-block-item.muted,
+input[type="radio"]:disabled:focus+label .label-block-item.muted {
+  color: rgb(var(--utilities-muted-disabled));
+  cursor: default;
+}
+
+.label-block-item:not(:last-child):not(:only-child) {
+  margin-bottom: calc(var(--form-wrap-space) / 4);
+}
+
+input:disabled+label .label-block-item,
+input:disabled:hover+label .label-block-item,
+input:disabled:focus+label .label-block-item,
+input[type="checkbox"]:disabled+label .label-block-item,
+input[type="checkbox"]:disabled:hover+label .label-block-item,
+input[type="checkbox"]:disabled:focus+label .label-block-item,
+input[type="radio"]:disabled+label .label-block-item,
+input[type="radio"]:disabled:hover+label .label-block-item,
+input[type="radio"]:disabled:focus+label .label-block-item {
+  color: rgb(var(--form-label-disabled));
+  cursor: default;
+}
+
 /* color */
 input[type="color"] {
   background-color: transparent;
@@ -646,7 +755,8 @@ input[type="color"] {
   border-radius: var(--theme-radius);
   overflow: hidden;
   cursor: pointer;
-  transition: box-shadow var(--layout-timing-extra-fast);
+  opacity: 1;
+  transition: box-shadow var(--layout-transition-extra-fast), opacity var(--layout-transition-extra-fast);
 }
 
 input[type="color"]:hover {
@@ -739,7 +849,7 @@ input[type="range"]:before {
   border: 0;
   border-radius: var(--theme-radius);
   transform: translate(0, -50%);
-  transition: background-color var(--layout-timing-extra-fast);
+  transition: background-color var(--layout-transition-extra-fast);
 }
 
 input[type="range"]:focus:before,
@@ -775,7 +885,7 @@ input[type="range"]::-webkit-slider-thumb {
   width: var(--form-thumb-size);
   cursor: pointer;
   box-sizing: border-box;
-  transition: background-color var(--layout-timing-extra-fast), box-shadow var(--layout-timing-extra-fast);
+  transition: background-color var(--layout-transition-extra-fast), box-shadow var(--layout-transition-extra-fast);
   -webkit-appearance: none;
 }
 
@@ -831,7 +941,7 @@ input[type="range"]::-moz-range-track {
   width: 100%;
   border: 0;
   border-radius: var(--theme-radius);
-  transition: all var(--layout-timing-extra-fast);
+  transition: all var(--layout-transition-extra-fast);
   -webkit-appearance: none;
 }
 
@@ -864,7 +974,7 @@ input[type="range"]::-moz-range-thumb {
   width: var(--form-thumb-size);
   cursor: pointer;
   box-sizing: border-box;
-  transition: background-color var(--layout-timing-extra-fast), box-shadow var(--layout-timing-extra-fast);
+  transition: background-color var(--layout-transition-extra-fast), box-shadow var(--layout-transition-extra-fast);
   -moz-appearance: none;
 }
 
@@ -916,7 +1026,7 @@ input[type="range"]::-moz-range-progress {
   background-color: rgb(var(--form-range-progress-background));
   height: calc(var(--layout-line-width) * 2);
   border-radius: var(--theme-radius);
-  transition: background-color var(--layout-timing-extra-fast);
+  transition: background-color var(--layout-transition-extra-fast);
 }
 
 input[type="range"]:active::-moz-range-progress {
@@ -931,7 +1041,7 @@ input[type="range"]:disabled::-moz-range-progress {
 .form-helper-item {
   font-size: 0.8em;
   color: rgb(var(--form-helper));
-  transition: color var(--layout-timing-extra-fast);
+  transition: color var(--layout-transition-extra-fast);
 }
 
 .form-helper-item.disabled {
@@ -949,7 +1059,7 @@ input[type="range"]:disabled::-moz-range-progress {
 .form-input-button input[type="color"]+label,
 .form-input-button input[type="file"]+label {
   background-color: rgb(var(--button-background));
-  padding: 0.25em 1em;
+  padding: 0.25em 1.25em;
   margin: 0;
   color: rgb(var(--button-text));
   font-size: 1em;
@@ -971,7 +1081,7 @@ input[type="range"]:disabled::-moz-range-progress {
   align-items: center;
   overflow: hidden;
   box-shadow: none;
-  transition: background-color var(--layout-timing-extra-fast), border-color var(--layout-timing-extra-fast), color var(--layout-timing-extra-fast);
+  transition: background-color var(--layout-transition-extra-fast), border-color var(--layout-transition-extra-fast), color var(--layout-transition-extra-fast);
 }
 
 .form-input-button input[type="checkbox"]:focus+label,
@@ -1007,7 +1117,6 @@ input[type="range"]:disabled::-moz-range-progress {
   color: rgb(var(--button-text-active));
   outline: none;
   text-decoration: none;
-  transition: none;
 }
 
 .form-input-button input[type="checkbox"]:disabled+label,
@@ -1037,12 +1146,63 @@ input[type="range"]:disabled::-moz-range-progress {
   top: inherit;
 }
 
-.form-input-button input[type="checkbox"]+label:after,
-.form-input-button input[type="radio"]+label:after,
-.form-input-button input[type="color"]+label:after,
-.form-input-button input[type="file"]+label:after {
+.form-input-button-ring input[type="checkbox"]+label,
+.form-input-button-ring input[type="radio"]+label,
+.form-input-button-ring input[type="color"]+label,
+.form-input-button-ring input[type="file"]+label {
+  transition: background-color var(--layout-transition-extra-fast), border-color var(--layout-transition-extra-fast), color var(--layout-transition-extra-fast), box-shadow var(--layout-transition-extra-fast);
+}
+
+.form-input-button-ring input[type="checkbox"]:focus+label,
+.form-input-button-ring input[type="checkbox"]:hover+label,
+.form-input-button-ring input[type="radio"]:focus+label,
+.form-input-button-ring input[type="radio"]:hover+label,
+.form-input-button-ring input[type="color"]:focus+label,
+.form-input-button-ring input[type="color"]:hover+label,
+.form-input-button-ring input[type="file"]:focus+label,
+.form-input-button-ring input[type="file"]:hover+label {
+  box-shadow: var(--form-ring-hover);
+}
+
+.form-input-button-ring input[type="checkbox"]:active+label,
+.form-input-button-ring input[type="radio"]:active+label,
+.form-input-button-ring input[type="color"]:active+label,
+.form-input-button-ring input[type="file"]:active+label {
+  box-shadow: var(--form-ring-accent);
+}
+
+.form-input-button-ring input[type="checkbox"]:checked+label,
+.form-input-button-ring input[type="radio"]:checked+label,
+.form-input-button-ring input[type="color"]:checked+label,
+.form-input-button-ring input[type="file"]:checked+label {
+  box-shadow: var(--form-ring-accent);
+}
+
+.form-input-button-ring input[type="checkbox"]:disabled+label,
+.form-input-button-ring input[type="checkbox"]:disabled:hover+label,
+.form-input-button-ring input[type="checkbox"]:disabled:focus+label,
+.form-input-button-ring input[type="checkbox"]:disabled:active+label,
+.form-input-button-ring input[type="radio"]:disabled+label,
+.form-input-button-ring input[type="radio"]:disabled:hover+label,
+.form-input-button-ring input[type="radio"]:disabled:focus+label,
+.form-input-button-ring input[type="radio"]:disabled:active+label,
+.form-input-button-ring input[type="color"]:disabled+label,
+.form-input-button-ring input[type="color"]:disabled:hover+label,
+.form-input-button-ring input[type="color"]:disabled:focus+label,
+.form-input-button-ring input[type="color"]:disabled:active+label,
+.form-input-button-ring input[type="file"]:disabled+label,
+.form-input-button-ring input[type="file"]:disabled:hover+label,
+.form-input-button-ring input[type="file"]:disabled:focus+label,
+.form-input-button-ring input[type="file"]:disabled:active+label {
+  box-shadow: none;
+}
+
+.form-input-button-line input[type="checkbox"]+label:after,
+.form-input-button-line input[type="radio"]+label:after,
+.form-input-button-line input[type="color"]+label:after,
+.form-input-button-line input[type="file"]+label:after {
   content: "";
-  background: rgb(var(--button-border));
+  background: transparent;
   border-radius: var(--theme-radius);
   position: absolute;
   bottom: 0;
@@ -1050,53 +1210,53 @@ input[type="range"]:disabled::-moz-range-progress {
   width: 100%;
   height: 100%;
   clip-path: polygon(0 calc(100% - var(--layout-line-width)), 100% calc(100% - var(--layout-line-width)), 100% 100%, 0% 100%);
-  transition: background-color var(--layout-timing-extra-fast);
+  transition: background-color var(--layout-transition-extra-fast);
   pointer-events: none;
 }
 
-.form-input-button input[type="checkbox"]:focus+label:after,
-.form-input-button input[type="checkbox"]:hover+label:after,
-.form-input-button input[type="radio"]:focus+label:after,
-.form-input-button input[type="radio"]:hover+label:after,
-.form-input-button input[type="color"]:focus+label:after,
-.form-input-button input[type="color"]:hover+label:after,
-.form-input-button input[type="file"]:focus+label:after,
-.form-input-button input[type="file"]:hover+label:after {
+.form-input-button-line input[type="checkbox"]:focus+label:after,
+.form-input-button-line input[type="checkbox"]:hover+label:after,
+.form-input-button-line input[type="radio"]:focus+label:after,
+.form-input-button-line input[type="radio"]:hover+label:after,
+.form-input-button-line input[type="color"]:focus+label:after,
+.form-input-button-line input[type="color"]:hover+label:after,
+.form-input-button-line input[type="file"]:focus+label:after,
+.form-input-button-line input[type="file"]:hover+label:after {
   background-color: rgb(var(--button-border-focus-hover));
 }
 
-.form-input-button input[type="checkbox"]:active+label:after,
-.form-input-button input[type="radio"]:active+label:after,
-.form-input-button input[type="color"]:active+label:after,
-.form-input-button input[type="file"]:active+label:after {
+.form-input-button-line input[type="checkbox"]:active+label:after,
+.form-input-button-line input[type="radio"]:active+label:after,
+.form-input-button-line input[type="color"]:active+label:after,
+.form-input-button-line input[type="file"]:active+label:after {
   background-color: rgb(var(--button-border-active));
   transition: none;
 }
 
-.form-input-button input[type="checkbox"]:checked+label:after,
-.form-input-button input[type="radio"]:checked+label:after,
-.form-input-button input[type="color"]:checked+label:after,
-.form-input-button input[type="file"]:checked+label:after {
+.form-input-button-line input[type="checkbox"]:checked+label:after,
+.form-input-button-line input[type="radio"]:checked+label:after,
+.form-input-button-line input[type="color"]:checked+label:after,
+.form-input-button-line input[type="file"]:checked+label:after {
   background-color: rgb(var(--button-border-active));
   transition: none;
 }
 
-.form-input-button input[type="checkbox"]:disabled+label:after,
-.form-input-button input[type="checkbox"]:disabled:hover+label:after,
-.form-input-button input[type="checkbox"]:disabled:focus+label:after,
-.form-input-button input[type="checkbox"]:disabled:active+label:after,
-.form-input-button input[type="radio"]:disabled+label:after,
-.form-input-button input[type="radio"]:disabled:hover+label:after,
-.form-input-button input[type="radio"]:disabled:focus+label:after,
-.form-input-button input[type="radio"]:disabled:active+label:after,
-.form-input-button input[type="color"]:disabled+label:after,
-.form-input-button input[type="color"]:disabled:hover+label:after,
-.form-input-button input[type="color"]:disabled:focus+label:after,
-.form-input-button input[type="color"]:disabled:active+label:after,
-.form-input-button input[type="file"]:disabled+label:after,
-.form-input-button input[type="file"]:disabled:hover+label:after,
-.form-input-button input[type="file"]:disabled:focus+label:after,
-.form-input-button input[type="file"]:disabled:active+label:after {
+.form-input-button-line input[type="checkbox"]:disabled+label:after,
+.form-input-button-line input[type="checkbox"]:disabled:hover+label:after,
+.form-input-button-line input[type="checkbox"]:disabled:focus+label:after,
+.form-input-button-line input[type="checkbox"]:disabled:active+label:after,
+.form-input-button-line input[type="radio"]:disabled+label:after,
+.form-input-button-line input[type="radio"]:disabled:hover+label:after,
+.form-input-button-line input[type="radio"]:disabled:focus+label:after,
+.form-input-button-line input[type="radio"]:disabled:active+label:after,
+.form-input-button-line input[type="color"]:disabled+label:after,
+.form-input-button-line input[type="color"]:disabled:hover+label:after,
+.form-input-button-line input[type="color"]:disabled:focus+label:after,
+.form-input-button-line input[type="color"]:disabled:active+label:after,
+.form-input-button-line input[type="file"]:disabled+label:after,
+.form-input-button-line input[type="file"]:disabled:hover+label:after,
+.form-input-button-line input[type="file"]:disabled:focus+label:after,
+.form-input-button-line input[type="file"]:disabled:active+label:after {
   background-color: rgb(var(--button-border-disabled));
 }
 
@@ -1149,13 +1309,6 @@ input[type="range"]:disabled::-moz-range-progress {
   background-color: transparent;
 }
 
-.form-input-button-link input[type="checkbox"]+label:after,
-.form-input-button-link input[type="radio"]+label:after,
-.form-input-button-link input[type="color"]+label:after,
-.form-input-button-link input[type="file"]+label:after {
-  content: none;
-}
-
 .input-color-dot input[type="color"] {
   margin: 0;
   position: absolute;
@@ -1164,7 +1317,7 @@ input[type="range"]:disabled::-moz-range-progress {
   width: calc(var(--form-thumb-size) * 0.8);
   height: calc(var(--form-thumb-size) * 0.8);
   min-width: inherit;
-  z-index: 1;
+  z-index: 4;
   border-radius: 50%;
   transform: translateY(-50%);
   transition: none;
@@ -1215,7 +1368,7 @@ input[type="range"]:disabled::-moz-range-progress {
   min-width: 1px;
   min-height: 1px;
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 0;
   -webkit-appearance: none;
 }
@@ -1226,7 +1379,7 @@ input[type="range"]:disabled::-moz-range-progress {
   padding: calc(var(--form-thumb-size) / 2);
   display: inline-grid;
   overflow: hidden;
-  transition: background-color var(--layout-timing-extra-fast);
+  transition: background-color var(--layout-transition-extra-fast);
 }
 
 .form-grid:hover {
@@ -1254,6 +1407,11 @@ input[type="range"]:disabled::-moz-range-progress {
 
 .form-grid-3x1 {
   grid-template-columns: repeat(3, 1fr);
+  border-radius: var(--theme-radius);
+}
+
+.form-grid-1x3 {
+  grid-template-rows: repeat(3, 1fr);
   border-radius: var(--theme-radius);
 }
 
@@ -1356,11 +1514,10 @@ input[type="range"]:disabled::-moz-range-progress {
 
 .form-group .form-group-text,
 .form-group .button,
-.form-group .button:after,
-.form-group .form-input-button input[type="checkbox"]+label:after,
-.form-group .form-input-button input[type="radio"]+label:after,
-.form-group .form-input-button input[type="color"]+label:after,
-.form-group .form-input-button input[type="file"]+label:after,
+.form-group .form-input-button input[type="checkbox"]+label,
+.form-group .form-input-button input[type="radio"]+label,
+.form-group .form-input-button input[type="color"]+label,
+.form-group .form-input-button input[type="file"]+label,
 .form-group>select,
 .form-group>input[type="email"],
 .form-group>input[type="number"],
@@ -1380,12 +1537,24 @@ input[type="range"]:disabled::-moz-range-progress {
   z-index: 1;
 }
 
+.form-group .button-line:after,
+.form-group .form-input-button-line input[type="checkbox"]+label:after,
+.form-group .form-input-button-line input[type="radio"]+label:after,
+.form-group .form-input-button-line input[type="color"]+label:after,
+.form-group .form-input-button-line input[type="file"]+label:after {
+  border-radius: 0;
+}
+
 .form-group .form-group-text {
   flex-shrink: 0;
 }
 
 .form-group .form-group-text:focus,
 .form-group .button:focus,
+.form-group .form-input-button input[type="checkbox"]:focus+label,
+.form-group .form-input-button input[type="radio"]:focus+label,
+.form-group .form-input-button input[type="color"]:focus+label,
+.form-group .form-input-button input[type="file"]:focus+label,
 .form-group>select:focus,
 .form-group>input[type="email"]:focus,
 .form-group>input[type="number"]:focus,
@@ -1399,26 +1568,56 @@ input[type="range"]:disabled::-moz-range-progress {
 }
 
 .form-group .form-group-text:hover,
+.form-group .form-group-text:active,
 .form-group .button:hover,
+.form-group .button:active,
+.form-group .form-input-button input[type="checkbox"]:hover+label,
+.form-group .form-input-button input[type="checkbox"]:active+label,
+.form-group .form-input-button input[type="radio"]:hover+label,
+.form-group .form-input-button input[type="radio"]:active+label,
+.form-group .form-input-button input[type="color"]:hover+label,
+.form-group .form-input-button input[type="color"]:active+label,
+.form-group .form-input-button input[type="file"]:hover+label,
+.form-group .form-input-button input[type="file"]:active+label,
 .form-group>select:hover,
+.form-group>select:active,
 .form-group>input[type="email"]:hover,
+.form-group>input[type="email"]:active,
 .form-group>input[type="number"]:hover,
+.form-group>input[type="number"]:active,
 .form-group>input[type="password"]:hover,
+.form-group>input[type="password"]:active,
 .form-group>input[type="search"]:hover,
+.form-group>input[type="search"]:active,
 .form-group>input[type="tel"]:hover,
+.form-group>input[type="tel"]:active,
 .form-group>input[type="text"]:hover,
+.form-group>input[type="text"]:active,
 .form-group>input[type="color"]:hover,
-.form-group>input[type="range"]:hover {
+.form-group>input[type="color"]:active,
+.form-group>input[type="range"]:hover,
+.form-group>input[type="range"]:active {
+  z-index: 3;
+}
+
+.form-group .form-input-button input[type="checkbox"]:checked+label,
+.form-group .form-input-button input[type="radio"]:checked+label,
+.form-group .form-input-button input[type="color"]:checked+label,
+.form-group .form-input-button input[type="file"]:checked+label {
   z-index: 3;
 }
 
 .form-group .form-group-text:first-child,
 .form-group .button:first-child,
-.form-group .button:first-child:after,
-.form-group .form-input-button:first-child input[type="checkbox"]+label:after,
-.form-group .form-input-button:first-child input[type="radio"]+label:after,
-.form-group .form-input-button:first-child input[type="color"]+label:after,
-.form-group .form-input-button:first-child input[type="file"]+label:after,
+.form-group .button-line:first-child:after,
+.form-group .form-input-button:first-child input[type="checkbox"]+label,
+.form-group .form-input-button:first-child input[type="radio"]+label,
+.form-group .form-input-button:first-child input[type="color"]+label,
+.form-group .form-input-button:first-child input[type="file"]+label,
+.form-group .form-input-button-line:first-child input[type="checkbox"]+label:after,
+.form-group .form-input-button-line:first-child input[type="radio"]+label:after,
+.form-group .form-input-button-line:first-child input[type="color"]+label:after,
+.form-group .form-input-button-line:first-child input[type="file"]+label:after,
 .form-group>select:first-child,
 .form-group>input[type="email"]:first-child,
 .form-group>input[type="number"]:first-child,
@@ -1433,11 +1632,15 @@ input[type="range"]:disabled::-moz-range-progress {
 
 .form-group .form-group-text:last-child,
 .form-group .button:last-child,
-.form-group .button:last-child:after,
-.form-group .form-input-button:last-child input[type="checkbox"]+label:after,
-.form-group .form-input-button:last-child input[type="radio"]+label:after,
-.form-group .form-input-button:last-child input[type="color"]+label:after,
-.form-group .form-input-button:last-child input[type="file"]+label:after,
+.form-group .button-line:last-child:after,
+.form-group .form-input-button:last-child input[type="checkbox"]+label,
+.form-group .form-input-button:last-child input[type="radio"]+label,
+.form-group .form-input-button:last-child input[type="color"]+label,
+.form-group .form-input-button:last-child input[type="file"]+label,
+.form-group .form-input-button-line:last-child input[type="checkbox"]+label:after,
+.form-group .form-input-button-line:last-child input[type="radio"]+label:after,
+.form-group .form-input-button-line:last-child input[type="color"]+label:after,
+.form-group .form-input-button-line:last-child input[type="file"]+label:after,
 .form-group>select:last-child,
 .form-group>input[type="email"]:last-child,
 .form-group>input[type="number"]:last-child,
@@ -1452,7 +1655,7 @@ input[type="range"]:disabled::-moz-range-progress {
 
 .form-group .form-group-text:only-child,
 .form-group .button:only-child,
-.form-group .button:only-child:after,
+.form-group .button-line:only-child:after,
 .form-group>select:only-child,
 .form-group>input[type="email"]:only-child,
 .form-group>input[type="number"]:only-child,
@@ -1466,7 +1669,7 @@ input[type="range"]:disabled::-moz-range-progress {
 }
 
 .form-group.form-group-nested-button * .button,
-.form-group.form-group-nested-button * .button:after,
+.form-group.form-group-nested-button * .button-line:after,
 .form-group.form-group-nested-button * input[type="checkbox"]+label,
 .form-group.form-group-nested-button * input[type="radio"]+label,
 .form-group.form-group-nested-button * input[type="color"]+label {
@@ -1474,7 +1677,7 @@ input[type="range"]:disabled::-moz-range-progress {
 }
 
 .form-group.form-group-nested-button *:first-child .button,
-.form-group.form-group-nested-button *:first-child .button:after,
+.form-group.form-group-nested-button *:first-child .button-line:after,
 .form-group.form-group-nested-button *:first-child input[type="checkbox"]+label,
 .form-group.form-group-nested-button *:first-child input[type="radio"]+label,
 .form-group.form-group-nested-button *:first-child input[type="color"]+label {
@@ -1482,7 +1685,7 @@ input[type="range"]:disabled::-moz-range-progress {
 }
 
 .form-group.form-group-nested-button *:last-child .button,
-.form-group.form-group-nested-button *:last-child .button:after,
+.form-group.form-group-nested-button *:last-child .button-line:after,
 .form-group.form-group-nested-button *:last-child input[type="checkbox"]+label,
 .form-group.form-group-nested-button *:last-child input[type="radio"]+label,
 .form-group.form-group-nested-button *:last-child input[type="color"]+label {
@@ -1491,7 +1694,7 @@ input[type="range"]:disabled::-moz-range-progress {
 
 .form-group .form-group-radius-left.form-group-text,
 .form-group .form-group-radius-left.button,
-.form-group .form-group-radius-left.button:after,
+.form-group .form-group-radius-left.button-line:after,
 .form-group>select.form-group-radius-left,
 .form-group>input.form-group-radius-left[type="email"],
 .form-group>input.form-group-radius-left[type="number"],
@@ -1507,7 +1710,7 @@ input[type="range"]:disabled::-moz-range-progress {
 
 .form-group .form-group-radius-right.form-group-text,
 .form-group .form-group-radius-right.button,
-.form-group .form-group-radius-right.button:after,
+.form-group .form-group-radius-right.butbutton-lineton:after,
 .form-group>select.form-group-radius-right,
 .form-group>input.form-group-radius-right[type="email"],
 .form-group>input.form-group-radius-right[type="number"],
@@ -1540,7 +1743,7 @@ input[type="range"]:disabled::-moz-range-progress {
 
 .form-group.form-group-border .form-group-text,
 .form-group.form-group-border .button,
-.form-group.form-group-border .button:after,
+.form-group.form-group-border .button-line:after,
 .form-group.form-group-border>select,
 .form-group.form-group-border>input[type="email"],
 .form-group.form-group-border>input[type="number"],
@@ -1551,7 +1754,7 @@ input[type="range"]:disabled::-moz-range-progress {
 .form-group.form-group-border>input[type="color"],
 .form-group.form-group-border>input[type="range"],
 .form-group.form-group-border.form-group-nested-button * .button,
-.form-group.form-group-border.form-group-nested-button * .button:after,
+.form-group.form-group-border.form-group-nested-button * .button-line:after,
 .form-group.form-group-border.form-group-nested-button * input[type="checkbox"]+label,
 .form-group.form-group-border.form-group-nested-button * input[type="radio"]+label,
 .form-group.form-group-border.form-group-nested-button * input[type="color"]+label {
@@ -1560,7 +1763,7 @@ input[type="range"]:disabled::-moz-range-progress {
 
 .form-group-text {
   background-color: rgb(var(--form-group-text-background));
-  padding: 0 1em;
+  padding: 0 1.25em;
   margin: 0;
   color: rgb(var(--form-input-text));
   min-width: 4em;
@@ -1577,7 +1780,7 @@ input[type="range"]:disabled::-moz-range-progress {
   border-style: solid;
   border-radius: var(--theme-radius);
   white-space: nowrap;
-  transition: background-color var(--layout-timing-extra-fast), border-color var(--layout-timing-extra-fast), color var(--layout-timing-extra-fast);
+  transition: background-color var(--layout-transition-extra-fast), border-color var(--layout-transition-extra-fast), color var(--layout-transition-extra-fast);
 }
 
 .form-group-text:hover,
@@ -1604,6 +1807,14 @@ input[type="range"]:disabled::-moz-range-progress {
   color: rgb(var(--form-input-text-disabled));
   box-shadow: none;
   cursor: default;
+}
+
+.form-group-text-left {
+  justify-content: flex-start;
+}
+
+.form-group-text-right {
+  justify-content: flex-end;
 }
 
 .form-group-item-small,
@@ -1693,7 +1904,7 @@ input[type="range"]:disabled::-moz-range-progress {
 .form-dropdown-menu {
   background-color: rgb(var(--form-dropdown-background));
   border-radius: var(--theme-radius);
-  padding: 0.5em 0;
+  padding: 0.75em 0;
   position: absolute;
   width: 100%;
   min-width: 12em;
@@ -1726,17 +1937,13 @@ input[type="range"]:disabled::-moz-range-progress {
 
 .form-dropdown-menu button,
 .form-dropdown-menu .button {
-  border: 0;
   border-radius: 0;
-  margin-bottom: 0;
   justify-content: flex-start;
   position: relative;
-  box-shadow: none;
 }
 
-.form-dropdown-menu button:after,
-.form-dropdown-menu .button:after {
-  content: none;
+.form-dropdown-menu .button-line:after {
+  border-radius: 0;
 }
 
 .form-group.form-group-nested-button .form-dropdown-menu *:first-child .button,
@@ -1752,7 +1959,7 @@ input[type="range"]:disabled::-moz-range-progress {
 
 /* form feedback */
 .form-feedback {
-  padding: 0.5em 1.5em 0.5em 1em;
+  padding: 0.75em 1.25em;
   background-color: rgb(var(--form-feedback-background));
   border-width: 0;
   border-left-width: calc(var(--layout-line-width) * 2);
@@ -1761,6 +1968,7 @@ input[type="range"]:disabled::-moz-range-progress {
   border-top-right-radius: var(--theme-radius);
   border-bottom-right-radius: var(--theme-radius);
   width: 100%;
+  transition: background-color var(--layout-transition-extra-fast), border-color var(--layout-transition-extra-fast);
 }
 
 .form-feedback p {

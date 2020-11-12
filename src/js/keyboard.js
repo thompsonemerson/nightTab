@@ -41,6 +41,9 @@ var keyboard = (function() {
           link.edit.mode.close();
           data.save();
         };
+        if (state.get.current().pagelock) {
+          pagelock.unlock();
+        };
         data.save();
       };
     }, false);
@@ -53,24 +56,18 @@ var keyboard = (function() {
         if (state.get.current().menu) {
           menu.close();
         };
-        if (state.get.current().modal && !state.get.current().link.add) {
-          modal.close();
-        };
         if (state.get.current().link.edit) {
           link.edit.item.close();
-          modal.close();
           shade.close();
           data.save();
         };
         if (state.get.current().group.edit) {
           link.edit.group.close();
-          modal.close();
           shade.close();
           data.save();
         };
         if (state.get.current().group.add) {
           link.add.group.close();
-          modal.close();
           shade.close();
           data.save();
         };
@@ -88,24 +85,18 @@ var keyboard = (function() {
         if (state.get.current().menu) {
           menu.close();
         };
-        if (state.get.current().modal && !state.get.current().group.add) {
-          modal.close();
-        };
         if (state.get.current().link.edit) {
           link.edit.item.close();
-          modal.close();
           shade.close();
           data.save();
         };
         if (state.get.current().link.add) {
           link.add.item.close();
-          modal.close();
           shade.close();
           data.save();
         };
         if (state.get.current().group.edit) {
           link.edit.group.close();
-          modal.close();
           shade.close();
           data.save();
         };
@@ -121,7 +112,6 @@ var keyboard = (function() {
       // ctrl+alt+d
       if (event.ctrlKey && event.altKey && event.keyCode == 68) {
         theme.style.toggle();
-        control.render.update.control.header();
         control.render.update.control.menu();
         data.save();
       };

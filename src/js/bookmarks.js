@@ -11,123 +11,489 @@ var bookmarks = (function() {
       show: true
     },
     items: [{
-      display: "icon",
-      letter: "AS",
-      icon: {
-        name: "dice-d20",
-        prefix: "fas",
-        label: "Dice D20"
-      },
-      name: "awesomeSheet",
-      url: "https://zombiefox.github.io/awesomeSheet/",
-      accent: {
-        override: false,
-        color: {
-          r: null,
-          g: null,
-          b: null
+      display: {
+        direction: "vertical",
+        order: "visualname",
+        alignment: "centercenter",
+        gutter: 2,
+        rotate: 0,
+        translate: {
+          x: 0,
+          y: 0
+        },
+        visual: {
+          show: true,
+          type: "icon",
+          letter: {
+            size: 3,
+            text: "AS"
+          },
+          image: {
+            size: 3,
+            url: ""
+          },
+          icon: {
+            size: 3,
+            name: "dice-d20",
+            prefix: "fas",
+            label: "Dice D20"
+          },
+          shadow: {
+            size: 0
+          }
+        },
+        name: {
+          show: true,
+          text: "awesomeSheet",
+          size: 0.9
         }
       },
+      url: "https://zombiefox.github.io/awesomeSheet/",
+      accent: {
+        by: "theme",
+        hsl: {
+          h: 0,
+          s: 0,
+          l: 0
+        },
+        rgb: {
+          r: 0,
+          g: 0,
+          b: 0
+        }
+      },
+      color: {
+        by: "theme",
+        hsl: {
+          h: 0,
+          s: 0,
+          l: 0
+        },
+        rgb: {
+          r: 0,
+          g: 0,
+          b: 0
+        },
+        opacity: 1
+      },
+      background: {
+        show: false,
+        type: "image",
+        opacity: 1,
+        image: {
+          url: ""
+        },
+        video: {
+          url: ""
+        }
+      },
+      wide: false,
+      tall: false,
       searchMatch: false,
       timeStamp: 1546453104010
     }, {
-      display: "letter",
-      letter: "AZ",
-      icon: {
-        name: "amazon",
-        prefix: "fab",
-        label: "Amazon"
-      },
-      name: "Amazon",
-      url: "https://www.amazon.co.uk/",
-      accent: {
-        override: false,
-        color: {
-          r: null,
-          g: null,
-          b: null
+      display: {
+        direction: "vertical",
+        order: "visualname",
+        alignment: "centercenter",
+        gutter: 2,
+        rotate: 0,
+        translate: {
+          x: 0,
+          y: 0
+        },
+        visual: {
+          show: true,
+          type: "letter",
+          letter: {
+            size: 3,
+            text: "AZ"
+          },
+          image: {
+            size: 3,
+            url: ""
+          },
+          icon: {
+            size: 3,
+            name: "amazon",
+            prefix: "fab",
+            label: "Amazon"
+          },
+          shadow: {
+            size: 0
+          }
+        },
+        name: {
+          show: true,
+          text: "Amazon",
+          size: 0.9
         }
       },
+      url: "https://www.amazon.co.uk/",
+      accent: {
+        by: "theme",
+        hsl: {
+          h: 0,
+          s: 0,
+          l: 0
+        },
+        rgb: {
+          r: 0,
+          g: 0,
+          b: 0
+        }
+      },
+      color: {
+        by: "theme",
+        hsl: {
+          h: 0,
+          s: 0,
+          l: 0
+        },
+        rgb: {
+          r: 0,
+          g: 0,
+          b: 0
+        },
+        opacity: 1
+      },
+      background: {
+        show: false,
+        type: "image",
+        opacity: 1,
+        image: {
+          url: ""
+        },
+        video: {
+          url: ""
+        }
+      },
+      wide: false,
+      tall: false,
       searchMatch: false,
       timeStamp: 1546453107633
     }, {
-      display: "letter",
-      letter: "GM",
-      icon: {
-        name: "envelope",
-        prefix: "fas",
-        label: "Envelope"
-      },
-      name: "Gmail",
-      url: "https://mail.google.com/",
-      accent: {
-        override: false,
-        color: {
-          r: null,
-          g: null,
-          b: null
+      display: {
+        direction: "vertical",
+        order: "visualname",
+        alignment: "centercenter",
+        gutter: 2,
+        rotate: 0,
+        translate: {
+          x: 0,
+          y: 0
+        },
+        visual: {
+          show: true,
+          type: "letter",
+          letter: {
+            size: 3,
+            text: "GM"
+          },
+          image: {
+            size: 3,
+            url: ""
+          },
+          icon: {
+            size: 3,
+            name: "envelope",
+            prefix: "fas",
+            label: "Envelope"
+          },
+          shadow: {
+            size: 0
+          }
+        },
+        name: {
+          show: true,
+          text: "Gmail",
+          size: 0.9
         }
       },
+      url: "https://mail.google.com/",
+      accent: {
+        by: "theme",
+        hsl: {
+          h: 0,
+          s: 0,
+          l: 0
+        },
+        rgb: {
+          r: 0,
+          g: 0,
+          b: 0
+        }
+      },
+      color: {
+        by: "theme",
+        hsl: {
+          h: 0,
+          s: 0,
+          l: 0
+        },
+        rgb: {
+          r: 0,
+          g: 0,
+          b: 0
+        },
+        opacity: 1
+      },
+      background: {
+        show: false,
+        type: "image",
+        opacity: 1,
+        image: {
+          url: ""
+        },
+        video: {
+          url: ""
+        }
+      },
+      wide: false,
+      tall: false,
       searchMatch: false,
       timeStamp: 1546453110265
     }, {
-      display: "icon",
-      letter: "R",
-      icon: {
-        name: "reddit-alien",
-        prefix: "fab",
-        label: "reddit Alien"
-      },
-      name: "Reddit",
-      url: "https://www.reddit.com/",
-      accent: {
-        override: false,
-        color: {
-          r: null,
-          g: null,
-          b: null
+      display: {
+        direction: "vertical",
+        order: "visualname",
+        alignment: "centercenter",
+        gutter: 2,
+        rotate: 0,
+        translate: {
+          x: 0,
+          y: 0
+        },
+        visual: {
+          show: true,
+          type: "icon",
+          letter: {
+            size: 3,
+            text: "R"
+          },
+          image: {
+            size: 3,
+            url: ""
+          },
+          icon: {
+            size: 3,
+            name: "reddit-alien",
+            prefix: "fab",
+            label: "reddit Alien"
+          },
+          shadow: {
+            size: 0
+          }
+        },
+        name: {
+          show: true,
+          text: "Reddit",
+          size: 0.9
         }
       },
+      url: "https://www.reddit.com/",
+      accent: {
+        by: "theme",
+        hsl: {
+          h: 0,
+          s: 0,
+          l: 0
+        },
+        rgb: {
+          r: 0,
+          g: 0,
+          b: 0
+        }
+      },
+      color: {
+        by: "theme",
+        hsl: {
+          h: 0,
+          s: 0,
+          l: 0
+        },
+        rgb: {
+          r: 0,
+          g: 0,
+          b: 0
+        },
+        opacity: 1
+      },
+      background: {
+        show: false,
+        type: "image",
+        opacity: 1,
+        image: {
+          url: ""
+        },
+        video: {
+          url: ""
+        }
+      },
+      wide: false,
+      tall: false,
       searchMatch: false,
       timeStamp: 1546453111491
     }, {
-      display: "icon",
-      letter: "N",
-      icon: {
-        name: "film",
-        prefix: "fas",
-        label: "Film"
-      },
-      name: "Netflix",
-      url: "https://www.netflix.com/",
-      accent: {
-        override: false,
-        color: {
-          r: null,
-          g: null,
-          b: null
+      display: {
+        direction: "vertical",
+        order: "visualname",
+        alignment: "centercenter",
+        gutter: 2,
+        rotate: 0,
+        translate: {
+          x: 0,
+          y: 0
+        },
+        visual: {
+          show: true,
+          type: "icon",
+          letter: {
+            size: 3,
+            text: "N"
+          },
+          image: {
+            size: 3,
+            url: ""
+          },
+          icon: {
+            size: 3,
+            name: "film",
+            prefix: "fas",
+            label: "Film"
+          },
+          shadow: {
+            size: 0
+          }
+        },
+        name: {
+          show: true,
+          text: "Netflix",
+          size: 0.9
         }
       },
+      url: "https://www.netflix.com/",
+      accent: {
+        by: "theme",
+        hsl: {
+          h: 0,
+          s: 0,
+          l: 0
+        },
+        rgb: {
+          r: 0,
+          g: 0,
+          b: 0
+        }
+      },
+      color: {
+        by: "theme",
+        hsl: {
+          h: 0,
+          s: 0,
+          l: 0
+        },
+        rgb: {
+          r: 0,
+          g: 0,
+          b: 0
+        },
+        opacity: 1
+      },
+      background: {
+        show: false,
+        type: "image",
+        opacity: 1,
+        image: {
+          url: ""
+        },
+        video: {
+          url: ""
+        }
+      },
+      wide: false,
+      tall: false,
       searchMatch: false,
       timeStamp: 1546453104460
     }, {
-      display: "letter",
-      letter: "DR",
-      icon: {
-        name: null,
-        prefix: null,
-        label: null
-      },
-      name: "Drive",
-      url: "https://drive.google.com/drive/",
-      accent: {
-        override: false,
-        color: {
-          r: null,
-          g: null,
-          b: null
+      display: {
+        direction: "vertical",
+        order: "visualname",
+        alignment: "centercenter",
+        gutter: 2,
+        rotate: 0,
+        translate: {
+          x: 0,
+          y: 0
+        },
+        visual: {
+          show: true,
+          type: "letter",
+          letter: {
+            size: 3,
+            text: "DR"
+          },
+          image: {
+            size: 3,
+            url: ""
+          },
+          icon: {
+            size: 3,
+            name: "",
+            prefix: "",
+            label: ""
+          },
+          shadow: {
+            size: 0
+          }
+        },
+        name: {
+          show: true,
+          text: "Drive",
+          size: 0.9
         }
       },
+      url: "https://drive.google.com/drive/",
+      accent: {
+        by: "theme",
+        hsl: {
+          h: 0,
+          s: 0,
+          l: 0
+        },
+        rgb: {
+          r: 0,
+          g: 0,
+          b: 0
+        }
+      },
+      color: {
+        by: "theme",
+        hsl: {
+          h: 0,
+          s: 0,
+          l: 0
+        },
+        rgb: {
+          r: 0,
+          g: 0,
+          b: 0
+        },
+        opacity: 1
+      },
+      background: {
+        show: false,
+        type: "image",
+        opacity: 1,
+        image: {
+          url: ""
+        },
+        video: {
+          url: ""
+        }
+      },
+      wide: false,
+      tall: false,
       searchMatch: false,
       timeStamp: 1546453111953
     }]
@@ -140,43 +506,165 @@ var bookmarks = (function() {
       show: true
     },
     items: [{
-      display: "icon",
-      letter: "DEV",
-      icon: {
-        name: "code",
-        prefix: "fas",
-        label: "Code"
-      },
-      name: "Devdocs",
-      url: "http://devdocs.io/",
-      accent: {
-        override: false,
-        color: {
-          r: null,
-          g: null,
-          b: null
+      display: {
+        direction: "vertical",
+        order: "visualname",
+        alignment: "centercenter",
+        gutter: 2,
+        rotate: 0,
+        translate: {
+          x: 0,
+          y: 0
+        },
+        visual: {
+          show: true,
+          type: "icon",
+          letter: {
+            size: 3,
+            text: "DEV"
+          },
+          image: {
+            size: 3,
+            url: ""
+          },
+          icon: {
+            size: 3,
+            name: "code",
+            prefix: "fas",
+            label: "Code"
+          },
+          shadow: {
+            size: 0
+          }
+        },
+        name: {
+          show: true,
+          text: "Devdocs",
+          size: 0.9
         }
       },
+      url: "http://devdocs.io/",
+      accent: {
+        by: "theme",
+        hsl: {
+          h: 0,
+          s: 0,
+          l: 0
+        },
+        rgb: {
+          r: 0,
+          g: 0,
+          b: 0
+        }
+      },
+      color: {
+        by: "theme",
+        hsl: {
+          h: 0,
+          s: 0,
+          l: 0
+        },
+        rgb: {
+          r: 0,
+          g: 0,
+          b: 0
+        },
+        opacity: 1
+      },
+      background: {
+        show: false,
+        type: "image",
+        opacity: 1,
+        image: {
+          url: ""
+        },
+        video: {
+          url: ""
+        }
+      },
+      wide: false,
+      tall: false,
       searchMatch: false,
       timeStamp: 1546453101749
     }, {
-      display: "icon",
-      letter: "GIT",
-      icon: {
-        name: "github",
-        prefix: "fab",
-        label: "GitHub"
-      },
-      name: "Github",
-      url: "https://github.com/",
-      accent: {
-        override: false,
-        color: {
-          r: null,
-          g: null,
-          b: null
+      display: {
+        direction: "vertical",
+        order: "visualname",
+        alignment: "centercenter",
+        gutter: 2,
+        rotate: 0,
+        translate: {
+          x: 0,
+          y: 0
+        },
+        visual: {
+          show: true,
+          type: "icon",
+          letter: {
+            size: 3,
+            text: "GIT"
+          },
+          image: {
+            size: 3,
+            url: ""
+          },
+          icon: {
+            size: 3,
+            name: "github",
+            prefix: "fab",
+            label: "GitHub"
+          },
+          shadow: {
+            size: 0
+          }
+        },
+        name: {
+          show: true,
+          text: "Github",
+          size: 0.9
         }
       },
+      url: "https://github.com/",
+      accent: {
+        by: "theme",
+        hsl: {
+          h: 0,
+          s: 0,
+          l: 0
+        },
+        rgb: {
+          r: 0,
+          g: 0,
+          b: 0
+        }
+      },
+      color: {
+        by: "theme",
+        hsl: {
+          h: 0,
+          s: 0,
+          l: 0
+        },
+        rgb: {
+          r: 0,
+          g: 0,
+          b: 0
+        },
+        opacity: 1
+      },
+      background: {
+        show: false,
+        type: "image",
+        opacity: 1,
+        image: {
+          url: ""
+        },
+        video: {
+          url: ""
+        }
+      },
+      wide: false,
+      tall: false,
       searchMatch: false,
       timeStamp: 1546453108926
     }]
@@ -211,52 +699,31 @@ var bookmarks = (function() {
 
   mod.add = {
     link: function(data) {
-      if (data.position.group.new) {
-        mod.add.group({
-          position: {
-            origin: null,
-            destination: data.position.destination.group
-          },
-          group: {
-            name: {
-              text: data.position.group.name.text,
-              show: data.position.group.name.show
+      if (data) {
+        if (data.position.group.new) {
+          mod.add.group({
+            position: {
+              origin: null,
+              destination: data.position.destination.group
             },
-            openAll: {
-              show: data.position.group.openAll.show
-            },
-            items: []
-          }
-        });
+            group: {
+              name: {
+                text: data.position.group.name.text,
+                show: data.position.group.name.show
+              },
+              openAll: {
+                show: data.position.group.openAll.show
+              },
+              items: []
+            }
+          });
+        };
+        mod.all[data.position.destination.group].items.splice(data.position.destination.item, 0, data.link);
       };
-      mod.all[data.position.destination.group].items.splice(data.position.destination.item, 0, data.link);
     },
     group: function(data) {
-      var makeName = function() {
-        var count = get().length + 1;
-        return "Group " + count;
-      };
       if (data) {
-        if (data.group.name.text == null) {
-          data.group.name.text = makeName();
-        } else if (typeof data.group.name.text == "string") {
-          data.group.name.text = data.group.name.text.trim();
-          if (data.group.name.text == "") {
-            data.group.name.text = makeName();
-          };
-        };
         mod.all.splice(data.position.destination, 0, data.group);
-      } else {
-        mod.all.push({
-          name: {
-            text: makeName(),
-            show: true
-          },
-          openAll: {
-            show: true
-          },
-          items: []
-        });
       };
     }
   };
@@ -304,13 +771,13 @@ var bookmarks = (function() {
   mod.sort = function(by) {
     var action = {
       name: function(array) {
-        return helper.sortObject(array, "name");
+        return helper.sortObject(array, "display.name.text");
       },
       letter: function(array) {
-        return helper.sortObject(array, "letter");
+        return helper.sortObject(array, "display.visual.letter.text");
       },
       icon: function(array) {
-        return helper.sortObject(array, "icon.name");
+        return helper.sortObject(array, "display.visual.icon.name");
       }
     };
     mod.all.forEach(function(arrayItem, index) {

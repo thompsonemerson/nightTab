@@ -2,6 +2,8 @@ var modal = (function() {
 
   var _previousModal = null;
 
+  var _maxHeadingLength = 50;
+
   var mod = {};
 
   mod.open = function() {
@@ -64,6 +66,7 @@ var modal = (function() {
         allModal[i].close();
       };
     };
+    _previousModal = null;
   };
 
   render.open = function(override) {
@@ -74,22 +77,24 @@ var modal = (function() {
       cancelAction: null,
       actionText: "OK",
       cancelText: "Cancel",
-      size: "medium"
+      size: "medium",
+      width: null
     };
     if (override) {
       options = helper.applyOptions(options, override);
     };
     var _makeModal = function() {
-      mod.open();
       var body = helper.e("body");
-      var modal = helper.node("div");
+      var modal = helper.node("div|class:modal");
       var modalWrapper = helper.node("div|class:modal-wrapper");
-      if (options.size == "large") {
-        modal.setAttribute("class", "modal modal-large");
+      if (options.width && typeof options.width == "number") {
+        modal.setAttribute("style", "--modal-size: " + options.width + "em;");
       } else if (options.size == "small") {
-        modal.setAttribute("class", "modal modal-small");
-      } else if (options.size) {
-        modal.setAttribute("class", "modal");
+        modal.setAttribute("style", "--modal-size: var(--modal-small);");
+      } else if (options.size == "medium") {
+        modal.setAttribute("style", "--modal-size: var(--modal-medium);");
+      } else if (options.size == "large") {
+        modal.setAttribute("style", "--modal-size: var(--modal-large);");
       };
       modal.close = function() {
         if (modal.classList.contains("is-opaque")) {
@@ -98,29 +103,46 @@ var modal = (function() {
         } else {
           modal.remove();
         };
-        mod.close();
         bind.focus.remove();
       };
       var modalBody = helper.node("div|class:modal-body");
-      var modalControls = helper.node("div|class:modal-controls");
-      var actionButton = helper.node("button:" + options.actionText + "|class:modal-button button button-primary button-block,tabindex:1");
-      var cancelButton = helper.node("button:" + options.cancelText + "|class:modal-button button button-primary button-block,tabindex:1");
+      var modalBodySpacer = helper.node("div|class:modal-body-spacer");
+      var modalControls = helper.node("div|class:modal-controls form-group");
+      var actionButton = helper.node("button:" + options.actionText + "|class:button button-line button-block modal-button,tabindex:1");
+      var cancelButton = helper.node("button:" + options.cancelText + "|class:button button-line button-block modal-button,tabindex:1");
       modalControls.appendChild(cancelButton);
       modalControls.appendChild(actionButton);
       if (options.heading != null) {
-        var modalHeading = helper.node("h1:" + options.heading + "|class:modal-heading,tabindex:1");
-        modalBody.appendChild(modalHeading);
+        if (options.heading.length > _maxHeadingLength) {
+          options.heading = options.heading.substring(0, _maxHeadingLength).replace(/\s+$/, "") + "...";
+        };
+        var modalHeading = helper.makeNode({
+          tag: "h1",
+          text: options.heading,
+          attr: [{
+            key: "class",
+            value: "modal-heading"
+          }, {
+            key: "tabindex",
+            value: 1
+          }]
+        });
+        modalBodySpacer.appendChild(modalHeading);
       };
       if (options.content) {
         if (typeof options.content == "string") {
           var container = helper.node("div|class:container");
-          var para = helper.node("p:" + options.content);
+          var para = helper.makeNode({
+            tag: "p",
+            text: options.content
+          });
           container.appendChild(para);
-          modalBody.appendChild(container);
+          modalBodySpacer.appendChild(container);
         } else {
-          modalBody.appendChild(options.content);
+          modalBodySpacer.appendChild(options.content);
         };
       };
+      modalBody.appendChild(modalBodySpacer);
       modalWrapper.appendChild(modalBody);
       modalWrapper.appendChild(modalControls);
       modal.appendChild(modalWrapper);
@@ -139,7 +161,7 @@ var modal = (function() {
         if (options.cancelAction) {
           options.cancelAction();
         };
-        this.close();
+        close();
       }.bind(modal), false);
       _previousModal = modal;
       body.appendChild(modal);

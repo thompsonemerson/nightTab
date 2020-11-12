@@ -27,6 +27,7 @@ var autoSuggest = (function() {
   bind.input = function(override) {
     var options = {
       input: null,
+      anchorElement: null,
       type: null,
       postFocus: null
     };
@@ -51,6 +52,7 @@ var autoSuggest = (function() {
     var elementToFocus = null;
     var focusIndex = null;
     var allSuggestItems = helper.eA(".auto-suggest-item");
+    var columnCount = getComputedStyle(helper.e(".auto-suggest-list")).getPropertyValue("grid-template-columns").split(" ").length;
     var _findInput = function() {
       if (event.target.classList.contains("auto-suggest-input")) {
         _currentInputOptions.input = event.target;
@@ -70,8 +72,8 @@ var autoSuggest = (function() {
         if (focusIndex == null) {
           elementToFocus = allSuggestItems[allSuggestItems.length - 1];
         } else {
-          if (focusIndex > 2 && focusIndex <= allSuggestItems.length - 1) {
-            elementToFocus = allSuggestItems[focusIndex - 3];
+          if (focusIndex >= columnCount && focusIndex <= allSuggestItems.length - 1) {
+            elementToFocus = allSuggestItems[focusIndex - columnCount];
           } else {
             elementToFocus = _currentInputOptions.input;
           };
@@ -83,8 +85,8 @@ var autoSuggest = (function() {
         if (focusIndex == null) {
           elementToFocus = allSuggestItems[0];
         } else {
-          if (focusIndex < allSuggestItems.length - 3) {
-            elementToFocus = allSuggestItems[focusIndex + 3];
+          if (focusIndex < allSuggestItems.length - columnCount) {
+            elementToFocus = allSuggestItems[focusIndex + columnCount];
           } else {
             elementToFocus = _currentInputOptions.input;
           };
@@ -153,12 +155,11 @@ var autoSuggest = (function() {
       document.removeEventListener("keydown", bind.navigateResults, false);
     },
     clickOut: function(event) {
-      if (!(event.target.classList.contains("auto-suggest-list")) && !(event.target.classList.contains("auto-suggest-input"))) {
+      if (!(event.target.classList.contains("auto-suggest")) && !(event.target.classList.contains("auto-suggest-list")) && !(event.target.classList.contains("auto-suggest-input"))) {
         render.close();
       };
     }
   };
-
 
   var render = {};
 
@@ -176,7 +177,7 @@ var autoSuggest = (function() {
         fontawesomeIcon: function() {
           suggestItems.forEach(function(arrayItem) {
             var li = helper.node("li|class:auto-suggest-list-item");
-            var button = helper.node("button|tabindex:1,class:auto-suggest-item");
+            var button = helper.node("button|tabindex:1,class:button button-link button-ring auto-suggest-item");
             var icon = helper.node("span|class:auto-suggest-icon fa-" + arrayItem.name);
             if (arrayItem.styles.includes("solid")) {
               helper.addClass(icon, "fas");
@@ -210,7 +211,11 @@ var autoSuggest = (function() {
           top: autoSuggestInput.getBoundingClientRect().bottom + window.scrollY,
           width: autoSuggestInput.getBoundingClientRect().width
         };
-        var autoSuggest = helper.node("div|class:auto-suggest list-unstyled");
+        if (options.anchorElement) {
+          box.width = options.anchorElement.getBoundingClientRect().width;
+          box.left = options.anchorElement.getBoundingClientRect().left;
+        };
+        var autoSuggest = helper.node("div|class:auto-suggest list-unstyled is-jello");
         var autoSuggestList = helper.node("ul|class:auto-suggest-list list-unstyled");
         autoSuggest.appendChild(autoSuggestList);
         body.appendChild(autoSuggest);
@@ -239,29 +244,29 @@ var autoSuggest = (function() {
   };
 
   render.suggestItems = function() {
-    var searchTerm = _currentInputOptions.input.value.replace(/^\s+/, "").replace(/\s+$/, "").toLowerCase();
+    var searchTerm = helper.trimString(_currentInputOptions.input.value);
     var action = {
       fontawesomeIcon: function() {
-        if (searchTerm == "" || searchTerm == undefined) {
-          return fontawesome.icons;
-        } else {
+        if (helper.checkIfValidString(searchTerm)) {
           return fontawesome.icons.filter(function(item) {
             var match = false;
-            if (item.name.toLowerCase().includes(searchTerm) || item.label.toLowerCase().includes(searchTerm)) {
+            if (item.name.toLowerCase().includes(searchTerm.toLowerCase()) || item.label.toLowerCase().includes(searchTerm.toLowerCase())) {
               match = true;
             };
             item.search.forEach(function(item, index) {
-              if (item.toLowerCase().includes(searchTerm)) {
+              if (item.toLowerCase().includes(searchTerm.toLowerCase())) {
                 match = true;
               };
             });
             item.styles.forEach(function(item, index) {
-              if (item.toLowerCase().includes(searchTerm)) {
+              if (item.toLowerCase().includes(searchTerm.toLowerCase())) {
                 match = true;
               };
             });
             return match;
           });
+        } else {
+          return fontawesome.icons;
         };
       }
     };

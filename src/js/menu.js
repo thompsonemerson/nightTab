@@ -28,6 +28,7 @@ var menu = (function() {
       background: false,
       data: false,
       coffee: false,
+      firefox: false,
       nighttab: false
     },
     toggle: function(name) {
@@ -172,7 +173,7 @@ var menu = (function() {
       var allMenuNavBody = helper.eA(".menu-subnav");
       allMenuNavBody.forEach(function(arrayItem, index) {
         helper.addClass(arrayItem, "active");
-        arrayItem.setAttribute("style", "--menu-subnav-height:" + arrayItem.getBoundingClientRect().height + "px;");
+        arrayItem.setAttribute("style", "--menu-subnav-height: " + arrayItem.getBoundingClientRect().height + "px;");
         helper.removeClass(arrayItem, "active");
       });
     }
@@ -186,6 +187,15 @@ var menu = (function() {
     helper.e(".menu").removeAttribute("style");
   };
 
+  render.firefoxSpecific = function() {
+    var firefoxBrowser = typeof InstallTrigger !== "undefined";
+    if (firefoxBrowser) {
+      helper.removeClass(helper.e(".menu-nav-item-firefox"), "is-hidden");
+    } else {
+      helper.addClass(helper.e(".menu-nav-item-firefox"), "is-hidden");
+    };
+  };
+
   var nav = function(name) {
     mod.nav.toggle(name);
     render.nav.active();
@@ -194,7 +204,7 @@ var menu = (function() {
     render.tab.tabindex();
     render.subnav.active();
     render.subnav.tabindex();
-    render.nav.scroll(name);
+    render.nav.scroll();
   };
 
   var open = function() {
@@ -207,7 +217,6 @@ var menu = (function() {
     render.tab.tabindex();
     render.subnav.active();
     render.subnav.tabindex();
-    render.nav.scroll(name);
     bind.focus.add();
     shade.open({
       action: function() {
@@ -252,6 +261,8 @@ var menu = (function() {
     mod.close();
     render.removeStyle();
     render.subnav.height();
+    render.nav.active();
+    render.firefoxSpecific();
   };
 
   return {

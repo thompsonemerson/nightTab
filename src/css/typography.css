@@ -18,10 +18,10 @@ h1 {
 }
 
 h2 {
-  font-size: 1.2em;
-  font-family: var(--theme-font-ui-name);
-  font-weight: var(--theme-font-ui-weight);
-  font-style: var(--theme-font-ui-style);
+  font-size: 1.3em;
+  font-family: var(--theme-font-display-name);
+  font-weight: var(--theme-font-display-weight);
+  font-style: var(--theme-font-display-style);
 }
 
 h3 {
@@ -68,8 +68,9 @@ hr {
   border: 0;
   border-top: var(--horizontal-rule-small);
   border-radius: var(--theme-radius);
-  margin: calc(var(--form-wrap-space) * 1.5) 0;
+  margin: calc(var(--form-wrap-space) * 2) 0;
   clear: both;
+  transition: border-color var(--layout-transition-extra-fast);
 }
 
 b,
@@ -87,7 +88,7 @@ i {
 a {
   color: rgb(var(--theme-color-16));
   text-decoration: underline;
-  transition: text-decoration var(--layout-timing-extra-fast);
+  transition: text-decoration var(--layout-transition-extra-fast);
 }
 
 a:link,
@@ -173,4 +174,10 @@ table tbody tr th {
   border: 0;
   text-align: left;
   box-sizing: border-box;
+}
+
+code {
+  background-color: rgb(var(--theme-color-04));
+  padding: 0.2em 0.5em;
+  border-radius: var(--theme-radius);
 }

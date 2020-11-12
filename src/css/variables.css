@@ -1,9 +1,9 @@
 :root {
   /* theme */
   --theme-root-font-size:                               14px;
-  --theme-accent-r:                                     250;
-  --theme-accent-g:                                     130;
-  --theme-accent-b:                                     0;
+  --theme-accent-r:                                     25;
+  --theme-accent-g:                                     25;
+  --theme-accent-b:                                     25;
   --theme-accent:                                       var(--theme-accent-r), var(--theme-accent-g), var(--theme-accent-b);
   --theme-accent-accessible-threshold:                  0.5;
   --theme-accent-accessible-r:                          calc(var(--theme-accent-r) * 0.50);
@@ -11,7 +11,7 @@
   --theme-accent-accessible-b:                          calc(var(--theme-accent-b) * 0.20);
   --theme-accent-accessible-sum:                        calc(var(--theme-accent-accessible-r) + var(--theme-accent-accessible-g) + var(--theme-accent-accessible-b));
   --theme-accent-accessible-perceived-lightness:        calc(var(--theme-accent-accessible-sum) / 255);
-  --theme-accent-accessible-color:                      0, 0%, calc((var(--theme-accent-accessible-perceived-lightness) - var(--theme-accent-accessible-threshold)) * -10000000%);
+  --theme-accent-accessible-color:                      0, calc(0 * 1%), calc((var(--theme-accent-accessible-perceived-lightness) - var(--theme-accent-accessible-threshold)) * -10000000%);
   --theme-radius:                                       0.2rem;
   --theme-font-display-name:                            "Fjalla One", sans-serif;
   --theme-font-display-weight:                          400;
@@ -109,20 +109,28 @@
   --group-border:                                       0;
   /* link */
   --link-area-width:                                    100%;
-  --link-item-color-theme:                              var(--theme-color-02);
-  --link-item-color-custom:                             rgb(0, 0, 0);
+  --link-item-color:                                    var(--theme-color-02);
+  --link-item-color-opacity:                            1;
+  --link-item-color-focus-hover:                        var(--theme-color-03);
+  --link-item-visual-element-color:                     var(--theme-accent);
+  --link-item-visual-element-color-focus-hover:         var(--theme-style-text);
+  --link-item-name-color:                               var(--theme-color-14);
+  --link-item-name-color-focus-hover:                   var(--theme-style-text);
+  --link-item-background-opacity:                       1;
   --link-item-size:                                     1em;
   --link-item-display-space:                            0.25em;
-  --link-item-display-gutter:                           2;
-  --link-item-display-letter-size:                      2em;
-  --link-item-display-icon-size:                        2.5em;
-  --link-item-display-rotate:                           0deg;
-  --link-item-display-translate-x:                      0em;
-  --link-item-display-translate-y:                      0em;
-  --link-item-display-name-size:                        0.9em;
   --link-item-border:                                   0;
-  --link-item-opacity:                                  1;
-  --link-item-padding:                                  1em;
+  --link-item-padding:                                  1;
+  --link-item-clip-padding:                             1em;
+  --link-item-display-visual-shadow-size:               1;
+  --link-item-display-visual-shadow-offset:             0.02em;
+  --link-item-display-visual-shadow-blur:               0.02em;
+  --link-item-display-visual-shadow-opacity:            0.01;
+  --link-item-display-visual-shadow:
+                                                        0 calc(var(--link-item-display-visual-shadow-size) * calc(var(--link-item-display-visual-shadow-offset) * 1)) calc(var(--link-item-display-visual-shadow-size) * calc(var(--link-item-display-visual-shadow-blur) * 2)) rgba(0, 0, 0, calc(var(--link-item-display-visual-shadow-size) * calc(var(--link-item-display-visual-shadow-opacity) * 1))),
+                                                        0 calc(var(--link-item-display-visual-shadow-size) * calc(var(--link-item-display-visual-shadow-offset) * 2)) calc(var(--link-item-display-visual-shadow-size) * calc(var(--link-item-display-visual-shadow-blur) * 4)) rgba(0, 0, 0, calc(var(--link-item-display-visual-shadow-size) * calc(var(--link-item-display-visual-shadow-opacity) * 2))),
+                                                        0 calc(var(--link-item-display-visual-shadow-size) * calc(var(--link-item-display-visual-shadow-offset) * 4)) calc(var(--link-item-display-visual-shadow-size) * calc(var(--link-item-display-visual-shadow-blur) * 6)) rgba(0, 0, 0, calc(var(--link-item-display-visual-shadow-size) * calc(var(--link-item-display-visual-shadow-opacity) * 3)));
+
   /* layout */
   --layout-size:                                        1;
   --layout-width:                                       80%;
@@ -140,24 +148,26 @@
   --layout-duration-08:                                 0.8s;
   --layout-duration-09:                                 0.9s;
   --layout-duration-10:                                 1s;
-  --layout-timing-extra-fast:                           var(--layout-duration-02) ease-in-out;
-  --layout-timing-fast:                                 var(--layout-duration-04) ease-in-out;
-  --layout-timing-medium:                               var(--layout-duration-06) ease-in-out;
-  --layout-timing-slow:                                 var(--layout-duration-08) ease-in-out;
-  --layout-timing-extra-slow:                           var(--layout-duration-10) ease-in-out;
+  --layout-timing-ease:                                 ease-in-out;
+  --layout-timing-bounce:                               cubic-bezier(0.8, 0.8, 0.4, 1.4);
+  --layout-transition-extra-fast:                       var(--layout-duration-02) var(--layout-timing-ease);
+  --layout-transition-fast:                             var(--layout-duration-04) var(--layout-timing-ease);
+  --layout-transition-medium:                           var(--layout-duration-06) var(--layout-timing-ease);
+  --layout-transition-slow:                             var(--layout-duration-08) var(--layout-timing-ease);
+  --layout-transition-extra-slow:                       var(--layout-duration-10) var(--layout-timing-ease);
   --horizontal-rule-small:                              1px solid rgb(var(--theme-color-02));
   --horizontal-rule-large:                              2px solid rgb(var(--theme-color-02));
   /* background */
   --background-color-theme:                             var(--theme-color-01);
   --background-color-custom:                            rgb(0, 0, 0);
-  --background-image:                                   none;
-  --background-opacity:                                 1;
-  --background-scale:                                   1;
-  --background-accent:                                  0;
-  --background-blur:                                    0;
-  --background-vignette-opacity:                        0%;
-  --background-vignette-start:                          90%;
-  --background-vignette-end:                            70%;
+  --background-visual-image:                            none;
+  --background-visual-opacity:                          1;
+  --background-visual-scale:                            1;
+  --background-visual-accent:                           0;
+  --background-visual-blur:                             0;
+  --background-visual-vignette-opacity:                 0%;
+  --background-visual-vignette-start:                   90%;
+  --background-visual-vignette-end:                     70%;
   /* form */
   --form-label:                                         var(--theme-color-16);
   --form-label-hover:                                   var(--theme-color-20);
@@ -234,8 +244,15 @@
   --form-ring-accent:                                   0 0 0 var(--layout-line-width) rgb(var(--theme-accent)),
                                                         0 0 0 calc(var(--layout-line-width) * 2) rgba(var(--theme-accent), 0.25);
   --form-wrap-space:                                    1em;
+  /* utilities */
+  --utilities-muted:                                    var(--theme-color-12);
+  --utilities-muted-hover:                              var(--theme-color-13);
+  --utilities-muted-focus-active:                       var(--theme-color-14);
+  --utilities-muted-checked:                            var(--theme-color-14);
+  --utilities-muted-disabled:                           var(--theme-color-04);
   /* menu */
   --menu-space:                                         0.75em;
+  --menu-edge-opacity:                                  0.75;
   /* button */
   --button-background:                                  var(--theme-color-02);
   --button-background-focus-hover:                      var(--theme-color-03);
@@ -257,6 +274,11 @@
   --edge-shadow:                                        inset 0 0 0 var(--layout-line-width) rgb(var(--theme-accent)),
                                                         inset 0 0 0 calc(var(--layout-line-width) * 4) rgba(var(--theme-accent), 0.1),
                                                         inset 0 0 0 calc(var(--layout-line-width) * 8) rgba(var(--theme-accent), 0.1);
+  /* modal */
+  --modal-small:                                        30em;
+  --modal-medium:                                       50em;
+  --modal-large:                                        70em;
+  --modal-size:                                         var(--modal-medium);
   /* z index */
   --z-index-background:                                 1000;
   --z-index-link:                                       2000;
@@ -329,24 +351,78 @@
   --theme-style-text:                                   var(--theme-black);
 }
 
+@media (prefers-color-scheme: light) {
+  .is-theme-style-system {
+    --theme-color:                                      var(--theme-shade);
+    --theme-color-01:                                   var(--theme-shade-positive-10);
+    --theme-color-02:                                   var(--theme-shade-positive-09);
+    --theme-color-03:                                   var(--theme-shade-positive-08);
+    --theme-color-04:                                   var(--theme-shade-positive-07);
+    --theme-color-05:                                   var(--theme-shade-positive-06);
+    --theme-color-06:                                   var(--theme-shade-positive-05);
+    --theme-color-07:                                   var(--theme-shade-positive-04);
+    --theme-color-08:                                   var(--theme-shade-positive-03);
+    --theme-color-09:                                   var(--theme-shade-positive-02);
+    --theme-color-10:                                   var(--theme-shade-positive-01);
+    --theme-color-11:                                   var(--theme-shade-negative-01);
+    --theme-color-12:                                   var(--theme-shade-negative-02);
+    --theme-color-13:                                   var(--theme-shade-negative-03);
+    --theme-color-14:                                   var(--theme-shade-negative-04);
+    --theme-color-15:                                   var(--theme-shade-negative-05);
+    --theme-color-16:                                   var(--theme-shade-negative-06);
+    --theme-color-17:                                   var(--theme-shade-negative-07);
+    --theme-color-18:                                   var(--theme-shade-negative-08);
+    --theme-color-19:                                   var(--theme-shade-negative-09);
+    --theme-color-20:                                   var(--theme-shade-negative-10);
+    --theme-style-text:                                 var(--theme-black);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .is-theme-style-system {
+    --theme-color:                                      var(--theme-shade);
+    --theme-color-01:                                   var(--theme-shade-negative-10);
+    --theme-color-02:                                   var(--theme-shade-negative-09);
+    --theme-color-03:                                   var(--theme-shade-negative-08);
+    --theme-color-04:                                   var(--theme-shade-negative-07);
+    --theme-color-05:                                   var(--theme-shade-negative-06);
+    --theme-color-06:                                   var(--theme-shade-negative-05);
+    --theme-color-07:                                   var(--theme-shade-negative-04);
+    --theme-color-08:                                   var(--theme-shade-negative-03);
+    --theme-color-09:                                   var(--theme-shade-negative-02);
+    --theme-color-10:                                   var(--theme-shade-negative-01);
+    --theme-color-11:                                   var(--theme-shade-positive-01);
+    --theme-color-12:                                   var(--theme-shade-positive-02);
+    --theme-color-13:                                   var(--theme-shade-positive-03);
+    --theme-color-14:                                   var(--theme-shade-positive-04);
+    --theme-color-15:                                   var(--theme-shade-positive-05);
+    --theme-color-16:                                   var(--theme-shade-positive-06);
+    --theme-color-17:                                   var(--theme-shade-positive-07);
+    --theme-color-18:                                   var(--theme-shade-positive-08);
+    --theme-color-19:                                   var(--theme-shade-positive-09);
+    --theme-color-20:                                   var(--theme-shade-positive-10);
+    --theme-style-text:                                 var(--theme-white);
+  }
+}
+
 .is-link-style-block {
   /* link */
+  --link-item-edit-height-tall:                         5em;
+  --link-item-edit-height-short:                        calc(var(--link-item-edit-height-tall) / 2);
   --link-item-width:                                    11em;
   --link-item-height:                                   10em;
-  --link-item-url-height:                               20%;
-  --link-item-edit-height:                              50%;
+  --link-item-url-height:                               2.25em;
+  --link-item-edit-height:                              var(--link-item-edit-height-tall);
 }
 
 .is-link-style-list {
   /* link */
+  --link-item-edit-height-tall:                         5em;
+  --link-item-edit-height-short:                        2em;
   --link-item-width:                                    20em;
   --link-item-height:                                   4em;
-  --link-item-url-height:                               30%;
-  --link-item-edit-height:                              50%;
-}
-
-.is-link-item-opacity {
-  --link-item-padding:                                  0em;
+  --link-item-url-height:                               1.5em;
+  --link-item-edit-height:                              var(--link-item-edit-height-short);
 }
 
 @media (min-width: 700px) {

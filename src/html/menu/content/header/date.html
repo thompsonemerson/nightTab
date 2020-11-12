@@ -5,7 +5,7 @@
   <div class="menu-item-form">
     <div class="form-wrap">
       <input id="control-header-date-day-show" class="control-header-date-day-show" type="checkbox" tabindex="-1">
-      <label for="control-header-date-day-show"><span class="label-icon"></span> Day</label>
+      <label for="control-header-date-day-show"><span class="label-icon"></span> Show Day</label>
     </div>
     <div class="form-wrap">
       <div class="form-indent">
@@ -26,7 +26,7 @@
               <input id="control-header-date-day-week-start-sunday" class="control-header-date-day-week-start-sunday" type="radio" name="control-header-date-day-week-start" value="sunday" tabindex="-1">
               <label for="control-header-date-day-week-start-sunday"><span class="label-icon"></span> Sunday</label>
             </div>
-            <div class="form-helper">
+            <div class="form-wrap">
               <p class="control-header-date-day-week-start-helper form-helper-item">Define what day "1" represents, either Monday or Sunday.</p>
             </div>
           </div>
@@ -55,7 +55,7 @@
     <hr>
     <div class="form-wrap">
       <input id="control-header-date-date-show" class="control-header-date-date-show" type="checkbox" tabindex="-1">
-      <label for="control-header-date-date-show"><span class="label-icon"></span> Date</label>
+      <label for="control-header-date-date-show"><span class="label-icon"></span> Show Date</label>
     </div>
     <div class="form-wrap">
       <div class="form-indent">
@@ -69,17 +69,20 @@
         </div>
         <div class="form-wrap">
           <input id="control-header-date-date-ordinal" class="control-header-date-date-ordinal" type="checkbox" tabindex="-1">
-          <label for="control-header-date-date-ordinal"><span class="label-icon"></span> Ordinal numbers</label>
-        </div>
-        <div class="form-helper">
-          <p class="control-header-date-date-ordinal-helper form-helper-item">Display Date as 1st, 2nd, 3rd, 4th etc.</p>
+          <label for="control-header-date-date-ordinal">
+            <span class="label-icon"></span>
+            <span class="label-block">
+              <span class="label-block-item">Ordinal numbers</span>
+              <span class="label-block-item small muted">Display Date as 1st, 2nd, 3rd, 4th etc.</span>
+            </span>
+          </label>
         </div>
       </div>
     </div>
     <hr>
     <div class="form-wrap">
       <input id="control-header-date-month-show" class="control-header-date-month-show" type="checkbox" tabindex="-1">
-      <label for="control-header-date-month-show"><span class="label-icon"></span> Month</label>
+      <label for="control-header-date-month-show"><span class="label-icon"></span> Show Month</label>
     </div>
     <div class="form-wrap">
       <div class="form-indent">
@@ -91,10 +94,13 @@
           <div class="form-indent">
             <div class="form-wrap">
               <input id="control-header-date-month-ordinal" class="control-header-date-month-ordinal" type="checkbox" tabindex="-1">
-              <label for="control-header-date-month-ordinal"><span class="label-icon"></span> Ordinal numbers</label>
-            </div>
-            <div class="form-helper">
-              <p class="control-header-date-month-ordinal-helper form-helper-item">Display Month as 1st, 2nd, 3rd, 4th etc.</p>
+              <label for="control-header-date-month-ordinal">
+                <span class="label-icon"></span>
+                <span class="label-block">
+                  <span class="label-block-item">Ordinal numbers</span>
+                  <span class="label-block-item small muted">Display Month as 1st, 2nd, 3rd, 4th etc.</span>
+                </span>
+              </label>
             </div>
           </div>
         </div>
@@ -122,7 +128,7 @@
     <hr>
     <div class="form-wrap">
       <input id="control-header-date-year-show" class="control-header-date-year-show" type="checkbox" tabindex="-1">
-      <label for="control-header-date-year-show"><span class="label-icon"></span> Year</label>
+      <label for="control-header-date-year-show"><span class="label-icon"></span> Show Year</label>
     </div>
     <div class="form-wrap">
       <div class="form-indent">
@@ -139,14 +145,14 @@
     <hr>
     <div class="form-wrap">
       <input id="control-header-date-separator-show" class="control-header-date-separator-show" type="checkbox" tabindex="-1">
-      <label for="control-header-date-separator-show"><span class="label-icon"></span> Separators</label>
+      <label for="control-header-date-separator-show"><span class="label-icon"></span> Show Separators</label>
     </div>
     <div class="form-wrap">
       <div class="form-indent">
         <div class="form-wrap">
           <div class="form-group form-group-block">
             <input id="control-header-date-separator-text" class="control-header-date-separator-text" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="/" tabindex="-1">
-            <button class="control-header-date-separator-text-default button" tabindex="-1" title="Reset to default"><span class="icon-replay"></span></button>
+            <button class="control-header-date-separator-text-default button button-line" tabindex="-1" title="Reset to default"><span class="icon-replay"></span></button>
           </div>
         </div>
       </div>
@@ -169,16 +175,19 @@
       <div class="form-group form-group-block">
         <input id="control-header-date-size-range" class="control-header-date-size-range mr-3" type="range" value="0" tabindex="-1">
         <input class="control-header-date-size-number form-group-item-medium form-group-radius-left" type="number" value="0" tabindex="-1">
-        <button class="control-header-date-size-default button" tabindex="-1" title="Reset to default"><span class="icon-replay"></span></button>
+        <button class="control-header-date-size-default button button-line" tabindex="-1" title="Reset to default"><span class="icon-replay"></span></button>
       </div>
     </div>
     <hr>
     <div class="form-wrap">
       <input id="control-header-date-newline" class="control-header-date-newline" type="checkbox" tabindex="-1">
-      <label for="control-header-date-newline"><span class="label-icon"></span> New line</label>
-    </div>
-    <div class="form-helper">
-      <p class="control-header-date-newline-helper form-helper-item">Force on to a new line and seperate from other Header items.</p>
+      <label for="control-header-date-newline">
+        <span class="label-icon"></span>
+        <span class="label-block">
+          <span class="label-block-item">New line</span>
+          <span class="label-block-item small muted">Force on to a new line and seperate from other Header items.</span>
+        </span>
+      </label>
     </div>
   </div>
 </div>

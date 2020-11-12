@@ -4,7 +4,7 @@
   </div>
   <div class="menu-item-form">
     <div class="form-wrap">
-      <label class="control-link-item-display-alignment-label">Letter/Icon and Name position</label>
+      <label class="control-link-item-display-alignment-label">Visual Element and Name alignment</label>
     </div>
     <div class="form-wrap">
       <div class="form-grid form-grid-3x3 control-link-item-display-alignment-grid">
@@ -46,14 +46,23 @@
         </div>
       </div>
     </div>
+    <div class="form-wrap">
+      <p class="control-link-item-display-alignment-helper form-helper-item">Position the Visual Element (letter, icon or image) and Name inside the Bookmark tile.</p>
+    </div>
+    <div class="form-wrap">
+      <button class="control-link-item-display-alignment-apply button button-line" tabindex="-1">Apply to all</button>
+    </div>
     <hr>
     <div class="form-wrap">
       <label for="control-link-item-display-rotate-range">Rotation</label>
       <div class="form-group form-group-block">
         <input id="control-link-item-display-rotate-range" class="control-link-item-display-rotate-range mr-3" type="range" value="0" tabindex="-1">
         <input class="control-link-item-display-rotate-number form-group-item-medium form-group-radius-left" type="number" value="0" tabindex="-1">
-        <button class="control-link-item-display-rotate-default button" tabindex="-1" title="Reset to default"><span class="icon-replay"></span></button>
+        <button class="control-link-item-display-rotate-default button button-line" tabindex="-1" title="Reset to default"><span class="icon-replay"></span></button>
       </div>
+    </div>
+    <div class="form-wrap">
+      <button class="control-link-item-display-rotate-apply button button-line" tabindex="-1">Apply to all</button>
     </div>
     <hr>
     <div class="form-wrap">
@@ -61,8 +70,11 @@
       <div class="form-group form-group-block">
         <input id="control-link-item-display-translate-x-range" class="control-link-item-display-translate-x-range mr-3" type="range" value="0" tabindex="-1">
         <input class="control-link-item-display-translate-x-number form-group-item-medium form-group-radius-left" type="number" value="0" tabindex="-1">
-        <button class="control-link-item-display-translate-x-default button" tabindex="-1" title="Reset to default"><span class="icon-replay"></span></button>
+        <button class="control-link-item-display-translate-x-default button button-line" tabindex="-1" title="Reset to default"><span class="icon-replay"></span></button>
       </div>
+    </div>
+    <div class="form-wrap">
+      <button class="control-link-item-display-translate-x-apply button button-line" tabindex="-1">Apply to all</button>
     </div>
     <hr>
     <div class="form-wrap">
@@ -70,8 +82,11 @@
       <div class="form-group form-group-block">
         <input id="control-link-item-display-translate-y-range" class="control-link-item-display-translate-y-range mr-3" type="range" value="0" tabindex="-1">
         <input class="control-link-item-display-translate-y-number form-group-item-medium form-group-radius-left" type="number" value="0" tabindex="-1">
-        <button class="control-link-item-display-translate-y-default button" tabindex="-1" title="Reset to default"><span class="icon-replay"></span></button>
+        <button class="control-link-item-display-translate-y-default button button-line" tabindex="-1" title="Reset to default"><span class="icon-replay"></span></button>
       </div>
+    </div>
+    <div class="form-wrap">
+      <button class="control-link-item-display-translate-y-apply button button-line" tabindex="-1">Apply to all</button>
     </div>
     <hr>
     <div class="form-wrap">
@@ -79,38 +94,59 @@
       <div class="form-group form-group-block">
         <input id="control-link-item-display-gutter-range" class="control-link-item-display-gutter-range mr-3" type="range" value="0" tabindex="1">
         <input class="control-link-item-display-gutter-number form-group-item-medium form-group-radius-left" type="number" value="0" tabindex="-1">
-        <button class="control-link-item-display-gutter-default button" tabindex="-1" title="Reset to default"><span class="icon-replay"></span></button>
+        <button class="control-link-item-display-gutter-default button button-line" tabindex="-1" title="Reset to default"><span class="icon-replay"></span></button>
       </div>
     </div>
-    <hr>
     <div class="form-wrap">
-      <input id="control-link-item-display-direction-horizontal" class="control-link-item-display-direction-horizontal" type="radio" name="control-link-item-display-direction" value="horizontal" tabindex="-1">
-      <label for="control-link-item-display-direction-horizontal"><span class="label-icon"></span> Align horizontally</label>
+      <button class="control-link-item-display-gutter-apply button button-line" tabindex="-1">Apply to all</button>
     </div>
+    <hr>
     <div class="form-wrap">
       <input id="control-link-item-display-direction-vertical" class="control-link-item-display-direction-vertical" type="radio" name="control-link-item-display-direction" value="vertical" tabindex="-1">
-      <label for="control-link-item-display-direction-vertical"><span class="label-icon"></span> Align vertically</label>
+      <label for="control-link-item-display-direction-vertical">
+        <span class="label-icon"></span>
+        <span class="label-block">
+          <span class="label-block-item">Align vertically</span>
+          <span class="label-block-item small muted">Works well with Bookmark Block Style.</span>
+        </span>
+      </label>
     </div>
-    <div class="form-helper">
-      <p class="control-link-item-display-direction-vertical-helper form-helper-item">Vertical alignment works well with Bookmark Block Style.</p>
+    <div class="form-wrap">
+      <input id="control-link-item-display-direction-horizontal" class="control-link-item-display-direction-horizontal" type="radio" name="control-link-item-display-direction" value="horizontal" tabindex="-1">
+      <label for="control-link-item-display-direction-horizontal">
+        <span class="label-icon"></span>
+        <span class="label-block">
+          <span class="label-block-item">Align horizontally</span>
+          <span class="label-block-item small muted">Works well with Bookmark List Style.</span>
+        </span>
+      </label>
     </div>
-    <div class="form-helper">
-      <p class="control-link-item-display-direction-horizontal-helper form-helper-item">Horizontal alignment works well with Bookmark List Style.</p>
-    </div>
-    <div class="form-helper">
-      <p class="control-link-item-display-direction-helper form-helper-item">Only available when Letter/Icon and Name are shown.</p>
+    <div class="form-wrap">
+      <button class="control-link-item-display-direction-apply button button-line" tabindex="-1">Apply to all</button>
     </div>
     <hr>
     <div class="form-wrap">
-      <input id="control-link-item-display-order-letconname" class="control-link-item-display-order-letconname" type="radio" name="control-link-item-display-order" value="letconname" tabindex="-1">
-      <label for="control-link-item-display-order-letconname"><span class="label-icon"></span> Order Letter/Icon then Name</label>
+      <input id="control-link-item-display-order-visualname" class="control-link-item-display-order-visualname" type="radio" name="control-link-item-display-order" value="visualname" tabindex="-1">
+      <label for="control-link-item-display-order-visualname">
+        <span class="label-icon"></span>
+        <span class="label-block">
+          <span class="label-block-item">Visual Element then Name</span>
+          <span class="label-block-item small muted">Stack the Visual Element before the Name.</span>
+        </span>
+      </label>
     </div>
     <div class="form-wrap">
-      <input id="control-link-item-display-order-nameletcon" class="control-link-item-display-order-nameletcon" type="radio" name="control-link-item-display-order" value="nameletcon" tabindex="-1">
-      <label for="control-link-item-display-order-nameletcon"><span class="label-icon"></span> Order Name then Letter/Icon</label>
+      <input id="control-link-item-display-order-namevisual" class="control-link-item-display-order-namevisual" type="radio" name="control-link-item-display-order" value="namevisual" tabindex="-1">
+      <label for="control-link-item-display-order-namevisual">
+        <span class="label-icon"></span>
+        <span class="label-block">
+          <span class="label-block-item">Name then Visual Element</span>
+          <span class="label-block-item small muted">Stack the Name before the Visual Element.</span>
+        </span>
+      </label>
     </div>
-    <div class="form-helper">
-      <p class="control-link-item-display-order-helper form-helper-item">Only available when Letter/Icon and Name are shown.</p>
+    <div class="form-wrap">
+      <button class="control-link-item-display-order-apply button button-line" tabindex="-1">Apply to all</button>
     </div>
   </div>
 </div>
